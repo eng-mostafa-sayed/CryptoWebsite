@@ -89,7 +89,6 @@ export class AuthService {
   logout() {
     clearTimeout(this.saveTimeout);
     this.clearAuthData();
-
     this.authStatusListner.next(false);
     this.router.navigate(['/']);
   }
