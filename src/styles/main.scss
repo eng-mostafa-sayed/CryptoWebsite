@@ -1,0 +1,68 @@
+@import "abstracts/animations";
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/variables";
+
+@import "base/base";
+@import "base/typography";
+@import "base/utilities";
+
+@import "components/button";
+@import "components/table";
+@import "components/icons";
+@import "components/slide-toggle";
+@import "components/custom-taps";
+@import "components/dropdown-taps";
+@import "components/table";
+@import "components/input";
+@import "components/miner";
+
+@import "layout/grid";
+@import "layout/main-nav";
+@import "layout/sidenav";
+@import "layout/login_box";
+@import "layout/menu-nav";
+
+@import "pages/overview";
+@import "pages/hashrate-plans";
+@import "pages/choose-plan";
+@import "pages/mining-devices";
+@import "pages/choose-miner";
+@import "pages/wallet";
+
+@import "shame";
+
+// .mat-menu-content .ng-tns-c97-0 {
+//   padding: 0px;
+//   justify-content: center;
+//   li {
+//     width: 165px;
+//     display: flex;
+//     justify-content: space-between;
+//   }
+// }
+// mat-form-field span.mat-form-field-label-wrapper label {
+//   color: orange !important;
+// }
+
+// mat-form-field.mat-focused span.mat-form-field-label-wrapper label {
+//   color: green !important;
+// }
+
+// .mat-select-panel {
+//   height: 500px !important;
+// }
+// .mat-dialog-container {
+//   padding: 0px !important;
+//   border-radius: 8px !important;
+//   border: none !important;
+//   background: none;
+// }
+
+// @media only screen and (max-width: 1700px) and (min-width: 1440px) {
+//   .dashboard-container {
+//     margin-left: auto;
+//     margin-right: auto;
+//     padding-left: 248px;
+//   }
+// }

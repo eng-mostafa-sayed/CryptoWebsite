@@ -1,0 +1,53 @@
+<header class="header-fixed" *ngIf="isAuthenticated">
+  <div class="header-limiter">
+    <h1>
+      <a routerLink="/">WEBSITE <span>LOGO</span></a>
+    </h1>
+
+    <nav>
+      <!-- <button
+        mat-button
+        [matMenuTriggerFor]="beforeMenu"
+        style="color: #fff; opacity: 0.9"
+        (click)="opend = !opend"
+      >
+        Welcome, Ahmed
+        <mat-icon *ngIf="!opend">arrow_drop_down</mat-icon>
+        <mat-icon *ngIf="opend">arrow_drop_up</mat-icon>
+      </button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button
+          routerLink="/dashboard/overview"
+          (click)="onLogout()"
+          mat-menu-item
+        >
+          <mat-icon>settings</mat-icon>
+          <a style="color: #000">Dashboard</a>
+        </button>
+        <button (click)="onLogout()" mat-menu-item>
+          <mat-icon>logout</mat-icon>Logout
+        </button>
+      </mat-menu> -->
+
+      <!-- <a routerLink="/signin" routerLinkActive="selected">Login</a>
+      <a routerLink="/signup" routerLinkActive="selected">Sign up</a> -->
+      <a
+        routerLink="/dashboard/overivew"
+        routerLinkActive="selected"
+        *ngIf="isAuthenticated"
+        >Dashboard</a
+      >
+
+      <a
+        routerLink="/signupOrsignin"
+        routerLinkActive="selected"
+        *ngIf="!isAuthenticated"
+        >Signup</a
+      >
+      <a *ngIf="isAuthenticated"> Signedin </a>
+    </nav>
+  </div>
+</header>
+
+<!-- You need this element to prevent the content of the page from jumping up -->
+<div class="header-fixed-placeholder"></div>
