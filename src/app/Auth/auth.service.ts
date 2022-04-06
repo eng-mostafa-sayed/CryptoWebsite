@@ -89,12 +89,6 @@ export class AuthService {
   logout() {
     clearTimeout(this.saveTimeout);
     this.clearAuthData();
-    sessionStorage.removeItem('name');
-    sessionStorage.removeItem('accessToken');
-    sessionStorage.removeItem('balance_btc');
-    sessionStorage.removeItem('balance_eth');
-    sessionStorage.removeItem('activePlans');
-    sessionStorage.removeItem('devices');
 
     this.authStatusListner.next(false);
     this.router.navigate(['/']);
@@ -143,9 +137,11 @@ export class AuthService {
     };
   }
   private clearAuthData() {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('email');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('expirDate');
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('accessToken');
+    sessionStorage.removeItem('balance_btc');
+    sessionStorage.removeItem('balance_eth');
+    sessionStorage.removeItem('activePlans');
+    sessionStorage.removeItem('devices');
   }
 }
