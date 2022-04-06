@@ -21,11 +21,11 @@ export class DepositeComponent implements OnInit {
     },
     {
       name: 'RVN',
-      value: '0.000002130',
+      value: '0',
     },
     {
       name: 'STX',
-      value: '0.000002130',
+      value: '0',
     },
   ];
   constructor() {}
