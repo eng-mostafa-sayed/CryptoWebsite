@@ -15,7 +15,9 @@ export class DashHeaderComponent implements OnInit {
   currentRoute: string = 'Overview';
   collapsed = false;
   toggleMenu = false;
-
+  logout() {
+    this.authServics.logout();
+  }
   constructor(private router: Router, private authServics: AuthService) {}
 
   ngOnInit(): void {

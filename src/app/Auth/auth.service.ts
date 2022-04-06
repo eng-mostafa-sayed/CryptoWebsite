@@ -89,9 +89,13 @@ export class AuthService {
   logout() {
     clearTimeout(this.saveTimeout);
     this.clearAuthData();
-    // this.accessToken = '';
-    // this.userId = '';
-    // this.email = '';
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('accessToken');
+    sessionStorage.removeItem('balance_btc');
+    sessionStorage.removeItem('balance_eth');
+    sessionStorage.removeItem('activePlans');
+    sessionStorage.removeItem('devices');
+
     this.authStatusListner.next(false);
     this.router.navigate(['/']);
   }

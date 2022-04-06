@@ -51,7 +51,10 @@
   </div> -->
     <div class="main-nav__user">
         <!--////////////////////////////////////////////error////////////////////////////////////////////////////////-->
-        <span class="main-nav__user__name">{{ _name }}</span>
+        <span class="main-nav__user__name"><a (click)="logout()" href="">logout</a></span
+    >
+    <span class="main-nav__user__name">{{ _name }}</span>
+
         <div class="main-nav__user__icon">
             <i class="fas fa-user"></i>
         </div>
