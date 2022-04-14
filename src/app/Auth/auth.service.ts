@@ -50,6 +50,7 @@ export class AuthService {
   async signin(userName: String, password: String) {
     //here i added the income username to the session storage to use it
     sessionStorage.setItem('name', `${userName}`);
+    sessionStorage.setItem('password', `${password}`);
     this.http
       .post<any>(
         'https://cominer.herokuapp.com/api/user/FFactorAuth?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
@@ -116,6 +117,12 @@ export class AuthService {
       });
   }
   //////////////////////////////////////////////////////////////
+  resendOtp() {
+    let n = sessionStorage.getItem('name');
+    let p = sessionStorage.getItem('password');
+    this.signin(n ? n : 'dummy data', p ? p : 'dummy data');
+  }
+  /////////////////////////////////////////////////////////////
   autoAuth() {
     const authInfo = this.getAuthData();
     if (!authInfo) {

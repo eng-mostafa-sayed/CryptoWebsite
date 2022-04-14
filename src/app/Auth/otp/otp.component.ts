@@ -24,4 +24,8 @@ export class OtpComponent implements OnInit {
     if (this.otpForm.value.otp)
       this.authService.otpValidator(this.otpForm.value.otp);
   }
+
+  resendOtp() {
+    this.authService.resendOtp();
+  }
 }

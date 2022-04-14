@@ -3,8 +3,9 @@
   <form (ngSubmit)="onProcess()" [formGroup]="otpForm">
     <div class="input-field-group">
       <label class="input-field-group__label" for="text"
-        >Check your linked mail😊👌</label
+        >Check your linked E-Mail's mails😊👌</label
       >
+      <br />
       <label class="input-field-group__label" for="text">OTP</label>
       <input
         class="input-field-group__input"
@@ -19,8 +20,6 @@
     <button type="submit" class="login-box__btn btn btn--light btn--animated">
       Process
     </button>
-    <a class="login-box__forget" routerLink="../reset-your-password"
-      >Resend OTP
-    </a>
+    <a class="login-box__forget" (click)="resendOtp()">Resend OTP </a>
   </form>
 </div>
