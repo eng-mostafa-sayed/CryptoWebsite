@@ -12,8 +12,7 @@ export interface Plan {
   date: string | any;
   name: string;
   total: number;
-  current: number;
-  average: number;
+  hashPower: number;
   expire: string;
 }
 
@@ -22,8 +21,7 @@ let expiredPlanData: Plan[] = [
     date: '',
     name: 'Loading...',
     total: 0,
-    current: 0,
-    average: 0,
+    hashPower: 0,
     expire: '',
   },
 ];
@@ -67,8 +65,7 @@ export class PlansComponent implements AfterViewInit, OnInit {
       date: '',
       name: 'Loading...',
       total: 0,
-      current: 0,
-      average: 0,
+      hashPower: 0,
       expire: '',
     },
   ];
@@ -85,8 +82,7 @@ export class PlansComponent implements AfterViewInit, OnInit {
     { name: 'date', field: 'date' },
     { name: 'name', field: 'name' },
     { name: 'total', field: 'total' },
-    { name: 'current', field: 'current' },
-    { name: 'average', field: 'average' },
+    { name: 'hashPower', field: 'hashPower' },
     { name: 'expire', field: 'expire' },
   ];
   activeHash: { crypto: string; plans: string; speed: string }[] = [
@@ -144,8 +140,7 @@ export class PlansComponent implements AfterViewInit, OnInit {
             date: this.activePlanData2[0][this.i].startDate,
             name: this.activePlanData2[0][this.i].cryptoName,
             total: this.activePlanData2[0][this.i].totalMined.toFixed(8),
-            current: 123, //this.activePlanData2[0][this.i].current,
-            average: 123, // this.activePlanData2[0][this.i].average,
+            hashPower: this.activePlanData2[0][this.i].hashPower,
             expire: this.activePlanData2[0][this.i].endDate,
           });
         } else {
@@ -154,8 +149,7 @@ export class PlansComponent implements AfterViewInit, OnInit {
             date: this.activePlanData2[0][this.i].startDate,
             name: this.activePlanData2[0][this.i].cryptoName,
             total: this.activePlanData2[0][this.i].totalMined.toFixed(8),
-            current: 123, //this.activePlanData2[0][this.i].current,
-            average: 123, // this.activePlanData2[0][this.i].average,
+            hashPower: this.activePlanData2[0][this.i].hashPower,
             expire: this.activePlanData2[0][this.i].endDate,
           });
         }

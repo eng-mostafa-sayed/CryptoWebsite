@@ -156,6 +156,7 @@ export class DashboardService {
       'https://cominer.herokuapp.com/api/plan/x/contract/add?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
       {
         planID: '6241fac32e9d176352ea9419',
+        currency: 'ETH',
       },
       this.header
     );
@@ -167,6 +168,7 @@ export class DashboardService {
       'https://cominer.herokuapp.com/api/asic/x/contract/add?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
       {
         asicID: '621a3e91b017345a2649748416',
+        currency: 'ETH',
       },
       this.header
     );

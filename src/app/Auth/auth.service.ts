@@ -61,28 +61,7 @@ export class AuthService {
       )
       .subscribe({
         next: (res) => {
-          // this.accessToken = res.jwt.accessToken;
-          // this.refreshToken = res.jwt.refreshToken;
-          // this.userId = res.user.userID;
-          // this.email = res.user.email;
-          // this.name = res.user.name;
-          // this.phone = res.user.phone;
-          // this.balance_eth = res.user.balance.eth.toFixed(5);
-          // this.balance_btc = res.user.balance.btc.toFixed(5);
-          // this.activePlans = res.user.activePlans;
-          // this.activeDemoPlans = res.user.activeDemoPlans;
-          // this.devices = res.user.devices;
-          // ///////////////////////////////session storage set values
-          // sessionStorage.setItem('name', `${this.name}`);
-          // sessionStorage.setItem('accessToken', `${this.accessToken}`);
-          // sessionStorage.setItem('balance_btc', `${this.balance_btc}`);
-          // sessionStorage.setItem('balance_eth', `${this.balance_eth}`);
-          // sessionStorage.setItem('activePlans', `${this.activePlans}`);
-          // sessionStorage.setItem('devices', `${this.devices}`);
           this.authStatusListner.next(true);
-
-          //this.router.navigate(['/user/dashboard/overview']);
-          // this.router.navigate(['./otp']);
           this.router.navigate(['/user/otp']);
         },
         error: (err) => {
