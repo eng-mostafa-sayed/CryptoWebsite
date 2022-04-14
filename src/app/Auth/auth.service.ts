@@ -48,6 +48,8 @@ export class AuthService {
     );
   }
   async signin(userName: String, password: String) {
+    //here i added the income username to the session storage to use it
+    sessionStorage.setItem('name', `${userName}`);
     this.http
       .post<any>(
         'https://cominer.herokuapp.com/api/user/FFactorAuth?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
@@ -76,7 +78,6 @@ export class AuthService {
           // sessionStorage.setItem('balance_eth', `${this.balance_eth}`);
           // sessionStorage.setItem('activePlans', `${this.activePlans}`);
           // sessionStorage.setItem('devices', `${this.devices}`);
-
           this.authStatusListner.next(true);
 
           //this.router.navigate(['/user/dashboard/overview']);
@@ -94,6 +95,27 @@ export class AuthService {
     this.authStatusListner.next(false);
     this.router.navigate(['/']);
   }
+  ///////////////////////////////////////////////////////////////
+  async otpValidator(otp: string) {
+    await this.http
+      .post<any>(
+        'https://cominer.herokuapp.com/api/user/TwoFactorAuth?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
+        {
+          userName: sessionStorage.getItem('name'),
+          otp: otp,
+        }
+      )
+      .subscribe({
+        next: (res) => {
+          this.authStatusListner.next(true);
+          this.router.navigate(['/user/dashboard/overview']);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+  //////////////////////////////////////////////////////////////
   autoAuth() {
     const authInfo = this.getAuthData();
     if (!authInfo) {

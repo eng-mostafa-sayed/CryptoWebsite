@@ -21,6 +21,7 @@ export class OtpComponent implements OnInit {
     });
   }
   onProcess() {
-    //if (this.otpForm.value.otp) this.authService.otpValidator(this.otpForm.value.otp);
+    if (this.otpForm.value.otp)
+      this.authService.otpValidator(this.otpForm.value.otp);
   }
 }
