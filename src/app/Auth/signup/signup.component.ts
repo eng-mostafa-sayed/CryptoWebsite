@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit {
           /////////////////////////////////////////////mesh byd5ol hena
           next: (res: any) => {
             console.log('Erooooor');
-            this.router.navigate(['/user/signin']);
+            this.router.navigate(['../signin']);
           },
           error: (err: any) => {
             console.log('Erooooor');

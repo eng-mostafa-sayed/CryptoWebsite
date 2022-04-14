@@ -15,8 +15,8 @@ export class SigninComponent implements OnInit {
 
   ngOnInit(): void {
     this.signinForm = new FormGroup({
-      email: new FormControl(null, {
-        validators: [Validators.required, Validators.email],
+      userName: new FormControl(null, {
+        validators: [Validators.required, Validators.minLength(3)],
       }),
       password: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(5)],
@@ -24,9 +24,9 @@ export class SigninComponent implements OnInit {
     });
   }
   onSignin() {
-    if (this.signinForm.value.email && this.signinForm.value.password)
+    if (this.signinForm.value.userName && this.signinForm.value.password)
       this.authService.signin(
-        this.signinForm.value.email,
+        this.signinForm.value.userName,
         this.signinForm.value.password
       );
   }
