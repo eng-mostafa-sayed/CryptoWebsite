@@ -174,7 +174,7 @@ export class DashboardService {
     return this.http.post<any>(
       'https://cominer.herokuapp.com/api/asic/x/contract/add?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
       {
-        asicID: '621a3e91b017345a2649748416',
+        asicID: '624866187db9d4a1ef65b09c',
         currency: 'ETH',
       },
       this.header
