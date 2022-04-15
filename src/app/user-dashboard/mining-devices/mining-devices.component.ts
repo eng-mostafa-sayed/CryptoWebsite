@@ -66,18 +66,16 @@ export class MiningDevicesComponent implements OnInit {
     encrypt: string;
     img: string;
     start: string;
-    end: string;
     maintainancePrice: string;
-    profit: string;
+    valid: string;
   }[] = [
     {
       name: 'Antminer S19 Pro ',
       encrypt: 'Bitcoin — SHA-256',
       img: '',
       start: '',
-      end: '',
       maintainancePrice: '',
-      profit: '',
+      valid: '',
     },
   ];
   constructor(private http: HttpClient, private dashboard: DashboardService) {}
@@ -91,9 +89,8 @@ export class MiningDevicesComponent implements OnInit {
           encrypt: 'TEST',
           img: '',
           start: res[i].startDate.substring(0, 10),
-          end: 'TEST',
-          maintainancePrice: 'TEST',
-          profit: 'TEST',
+          maintainancePrice: res[i].hostFees,
+          valid: !res[i].expired ? 'working' : 'expired',
         };
         this.myMiners.push(ele);
       }

@@ -130,7 +130,7 @@ export class PlansComponent implements AfterViewInit, OnInit {
     ///////////////////////////////////get the active plans from user-dashboard-services
     this.dashboard.getPlans().subscribe((res) => {
       this.activePlanData2.push(res);
-      //console.log(this.activePlanData2);
+      console.log(this.activePlanData2);
       this.activePlanData = [];
       this.expiredPlanData = [];
       for (this.i = 0; this.i < this.activePlanData2[0].length; this.i++) {
