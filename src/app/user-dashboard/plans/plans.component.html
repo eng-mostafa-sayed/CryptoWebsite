@@ -145,7 +145,7 @@
       [rowsPerPageOptions]="[4, 8, 12]"
     >
       <ng-template pTemplate="caption">
-        Active plans ({{ activePlanDataLength }})
+        Active plans ({{ activePlanData.length }})
       </ng-template>
       <ng-template pTemplate="header" let-columns>
         <tr>
@@ -218,7 +218,7 @@
       [rowsPerPageOptions]="[4, 8, 12]"
     >
       <ng-template pTemplate="caption">
-        Expired plans ({{ expiredPlanDataLength }})
+        Expired plans ({{ expiredPlanData.length }})
       </ng-template>
       <ng-template pTemplate="header" let-columns>
         <tr>

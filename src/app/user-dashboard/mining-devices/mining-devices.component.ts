@@ -82,7 +82,7 @@ export class MiningDevicesComponent implements OnInit {
 
   ngOnInit(): void {
     this.dashboard.getMyAsicDevices().subscribe((res: any) => {
-      console.log(res);
+      //console.log(res);
       for (let i = 0; i < res.length; i++) {
         const ele = {
           name: res[i].name,

@@ -157,7 +157,7 @@ export class OverviewComponent implements OnInit {
           minWithdraw: 0.00005,
         });
 
-        console.log(res);
+        //console.log(res);
       },
       error: (err) => {
         console.log(err);
@@ -183,7 +183,7 @@ export class OverviewComponent implements OnInit {
           minWithdraw: 0.00005,
         });
 
-        console.log(res);
+        // console.log(res);
       },
       error: (err) => {
         console.log(err);
@@ -209,7 +209,7 @@ export class OverviewComponent implements OnInit {
           minWithdraw: 0.00005,
         });
 
-        console.log(res);
+        // console.log(res);
       },
       error: (err) => {
         console.log(err);
@@ -235,7 +235,7 @@ export class OverviewComponent implements OnInit {
           minWithdraw: 0.00005,
         });
 
-        console.log(res);
+        // console.log(res);
       },
       error: (err) => {
         console.log(err);
@@ -379,7 +379,7 @@ export class OverviewComponent implements OnInit {
     this.item = this.array.filter((item) =>
       item.title.toLowerCase().includes('BTC')
     );
-    console.log('inside the filter' + this.item.balance_btc);
+    // console.log('inside the filter' + this.item.balance_btc);
     return this.item.miningSpeed;
   }
   getETH() {

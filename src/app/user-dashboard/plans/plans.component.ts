@@ -107,8 +107,6 @@ export class PlansComponent implements AfterViewInit, OnInit {
       speed: '0',
     },
   ];
-  activePlanDataLength: number = this.activePlanData.length;
-  expiredPlanDataLength: number = expiredPlanData.length;
 
   dataSourceActive = new MatTableDataSource(this.activePlanData);
   dataSourceExpired = new MatTableDataSource(expiredPlanData);

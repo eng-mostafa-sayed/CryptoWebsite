@@ -14,9 +14,11 @@ export class ChooseMinerComponent implements OnInit {
   miners3 = new Array();
 
   buyAsic() {
-    this.dashboard.buyAsic('621a3e91b017345a2649748416').subscribe((res) => {
-      console.log('buying Asic');
-    });
+    this.dashboard
+      .buyAsic('621a3e91b017345a2649748416')
+      .subscribe((res: any) => {
+        console.log('buying Asic');
+      });
   }
 
   constructor(private dashboard: DashboardService, private http: HttpClient) {}
