@@ -16,7 +16,6 @@ export class ChooseMinerComponent implements OnInit {
       crypto: 'Loading...',
       algorithm: 'Loading...',
       power: 'Loading...',
-      profitability: 0,
       Hostfees: 'Loading...',
       price: 0,
     },
