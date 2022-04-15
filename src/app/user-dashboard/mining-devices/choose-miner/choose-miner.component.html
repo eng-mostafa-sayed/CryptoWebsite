@@ -52,7 +52,7 @@
             (click)="buyAsic()"
             class="btn btn--animated btn--light miner__btn"
           >
-            Buy Device
+            {{ miner.availability ? "Buy Device" : "Not Available Now" }}
           </button>
         </div>
       </div>

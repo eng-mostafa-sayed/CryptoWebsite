@@ -9,18 +9,9 @@ import { DashboardService } from '../../user-dashboard.service';
   styleUrls: ['./choose-miner.component.scss'],
 })
 export class ChooseMinerComponent implements OnInit {
-  miners: any = [
-    {
-      name: 'Loading...',
-      icon: '',
-      crypto: 'Loading...',
-      algorithm: 'Loading...',
-      power: 'Loading...',
-      Hostfees: 'Loading...',
-      price: 0,
-    },
-  ];
-  miners2: any = [];
+  miners: any = [];
+  miners2 = new Array();
+  miners3 = new Array();
 
   buyAsic() {
     this.dashboard.buyAsic('621a3e91b017345a2649748416').subscribe((res) => {
@@ -31,11 +22,14 @@ export class ChooseMinerComponent implements OnInit {
   constructor(private dashboard: DashboardService, private http: HttpClient) {}
 
   ngOnInit() {
-    this.dashboard.getAsicDevicesContractPlans().subscribe((res: any) => {
-      //console.log(res);
+    this.dashboard.getAsicBTCDevicesContractPlans().subscribe((res: any) => {
       this.miners2 = res;
       this.miners = this.miners2;
-      //console.log(this.miners);
+      this.dashboard.getAsicETHDevicesContractPlans().subscribe((res: any) => {
+        this.miners3 = res;
+        this.miners.push(...this.miners3);
+        console.log(this.miners);
+      });
     });
   }
 }

@@ -70,12 +70,12 @@ export class MiningDevicesComponent implements OnInit {
     valid: string;
   }[] = [
     {
-      name: 'Antminer S19 Pro ',
-      encrypt: 'Bitcoin — SHA-256',
-      img: '',
-      start: '',
-      maintainancePrice: '',
-      valid: '',
+      name: 'loading ... ',
+      encrypt: 'loading ... ',
+      img: 'loading ... ',
+      start: 'loading ... ',
+      maintainancePrice: 'loading ... ',
+      valid: 'loading ... ',
     },
   ];
   constructor(private http: HttpClient, private dashboard: DashboardService) {}
