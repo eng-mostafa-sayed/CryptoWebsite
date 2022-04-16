@@ -50,12 +50,9 @@ export class SignupComponent implements OnInit {
         .subscribe({
           /////////////////////////////////////////////mesh byd5ol hena
           next: (res: any) => {
-            console.log('Erooooor');
             this.router.navigate(['../signin']);
           },
           error: (err: any) => {
-            console.log('Erooooor');
-            console.log('Erooooor');
             console.log(err);
           },
         });
