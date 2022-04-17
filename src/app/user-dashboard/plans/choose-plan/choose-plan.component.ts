@@ -142,6 +142,82 @@ export class ChoosePlanComponent implements OnInit {
         }
       }
     });
+    this.dashboard.getHashrateContractPlans('RVN').subscribe((res: any) => {
+      console.log(res);
+      for (let i = 0; i < res.plans.length; i++) {
+        const ele = {
+          id: res.plans[i]._id,
+          type: `${res.plans[i].planName} Miners`,
+          icon: '',
+          avilability: res.plans[i].availability,
+          duration: res.plans[i].planDuration,
+          crypto: `${res.plans[i].cryptoName}`,
+          power: res.PlansHashPower[1][i],
+          pricePer: '',
+          profitability: `${res.plans[i].profitability}`,
+          price: `${res.plans[i].price}`,
+        };
+        if (res.plans[i].planType.toLowerCase() == 'long') {
+          if (res.plans[i].cryptoName == 'BTC') {
+            this.BTCPlansLong.push(ele);
+          } else if (res.plans[i].cryptoName == 'ETH') {
+            this.ETHPlansLong.push(ele);
+          } else if (res.plans[i].cryptoName == 'RVN') {
+            this.RVNPlansLong.push(ele);
+          } else if (res.plans[i].cryptoName == 'LTCT') {
+            this.LTCTPlansLong.push(ele);
+          }
+        } else if (res.plans[i].planType.toLowerCase() == 'short') {
+          if (res.plans[i].cryptoName == 'BTC') {
+            this.BTCPlansShort.push(ele);
+          } else if (res.plans[i].cryptoName == 'ETH') {
+            this.ETHPlansShort.push(ele);
+          } else if (res.plans[i].cryptoName == 'RVN') {
+            this.RVNPlansShort.push(ele);
+          } else if (res.plans[i].cryptoName == 'LTCT') {
+            this.LTCTPlansShort.push(ele);
+          }
+        }
+      }
+    });
+    this.dashboard.getHashrateContractPlans('LTCT').subscribe((res: any) => {
+      console.log(res);
+      for (let i = 0; i < res.plans.length; i++) {
+        const ele = {
+          id: res.plans[i]._id,
+          type: `${res.plans[i].planName} Miners`,
+          icon: '',
+          avilability: res.plans[i].availability,
+          duration: res.plans[i].planDuration,
+          crypto: `${res.plans[i].cryptoName}`,
+          power: res.PlansHashPower[1][i],
+          pricePer: '',
+          profitability: `${res.plans[i].profitability}`,
+          price: `${res.plans[i].price}`,
+        };
+        if (res.plans[i].planType.toLowerCase() == 'long') {
+          if (res.plans[i].cryptoName == 'BTC') {
+            this.BTCPlansLong.push(ele);
+          } else if (res.plans[i].cryptoName == 'ETH') {
+            this.ETHPlansLong.push(ele);
+          } else if (res.plans[i].cryptoName == 'RVN') {
+            this.RVNPlansLong.push(ele);
+          } else if (res.plans[i].cryptoName == 'LTCT') {
+            this.LTCTPlansLong.push(ele);
+          }
+        } else if (res.plans[i].planType.toLowerCase() == 'short') {
+          if (res.plans[i].cryptoName == 'BTC') {
+            this.BTCPlansShort.push(ele);
+          } else if (res.plans[i].cryptoName == 'ETH') {
+            this.ETHPlansShort.push(ele);
+          } else if (res.plans[i].cryptoName == 'RVN') {
+            this.RVNPlansShort.push(ele);
+          } else if (res.plans[i].cryptoName == 'LTCT') {
+            this.LTCTPlansShort.push(ele);
+          }
+        }
+      }
+    });
   }
 
   shortPlansTap1() {
