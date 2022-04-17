@@ -37,8 +37,6 @@ const routes: Routes = [
       { path: 'signup', component: SignupComponent },
       { path: 'reset-your-password', component: ResetPasswordComponent },
       { path: 'otp', component: OtpComponent },
-      { path: 'hashrate-plans', component: ChoosePlanComponent },
-      { path: 'withdraw', component: WithdrawComponent },
     ],
   },
   {
