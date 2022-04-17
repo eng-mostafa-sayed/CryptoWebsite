@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { Numeric, stratify } from 'd3';
 import { AuthService } from 'src/app/Auth/auth.service';
@@ -124,10 +125,20 @@ export class OverviewComponent implements OnInit {
   ethPrice: string;
   rvnPrice: string;
   stxPrice: string;
+  plans: any;
+  BTCPlansTotalMined = 0;
+  ETHPlansTotalMined = 0;
+  STXPlansTotalMined = 0;
+  RVNPlansTotalMined = 0;
 
+  BTCPlansMiningSpeed = 0;
+  ETHPlansMiningSpeed = 0;
+  STXPlansMiningSpeed = 0;
+  RVNPlansMiningSpeed = 0;
   constructor(
     private dashboard: DashboardService,
-    private authServics: AuthService
+    private authServics: AuthService,
+    private router: Router
   ) {
     Chart.register(...registerables);
   }
@@ -247,6 +258,38 @@ export class OverviewComponent implements OnInit {
     this.RVN = this.balances[2];
     this.STX = this.balances[3];
 
+    ////////////////////////////////////////////////////////////////////////
+    ///////////////////here calculating the total mined of each currency and mining speed for each currency
+    this.dashboard.getPlans().subscribe({
+      next: (res) => {
+        this.plans = res;
+        for (let i = 0; i < this.plans.length; i++) {
+          if (this.plans[i].cryptoName === 'BTC' && this.plans[i].planStatus) {
+            this.BTCPlansTotalMined += Number(this.plans[i].totalMined);
+            this.BTCPlansMiningSpeed += Number(this.plans[i].hashPower);
+          } else if (
+            this.plans[i].cryptoName === 'ETH' &&
+            this.plans[i].planStatus
+          ) {
+            this.ETHPlansTotalMined += Number(this.plans[i].totalMined);
+            this.ETHPlansMiningSpeed += Number(this.plans[i].hashPower);
+          } else if (
+            this.plans[i].cryptoName === 'RVN' &&
+            this.plans[i].planStatus
+          ) {
+            this.RVNPlansTotalMined += Number(this.plans[i].totalMined);
+            this.RVNPlansMiningSpeed += Number(this.plans[i].hashPower);
+          } else if (
+            this.plans[i].cryptoName === 'STX' &&
+            this.plans[i].planStatus
+          ) {
+            this.STXPlansTotalMined += Number(this.plans[i].totalMined);
+            this.STXPlansMiningSpeed += Number(this.plans[i].hashPower);
+          }
+        }
+      },
+    });
+
     ///////////////////////////////////////////////btc graph called btcMiningDetails
     this.tap1Data = {
       labels: this.graphData,
@@ -333,6 +376,14 @@ export class OverviewComponent implements OnInit {
       },
     };
   }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  goToPlans() {
+    this.router.navigate(['/user/dashboard/hashrate-plans']);
+  }
+  goToWithdraw() {
+    this.router.navigate(['/user/dashboard/withdraw']);
+  }
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   update(event: Event) {}
   minedTap1() {
     this.minedTapOpend = 'tap1';

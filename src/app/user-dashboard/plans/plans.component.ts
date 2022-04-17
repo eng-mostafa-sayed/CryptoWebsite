@@ -71,6 +71,13 @@ export class PlansComponent implements AfterViewInit, OnInit {
   ];
   expiredPlanData = expiredPlanData;
   _activePlans: any = sessionStorage.getItem('activePlans');
+  /////////////////
+  plans: any;
+
+  BTCPlansMiningSpeed = 0;
+  ETHPlansMiningSpeed = 0;
+  STXPlansMiningSpeed = 0;
+  RVNPlansMiningSpeed = 0;
   /////////////////////////////////////////////////////////////////
   minedChartTapOpend = 'tap1';
   tap1Data: any;
@@ -87,24 +94,24 @@ export class PlansComponent implements AfterViewInit, OnInit {
   ];
   activeHash: { crypto: string; plans: string; speed: string }[] = [
     {
-      crypto: 'BTC ',
+      crypto: 'BTC',
       plans: this._activePlans,
-      speed: '23 580',
+      speed: String(this.BTCPlansMiningSpeed),
     },
     {
-      crypto: 'ETH ',
+      crypto: 'ETH',
       plans: this._activePlans,
-      speed: '23 580',
+      speed: String(this.ETHPlansMiningSpeed),
     },
     {
-      crypto: 'RVN ',
-      plans: '0',
-      speed: '0',
+      crypto: 'RVN',
+      plans: this._activePlans,
+      speed: String(this.RVNPlansMiningSpeed),
     },
     {
-      crypto: 'STX ',
-      plans: '0',
-      speed: '0',
+      crypto: 'STX',
+      plans: this._activePlans,
+      speed: String(this.STXPlansMiningSpeed),
     },
   ];
 
@@ -153,7 +160,26 @@ export class PlansComponent implements AfterViewInit, OnInit {
         }
       }
     });
+    ////////////////////////////////////////////////
 
+    ////////////////////////////////////////////////////////////////////////
+    ///////////////////here calculating the total mined of each currency and mining speed for each currency
+    this.dashboard.getPlans().subscribe({
+      next: (res) => {
+        this.plans = res;
+        for (let i = 0; i < this.plans.length; i++) {
+          if (this.plans[i].cryptoName === 'BTC') {
+            this.BTCPlansMiningSpeed += Number(this.plans[i].hashPower);
+          } else if (this.plans[i].cryptoName === 'ETH') {
+            this.ETHPlansMiningSpeed += Number(this.plans[i].hashPower);
+          } else if (this.plans[i].cryptoName === 'RVN') {
+            this.RVNPlansMiningSpeed += Number(this.plans[i].hashPower);
+          } else if (this.plans[i].cryptoName === 'STX') {
+            this.STXPlansMiningSpeed += Number(this.plans[i].hashPower);
+          }
+        }
+      },
+    });
     ////////////////////////////////////////dummy data for active plans
 
     this.dataSourceActive.filterPredicate = function (

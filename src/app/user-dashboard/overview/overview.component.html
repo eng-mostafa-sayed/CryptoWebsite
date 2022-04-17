@@ -63,12 +63,14 @@
           <button
             class="btn btn--dark btn--animated w-100"
             *ngIf="balance.currencyBalance > 0"
+            onclick="goToWithdraw()"
           >
             Withdraw
           </button>
           <button
             class="btn btn--light btn--animated w-100 mt-2"
             *ngIf="!(balance.currencyBalance > 0)"
+            onclick="goToPlans()"
           >
             Buy Mining plan
           </button>
@@ -140,17 +142,17 @@
                   <span>Mining speed </span>
                 </div>
                 <div class="summery__item__value">
-                  <span>{{ _miningSpeed }} H/s</span>
+                  <span>{{ BTCPlansMiningSpeed }} TH/S</span>
                   <i class="fas fa-plus"></i>
                 </div>
               </div>
               <div class="summery__item col-12 col-lg-4">
                 <div class="summery__item__title">
                   <i class="fas fa-hammer"></i>
-                  <span>Today Mined </span>
+                  <span>Total Mined </span>
                 </div>
                 <div class="summery__item__value">
-                  <h4>{{ balances[0].mined }} BTC</h4>
+                  <h4>${{ BTCPlansTotalMined }} BTC</h4>
                 </div>
               </div>
               <div class="summery__item col-12 col-lg-4">
@@ -184,17 +186,17 @@
                   <span>Mining speed </span>
                 </div>
                 <div class="summery__item__value">
-                  <span>{{ _miningSpeed }} H/s</span>
+                  <span>{{ ETHPlansMiningSpeed }} MH/S</span>
                   <i class="fas fa-plus"></i>
                 </div>
               </div>
               <div class="summery__item col-12 col-md-4">
                 <div class="summery__item__title">
                   <i class="fas fa-hammer"></i>
-                  <span>Today Mined </span>
+                  <span>Total Mined </span>
                 </div>
                 <div class="summery__item__value">
-                  <h4>{{ balances[1].mined }} ETH</h4>
+                  <h4>${{ ETHPlansTotalMined }} ETH</h4>
                 </div>
               </div>
               <div class="summery__item col-12 col-md-4">
@@ -228,17 +230,17 @@
                   <span>Mining speed </span>
                 </div>
                 <div class="summery__item__value">
-                  <span>{{ _miningSpeed }} H/s</span>
+                  <span>{{ RVNPlansMiningSpeed }} MH/S</span>
                   <i class="fas fa-plus"></i>
                 </div>
               </div>
               <div class="summery__item col-12 col-md-4">
                 <div class="summery__item__title">
                   <i class="fas fa-hammer"></i>
-                  <span>Today Mined </span>
+                  <span>Total Mined </span>
                 </div>
                 <div class="summery__item__value">
-                  <h4>{{ balances[2].mined }} RVN</h4>
+                  <h4>${{ RVNPlansTotalMined }} RVN</h4>
                 </div>
               </div>
               <div class="summery__item col-12 col-md-4">
@@ -272,17 +274,17 @@
                   <span>Mining speed </span>
                 </div>
                 <div class="summery__item__value">
-                  <span>{{ _miningSpeed }} H/s</span>
+                  <span>{{ STXPlansMiningSpeed }} MH/S</span>
                   <i class="fas fa-plus"></i>
                 </div>
               </div>
               <div class="summery__item col-12 col-md-4">
                 <div class="summery__item__title">
                   <i class="fas fa-hammer"></i>
-                  <span>Today Mined </span>
+                  <span>Total Mined </span>
                 </div>
                 <div class="summery__item__value">
-                  <h4>{{ balances[3].mined }} STX</h4>
+                  <h4>${{ STXPlansTotalMined }} STX</h4>
                 </div>
               </div>
               <div class="summery__item col-12 col-lg-4">

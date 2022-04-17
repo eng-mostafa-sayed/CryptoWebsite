@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
+import { platformBrowser } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { OtpComponent } from './Auth/otp/otp.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { SigninComponent } from './Auth/signin/signin.component';
 import { SignupComponent } from './Auth/signup/signup.component';
 import { UserComponent } from './Auth/user/user.component';
+import { ChoosePlanComponent } from './user-dashboard/plans/choose-plan/choose-plan.component';
+import { WithdrawComponent } from './user-dashboard/withdraw/withdraw.component';
 
 const routes: Routes = [
   {
@@ -34,6 +37,8 @@ const routes: Routes = [
       { path: 'signup', component: SignupComponent },
       { path: 'reset-your-password', component: ResetPasswordComponent },
       { path: 'otp', component: OtpComponent },
+      { path: 'hashrate-plans', component: ChoosePlanComponent },
+      { path: 'withdraw', component: WithdrawComponent },
     ],
   },
   {

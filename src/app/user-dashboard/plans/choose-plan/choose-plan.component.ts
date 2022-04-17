@@ -30,8 +30,27 @@ export class ChoosePlanComponent implements OnInit {
       price: 0,
     },
   ];
+  longPlans = [
+    {
+      id: '0',
+      type: 'loading...',
+      icon: '',
+      crypto: 'loading...',
+      power: 'loading...',
+      pricePer: 'loading...',
+      profitability: 'loading...',
+      price: 0,
+    },
+  ];
 
-  plans = new Array();
+  BTCPlansLong = new Array();
+  BTCPlansShort = new Array();
+  ETHPlansLong = new Array();
+  ETHPlansShort = new Array();
+  RVNPlansLong = new Array();
+  RVNPlansShort = new Array();
+  STXPlansLong = new Array();
+  STXPlansShort = new Array();
   constructor(private http: HttpClient, private dashboard: DashboardService) {}
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////here is buy  plan button
@@ -42,42 +61,6 @@ export class ChoosePlanComponent implements OnInit {
       console.log(n[0]);
     });
   }
-  // buyShortPlanETH(n: any) {
-  //   console.log('buy ETH short plan');
-  //   this.dashboard
-  //     .buyPlan(
-  //       this.plans[1]._id ? this.plans[1]._id : '6259ff1592fa2a9620d9543e'
-  //     )
-  //     .subscribe((res: any) => {});
-  // }
-  // buyShortPlanRVN(n: any) {
-  //   console.log('buying rvn short plan');
-  //   this.dashboard
-  //     .buyPlan(
-  //       this.plans[2]._id ? this.plans[2]._id : '6259ff1f92fa2a9620d95440'
-  //     )
-  //     .subscribe((res: any) => {});
-  // }
-  // buyShortPlanSTX(n: any) {
-  //   console.log('buying stx short plan');
-  //   this.dashboard.buyPlan(n).subscribe((res: any) => {});
-  // }
-  // buyLongPlanBTC(n: any) {
-  //   console.log('buying Bitcion Long plan');
-  //   this.dashboard.buyPlan(n).subscribe((res: any) => {});
-  // }
-  // buyLongPlanETH(n: any) {
-  //   console.log('buying eth long plan');
-  //   this.dashboard.buyPlan(n).subscribe((res: any) => {});
-  // }
-  // buyLongPlanRVN(n: any) {
-  //   console.log('buying rvn long plan');
-  //   this.dashboard.buyPlan(n).subscribe((res: any) => {});
-  // }
-  // buyLongPlanSTX(n: any) {
-  //   console.log('buying stx long plan');
-  //   this.dashboard.buyPlan(n).subscribe((res: any) => {});
-  // }
 
   /////here is general buy plan method
 
@@ -90,17 +73,36 @@ export class ChoosePlanComponent implements OnInit {
           id: res.plans[i]._id,
           type: `${res.plans[i].planName} Miners`,
           icon: '',
+          avilability: res.plans[i].availability,
+          duration: res.plans[i].planDuration,
           crypto: `${res.plans[i].cryptoName}`,
           power: res.PlansHashPower[1][i],
           pricePer: '',
           profitability: `${res.plans[i].profitability}`,
           price: `${res.plans[i].price}`,
         };
-        console.log(ele);
-        this.plans.push(ele);
+        if (res.plans[i].planType == 'long') {
+          if (res.plans[i].cryptoName == 'BTC') {
+            this.BTCPlansLong.push(ele);
+          } else if (res.plans[i].cryptoName == 'ETH') {
+            this.ETHPlansLong.push(ele);
+          } else if (res.plans[i].cryptoName == 'RVN') {
+            this.RVNPlansLong.push(ele);
+          } else if (res.plans[i].cryptoName == 'STX') {
+            this.STXPlansLong.push(ele);
+          }
+        } else if (res.plans[i].planType == 'short') {
+          if (res.plans[i].cryptoName == 'BTC') {
+            this.BTCPlansShort.push(ele);
+          } else if (res.plans[i].cryptoName == 'ETH') {
+            this.ETHPlansShort.push(ele);
+          } else if (res.plans[i].cryptoName == 'RVN') {
+            this.RVNPlansShort.push(ele);
+          } else if (res.plans[i].cryptoName == 'STX') {
+            this.STXPlansShort.push(ele);
+          }
+        }
       }
-      this.shortPlans = [];
-      this.shortPlans = this.plans;
     });
   }
 

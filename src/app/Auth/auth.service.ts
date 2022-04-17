@@ -69,11 +69,29 @@ export class AuthService {
         },
       });
   }
-  logout() {
+  async logout() {
     clearTimeout(this.saveTimeout);
+    await this.logingOut();
     this.clearAuthData();
     this.authStatusListner.next(false);
     this.router.navigate(['/']);
+  }
+  logingOut() {
+    this.http
+      .post<any>(
+        'https://cominer.herokuapp.com/api/user/logout?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
+        {
+          token: this.refreshToken,
+        }
+      )
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
   ///////////////////////////////////////////////////////////////
   async otpValidator(otp: string) {

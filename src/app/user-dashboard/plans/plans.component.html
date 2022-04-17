@@ -14,11 +14,13 @@
             </div>
             <div style="display: flex; flex-direction: column">
               <span>{{ power.crypto }}</span>
-              <span>{{ power.plans }} Active Plans</span>
+              <span></span>
             </div>
           </div>
           <div class="hashrate-active__item__value">
-            <span>{{ power.speed }} GH/S </span>
+            <span
+              >{{ power.speed }} {{ power.crypto == "BTC" ? "TH/S" : "MH/S" }}
+            </span>
           </div>
         </div>
       </div>
