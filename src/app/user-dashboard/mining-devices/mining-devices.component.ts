@@ -60,6 +60,9 @@ export class MiningDevicesComponent implements OnInit {
     },
   ];
   ////////////////////////////////////////////////////your miners
+  myBTCMinersHashratePower = 0; //not used
+  myETHMinersHashratePower = 0; //not used
+
   myMiners = new Array();
   miners: {
     name: string;

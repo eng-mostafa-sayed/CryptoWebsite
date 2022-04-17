@@ -61,11 +61,17 @@ export class AuthService {
       )
       .subscribe({
         next: (res) => {
-          this.authStatusListner.next(true);
-          this.router.navigate(['/user/otp']);
+          console.log(res);
+
+          if (res.message == 'Wrong credentials') {
+            this.authStatusListner.next(false);
+          } else if (res.message != 'Wrong credentials') {
+            this.authStatusListner.next(true);
+            this.router.navigate(['/user/otp']);
+          }
         },
         error: (err) => {
-          console.log(err);
+          //console.log(err);
         },
       });
   }
