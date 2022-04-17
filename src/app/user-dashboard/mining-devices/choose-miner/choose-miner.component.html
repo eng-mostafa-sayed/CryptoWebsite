@@ -49,7 +49,7 @@
             </p>
           </div>
           <button
-            (click)="buyAsic()"
+            (click)="buyAsic([miner._id])"
             class="btn btn--animated btn--light miner__btn"
           >
             {{ miner.availability ? "Buy Device" : "Not Available Now" }}

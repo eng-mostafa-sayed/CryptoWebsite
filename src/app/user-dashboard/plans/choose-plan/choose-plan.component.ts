@@ -20,6 +20,7 @@ export class ChoosePlanComponent implements OnInit {
   /////////////////////////////////////initial data/////////////////////////////////////////////
   shortPlans = [
     {
+      id: '0',
       type: 'loading...',
       icon: '',
       crypto: 'loading...',
@@ -35,52 +36,48 @@ export class ChoosePlanComponent implements OnInit {
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////here is buy  plan button
   //////////////////////////// each tab has its buttons even short or long and BTC or ETH or RVN or STX
-  buyShortPlanBTC() {
+  buying(n: any) {
     console.log('buy Bitcion short plan');
-    this.dashboard.buyPlan('6241fac32e9d176352ea9419').subscribe((res: any) => {
-      //console.log(res);
+    this.dashboard.buyPlan(n[0]).subscribe((res: any) => {
+      console.log(n[0]);
     });
   }
-  buyShortPlanETH() {
-    console.log('buy eth short plan');
-  }
-  buyShortPlanRVN() {
-    console.log('buying rvn short plan');
-    //planID: string = '6241fac32e9d176352ea9419';
-    this.dashboard.buyPlan('6241fac32e9d176352ea9419').subscribe((res: any) => {
-      //console.log(res);
-    });
-  }
-  buyShortPlanSTX() {
-    console.log('buying stx short plan');
-    this.dashboard.buyPlan('6241fac32e9d176352ea9419').subscribe((res: any) => {
-      //console.log(res);
-    });
-  }
-  buyLongPlanBTC() {
-    console.log('buying Bitcion Long plan');
-    this.dashboard.buyPlan('6241fac32e9d176352ea9419').subscribe((res: any) => {
-      //console.log(res);
-    });
-  }
-  buyLongPlanETH() {
-    console.log('buying eth long plan');
-    this.dashboard.buyPlan('6241fac32e9d176352ea9419').subscribe((res: any) => {
-      //console.log(res);
-    });
-  }
-  buyLongPlanRVN() {
-    console.log('buying rvn long plan');
-    this.dashboard.buyPlan('6241fac32e9d176352ea9419').subscribe((res: any) => {
-      //console.log(res);
-    });
-  }
-  buyLongPlanSTX() {
-    console.log('buying stx long plan');
-    this.dashboard.buyPlan('6241fac32e9d176352ea9419').subscribe((res: any) => {
-      //console.log(res);
-    });
-  }
+  // buyShortPlanETH(n: any) {
+  //   console.log('buy ETH short plan');
+  //   this.dashboard
+  //     .buyPlan(
+  //       this.plans[1]._id ? this.plans[1]._id : '6259ff1592fa2a9620d9543e'
+  //     )
+  //     .subscribe((res: any) => {});
+  // }
+  // buyShortPlanRVN(n: any) {
+  //   console.log('buying rvn short plan');
+  //   this.dashboard
+  //     .buyPlan(
+  //       this.plans[2]._id ? this.plans[2]._id : '6259ff1f92fa2a9620d95440'
+  //     )
+  //     .subscribe((res: any) => {});
+  // }
+  // buyShortPlanSTX(n: any) {
+  //   console.log('buying stx short plan');
+  //   this.dashboard.buyPlan(n).subscribe((res: any) => {});
+  // }
+  // buyLongPlanBTC(n: any) {
+  //   console.log('buying Bitcion Long plan');
+  //   this.dashboard.buyPlan(n).subscribe((res: any) => {});
+  // }
+  // buyLongPlanETH(n: any) {
+  //   console.log('buying eth long plan');
+  //   this.dashboard.buyPlan(n).subscribe((res: any) => {});
+  // }
+  // buyLongPlanRVN(n: any) {
+  //   console.log('buying rvn long plan');
+  //   this.dashboard.buyPlan(n).subscribe((res: any) => {});
+  // }
+  // buyLongPlanSTX(n: any) {
+  //   console.log('buying stx long plan');
+  //   this.dashboard.buyPlan(n).subscribe((res: any) => {});
+  // }
 
   /////here is general buy plan method
 
@@ -90,10 +87,11 @@ export class ChoosePlanComponent implements OnInit {
       console.log(res);
       for (let i = 0; i < res.plans.length; i++) {
         const ele = {
+          id: res.plans[i]._id,
           type: `${res.plans[i].planName} Miners`,
           icon: '',
           crypto: `${res.plans[i].cryptoName}`,
-          power: res.PlansHashPower[1].toFixed(6),
+          power: res.PlansHashPower[1][i],
           pricePer: '',
           profitability: `${res.plans[i].profitability}`,
           price: `${res.plans[i].price}`,
@@ -101,7 +99,6 @@ export class ChoosePlanComponent implements OnInit {
         console.log(ele);
         this.plans.push(ele);
       }
-      //console.log(this.plans);
       this.shortPlans = [];
       this.shortPlans = this.plans;
     });

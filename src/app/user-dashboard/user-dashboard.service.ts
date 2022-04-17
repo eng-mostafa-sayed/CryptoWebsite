@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Balance } from './balance.model';
-import { ThrowStmt } from '@angular/compiler';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -36,6 +36,12 @@ export class DashboardService {
       `Bearer ${this.accessToken}`
     ),
   };
+  requestHeader = {
+    headers: new HttpHeaders({
+      'Content-Type': 'text/plain',
+      Authorization: `Bearer ${this.accessToken}`,
+    }),
+  };
 
   async userData() {
     await this.http.get<any>(this.api, this.header).subscribe({
@@ -65,14 +71,6 @@ export class DashboardService {
 
   balances$ = new Subject<Balance[]>();
   constructor(private http: HttpClient) {}
-
-  // async ngOnInit() {
-  //   await this.userData();
-  //   await this.getPriceOfBitcoin();
-  //   await this.getPriceOfEth();
-  //   await this.getPriceOfRVN();
-  //   await this.getPriceOfSTX();
-  // }
 
   updateBalances() {
     this.balances$.next([
@@ -157,12 +155,13 @@ export class DashboardService {
   }
 
   /////////////////////////////////////buy plan dummy method
-
+  buyplanAPI =
+    'https://cominer.herokuapp.com/api/plan/x/contract/add?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4';
   buyPlan(plan_id: String) {
     return this.http.post<any>(
-      'https://cominer.herokuapp.com/api/plan/x/contract/add?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
+      this.buyplanAPI,
       {
-        planID: '6241fac32e9d176352ea9419',
+        planID: plan_id,
         currency: 'ETH',
       },
       this.header
@@ -174,7 +173,7 @@ export class DashboardService {
     return this.http.post<any>(
       'https://cominer.herokuapp.com/api/asic/x/contract/add?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
       {
-        asicID: '624866187db9d4a1ef65b09c',
+        asicID: asic_id,
         currency: 'ETH',
       },
       this.header
