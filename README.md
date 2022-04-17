@@ -1,8 +1,8 @@
 # EBitcoiner
 
 <br>
-##  Starting and installing programms
-1. Download Node.js Installer[from here](https://nodejs.org/en/download/)
+##  Starting and installing programms<br>
+1. Download Node.js Installer<a href="https://nodejs.org/en/download/">From here </a>
 <br>
 2. Install Node.js and NPM <br>
 3. Verify Installation <br>
