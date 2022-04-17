@@ -17,7 +17,7 @@ export class DashboardService {
   btcPriceObj: any = { USD: 0.0 };
   ethPriceObj: any = { USD: 0.0 };
   rvnPriceObj: any = { USD: 0.0 };
-  stxPriceObj: any = { USD: 0.0 };
+  LTCTPriceObj: any = { USD: 0.0 };
 
   //currencies APIs
   btcAPI: any =
@@ -26,8 +26,8 @@ export class DashboardService {
     'https://min-api.cryptocompare.com/data/price?fsym=Eth&tsyms=USD&api_key=43b6539c4d7f1fefd865f2580d4bd3fad07816ccca445c1055359ccdf57f0bf9';
   rvnAPI: any =
     'https://min-api.cryptocompare.com/data/price?fsym=rvn&tsyms=USD&api_key=43b6539c4d7f1fefd865f2580d4bd3fad07816ccca445c1055359ccdf57f0bf9';
-  stxAPI =
-    'https://min-api.cryptocompare.com/data/price?fsym=stx&tsyms=USD&api_key=43b6539c4d7f1fefd865f2580d4bd3fad07816ccca445c1055359ccdf57f0bf9';
+  LTCTAPI =
+    'https://min-api.cryptocompare.com/data/price?fsym=LTCT&tsyms=USD&api_key=43b6539c4d7f1fefd865f2580d4bd3fad07816ccca445c1055359ccdf57f0bf9';
 
   ///part of the userData() function to get the user data from the backend
   header: any = {
@@ -65,8 +65,8 @@ export class DashboardService {
   getPriceOfRVN() {
     return this.http.get<any>(this.rvnAPI);
   }
-  getPriceOfSTX() {
-    return this.http.get<any>(this.stxAPI);
+  getPriceOfLTCT() {
+    return this.http.get<any>(this.LTCTAPI);
   }
 
   balances$ = new Subject<Balance[]>();
@@ -105,11 +105,11 @@ export class DashboardService {
         minWithdraw: 0.000011,
       },
       {
-        currency: 'STX',
+        currency: 'LTCT',
         currencyBalance: 0.0,
         plans: this.obj.activePlans,
         devices: this.obj.devices,
-        price: this.stxPriceObj,
+        price: this.LTCTPriceObj,
         miningSpeed: '9,299',
         mined: 0.0,
         minWithdraw: 0.000099,

@@ -16,7 +16,7 @@
               ></i>
               <i
                 class="fab fa-ethereum lg"
-                *ngIf="balance.currency == 'ETH' || balance.currency == 'STX'"
+                *ngIf="balance.currency == 'ETH' || balance.currency == 'LTCT'"
               ></i>
             </div>
             <div class="col-12 col-md-9">
@@ -63,14 +63,14 @@
           <button
             class="btn btn--dark btn--animated w-100"
             *ngIf="balance.currencyBalance > 0"
-            onclick="goToWithdraw()"
+            (click)="goToWithdraw()"
           >
             Withdraw
           </button>
           <button
             class="btn btn--light btn--animated w-100 mt-2"
             *ngIf="!(balance.currencyBalance > 0)"
-            onclick="goToPlans()"
+            (click)="goToPlans()"
           >
             Buy Mining plan
           </button>
@@ -129,7 +129,7 @@
                     minedTapOpend == 'tap4'
                 }"
               >
-                <i class="fab fa-ethereum sm"></i> STX
+                <i class="fab fa-ethereum sm"></i> LTCT
               </div>
             </div>
           </div>
@@ -274,7 +274,7 @@
                   <span>Mining speed </span>
                 </div>
                 <div class="summery__item__value">
-                  <span>{{ STXPlansMiningSpeed }} MH/S</span>
+                  <span>{{ LTCTPlansMiningSpeed }} MH/S</span>
                   <i class="fas fa-plus"></i>
                 </div>
               </div>
@@ -284,7 +284,7 @@
                   <span>Total Mined </span>
                 </div>
                 <div class="summery__item__value">
-                  <h4>${{ STXPlansTotalMined }} STX</h4>
+                  <h4>${{ LTCTPlansTotalMined }} LTCT</h4>
                 </div>
               </div>
               <div class="summery__item col-12 col-lg-4">
@@ -300,14 +300,14 @@
             <div class="balance">
               <div class="balance__total">
                 <i class="fab fa-ethereum lg"></i>
-                <span>{{ _balance_stx }} STX</span>
+                <span>{{ _balance_LTCT }} LTCT</span>
               </div>
               <div class="balance__min">
-                <span>Min Withdraw: {{ balances[3].minWithdraw }} STX</span>
+                <span>Min Withdraw: {{ balances[3].minWithdraw }} LTCT</span>
               </div>
             </div>
             <button class="btn btn--animated btn--darker">
-              <i class="fab fa-ethereum sm"></i> <span> Withdraw STX </span>
+              <i class="fab fa-ethereum sm"></i> <span> Withdraw LTCT </span>
             </button>
           </div>
         </div>
@@ -366,7 +366,7 @@
                     minedChartTapOpend == 'tap4'
                 }"
               >
-                <i class="fab fa-ethereum sm"></i> STX
+                <i class="fab fa-ethereum sm"></i> LTCT
               </div>
             </div>
           </div>
@@ -458,7 +458,7 @@
                   'custom-taps__heading__taps__tap--active':
                     minedChartTapOpend == 'tap4'
                 }">
-                        <i class="fab fa-ethereum sm"></i> STX
+                        <i class="fab fa-ethereum sm"></i> LTCT
                     </div>
                 </div>
             </div>

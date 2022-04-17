@@ -35,7 +35,7 @@ export class PlansComponent implements AfterViewInit, OnInit {
   /////////////////////////////////////////////// i added this to manupulate the graph Data
   btcMiningDetails = new Array(12, 51, 62, 33, 21, 62, 45, 50, 30);
   ethMiningDetails = new Array(10, 20, 20, 20, 50, 10, 40, 50, 30);
-  stxMiningDetails = new Array(15, 20, 24, 30, 40, 62, 45, 50, 30);
+  LTCTMiningDetails = new Array(15, 20, 24, 30, 40, 62, 45, 50, 30);
   rvnMiningDetails = new Array(80, 70, 50, 30, 80, 50, 30, 50, 30);
   ////////////////////////////////////////////// i added this to make the color &Data of graph as constant
   graphColor: string = 'rgba(255, 73, 128, 1)';
@@ -76,7 +76,7 @@ export class PlansComponent implements AfterViewInit, OnInit {
 
   BTCPlansMiningSpeed = 0;
   ETHPlansMiningSpeed = 0;
-  STXPlansMiningSpeed = 0;
+  LTCTPlansMiningSpeed = 0;
   RVNPlansMiningSpeed = 0;
   /////////////////////////////////////////////////////////////////
   minedChartTapOpend = 'tap1';
@@ -109,9 +109,9 @@ export class PlansComponent implements AfterViewInit, OnInit {
       speed: String(this.RVNPlansMiningSpeed),
     },
     {
-      crypto: 'STX',
+      crypto: 'LTCT',
       plans: this._activePlans,
-      speed: String(this.STXPlansMiningSpeed),
+      speed: String(this.LTCTPlansMiningSpeed),
     },
   ];
 
@@ -174,8 +174,8 @@ export class PlansComponent implements AfterViewInit, OnInit {
             this.ETHPlansMiningSpeed += Number(this.plans[i].hashPower);
           } else if (this.plans[i].cryptoName === 'RVN') {
             this.RVNPlansMiningSpeed += Number(this.plans[i].hashPower);
-          } else if (this.plans[i].cryptoName === 'STX') {
-            this.STXPlansMiningSpeed += Number(this.plans[i].hashPower);
+          } else if (this.plans[i].cryptoName === 'LTCT') {
+            this.LTCTPlansMiningSpeed += Number(this.plans[i].hashPower);
           }
         }
       },
@@ -244,7 +244,7 @@ export class PlansComponent implements AfterViewInit, OnInit {
       datasets: [
         {
           label: '',
-          data: this.stxMiningDetails,
+          data: this.LTCTMiningDetails,
           fill: true,
           borderColor: this.graphColor,
           tension: this.graphTension,

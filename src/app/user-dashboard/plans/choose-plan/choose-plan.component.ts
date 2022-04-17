@@ -49,12 +49,12 @@ export class ChoosePlanComponent implements OnInit {
   ETHPlansShort = new Array();
   RVNPlansLong = new Array();
   RVNPlansShort = new Array();
-  STXPlansLong = new Array();
-  STXPlansShort = new Array();
+  LTCTPlansLong = new Array();
+  LTCTPlansShort = new Array();
   constructor(private http: HttpClient, private dashboard: DashboardService) {}
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////here is buy  plan button
-  //////////////////////////// each tab has its buttons even short or long and BTC or ETH or RVN or STX
+  //////////////////////////// each tab has its buttons even short or long and BTC or ETH or RVN or LTCT
   buying(n: any) {
     console.log('buy Bitcion short plan');
     this.dashboard.buyPlan(n[0]).subscribe((res: any) => {
@@ -88,8 +88,8 @@ export class ChoosePlanComponent implements OnInit {
             this.ETHPlansLong.push(ele);
           } else if (res.plans[i].cryptoName == 'RVN') {
             this.RVNPlansLong.push(ele);
-          } else if (res.plans[i].cryptoName == 'STX') {
-            this.STXPlansLong.push(ele);
+          } else if (res.plans[i].cryptoName == 'LTCT') {
+            this.LTCTPlansLong.push(ele);
           }
         } else if (res.plans[i].planType == 'short') {
           if (res.plans[i].cryptoName == 'BTC') {
@@ -98,8 +98,8 @@ export class ChoosePlanComponent implements OnInit {
             this.ETHPlansShort.push(ele);
           } else if (res.plans[i].cryptoName == 'RVN') {
             this.RVNPlansShort.push(ele);
-          } else if (res.plans[i].cryptoName == 'STX') {
-            this.STXPlansShort.push(ele);
+          } else if (res.plans[i].cryptoName == 'LTCT') {
+            this.LTCTPlansShort.push(ele);
           }
         }
       }
@@ -119,25 +119,25 @@ export class ChoosePlanComponent implements OnInit {
           profitability: `${res.plans[i].profitability}`,
           price: `${res.plans[i].price}`,
         };
-        if (res.plans[i].planType == 'long') {
+        if (res.plans[i].planType.toLowerCase() == 'long') {
           if (res.plans[i].cryptoName == 'BTC') {
             this.BTCPlansLong.push(ele);
           } else if (res.plans[i].cryptoName == 'ETH') {
             this.ETHPlansLong.push(ele);
           } else if (res.plans[i].cryptoName == 'RVN') {
             this.RVNPlansLong.push(ele);
-          } else if (res.plans[i].cryptoName == 'STX') {
-            this.STXPlansLong.push(ele);
+          } else if (res.plans[i].cryptoName == 'LTCT') {
+            this.LTCTPlansLong.push(ele);
           }
-        } else if (res.plans[i].planType == 'short') {
+        } else if (res.plans[i].planType.toLowerCase() == 'short') {
           if (res.plans[i].cryptoName == 'BTC') {
             this.BTCPlansShort.push(ele);
           } else if (res.plans[i].cryptoName == 'ETH') {
             this.ETHPlansShort.push(ele);
           } else if (res.plans[i].cryptoName == 'RVN') {
             this.RVNPlansShort.push(ele);
-          } else if (res.plans[i].cryptoName == 'STX') {
-            this.STXPlansShort.push(ele);
+          } else if (res.plans[i].cryptoName == 'LTCT') {
+            this.LTCTPlansShort.push(ele);
           }
         }
       }

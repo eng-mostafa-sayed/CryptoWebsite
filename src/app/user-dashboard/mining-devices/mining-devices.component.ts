@@ -11,7 +11,7 @@ export class MiningDevicesComponent implements OnInit {
   /////////////////////////////////////////////// i added this to manupulate the graph Data
   btcMiningDetails = new Array(12, 51, 62, 33, 21, 62, 45, 50, 30);
   ethMiningDetails = new Array(10, 20, 20, 20, 50, 10, 40, 50, 30);
-  stxMiningDetails = new Array(15, 20, 24, 30, 40, 62, 45, 50, 30);
+  LTCTMiningDetails = new Array(15, 20, 24, 30, 40, 62, 45, 50, 30);
   rvnMiningDetails = new Array(80, 70, 50, 30, 80, 50, 30, 50, 30);
   ////////////////////////////////////////////// i added this to make the color &Data of graph as constant
   graphColor: string = 'rgba(255, 73, 128, 1)';
@@ -54,7 +54,7 @@ export class MiningDevicesComponent implements OnInit {
       speed: '0',
     },
     {
-      crypto: 'STX (Stacks)',
+      crypto: 'LTCT (Stacks)',
       plans: 'No active plan',
       speed: '0',
     },
@@ -146,7 +146,7 @@ export class MiningDevicesComponent implements OnInit {
       datasets: [
         {
           label: '',
-          data: this.stxMiningDetails,
+          data: this.LTCTMiningDetails,
           fill: true,
           borderColor: this.graphColor,
           tension: this.graphTension,

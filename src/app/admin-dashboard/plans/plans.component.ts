@@ -53,7 +53,7 @@ export class PlansComponent implements OnInit {
       return true;
     } else if (miner.name.includes('RVN') && this.selected == 'tap3') {
       return true;
-    } else if (miner.name.includes('STX') && this.selected == 'tap4') {
+    } else if (miner.name.includes('LTCT') && this.selected == 'tap4') {
       return true;
     } else if (this.selected == 'all') {
       return true;

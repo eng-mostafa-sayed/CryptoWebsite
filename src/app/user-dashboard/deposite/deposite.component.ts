@@ -24,7 +24,7 @@ export class DepositeComponent implements OnInit {
       value: '0',
     },
     {
-      name: 'STX',
+      name: 'LTCT',
       value: '0',
     },
   ];

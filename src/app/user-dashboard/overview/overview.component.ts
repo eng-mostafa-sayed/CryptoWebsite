@@ -36,7 +36,7 @@ export class OverviewComponent implements OnInit {
   _devices: any = sessionStorage.getItem('devices');
 
   _balance_rvn: any = '0';
-  _balance_stx: any = '0';
+  _balance_LTCT: any = '0';
   _miningSpeed = 3.23;
   //////////////////////////////////////////////////////////////////////
 
@@ -65,18 +65,18 @@ export class OverviewComponent implements OnInit {
   };
   ////////////////////////////////////i added this
   balances = new Array();
-  array = new Array(); ///// this is for the BTC ETH STX RVN
+  array = new Array(); ///// this is for the BTC ETH LTCT RVN
   item: any;
 
   BTC: any;
   ETH: any;
   RVN: any;
-  STX: any;
+  LTCT: any;
 
   /////////////////////////////////////////////// i added this to manupulate the graph Data
   btcMiningDetails = new Array(12, 51, 62, 33, 21, 62, 45, 50, 30);
   ethMiningDetails = new Array(10, 20, 20, 20, 50, 10, 40, 50, 30);
-  stxMiningDetails = new Array(15, 20, 24, 30, 40, 62, 45, 50, 30);
+  LTCTMiningDetails = new Array(15, 20, 24, 30, 40, 62, 45, 50, 30);
   rvnMiningDetails = new Array(80, 70, 50, 30, 80, 50, 30, 50, 30);
   ////////////////////////////////////////////// i added this to make the color &Data of graph as constant
   graphColor: string = 'rgba(255, 73, 128, 1)';
@@ -124,16 +124,16 @@ export class OverviewComponent implements OnInit {
   btcPrice: string;
   ethPrice: string;
   rvnPrice: string;
-  stxPrice: string;
+  LTCTPrice: string;
   plans: any;
   BTCPlansTotalMined = 0;
   ETHPlansTotalMined = 0;
-  STXPlansTotalMined = 0;
+  LTCTPlansTotalMined = 0;
   RVNPlansTotalMined = 0;
 
   BTCPlansMiningSpeed = 0;
   ETHPlansMiningSpeed = 0;
-  STXPlansMiningSpeed = 0;
+  LTCTPlansMiningSpeed = 0;
   RVNPlansMiningSpeed = 0;
   constructor(
     private dashboard: DashboardService,
@@ -226,13 +226,13 @@ export class OverviewComponent implements OnInit {
         console.log(err);
       },
     });
-    await this.dashboard.getPriceOfSTX().subscribe({
+    await this.dashboard.getPriceOfLTCT().subscribe({
       next: (res) => {
-        this.stxPrice = res.USD;
+        this.LTCTPrice = res.USD;
         this.balances.push({
-          currency: 'STX',
-          currencyBalance: this.UserData.balance_stx
-            ? this.UserData.balance_stx
+          currency: 'LTCT',
+          currencyBalance: this.UserData.balance_LTCT
+            ? this.UserData.balance_LTCT
             : '0',
           plans: this.UserData.activePlans
             ? this.UserData.activePlans
@@ -240,7 +240,7 @@ export class OverviewComponent implements OnInit {
           devices: this.UserData.devices
             ? this.UserData.devices
             : this._devices,
-          price: this.stxPrice,
+          price: this.LTCTPrice,
           miningSpeed: '3,230',
           mined: 0.000003,
           minWithdraw: 0.00005,
@@ -256,7 +256,7 @@ export class OverviewComponent implements OnInit {
     this.BTC = this._balance_btc;
     this.ETH = this._balance_eth;
     this.RVN = this.balances[2];
-    this.STX = this.balances[3];
+    this.LTCT = this.balances[3];
 
     ////////////////////////////////////////////////////////////////////////
     ///////////////////here calculating the total mined of each currency and mining speed for each currency
@@ -280,11 +280,11 @@ export class OverviewComponent implements OnInit {
             this.RVNPlansTotalMined += Number(this.plans[i].totalMined);
             this.RVNPlansMiningSpeed += Number(this.plans[i].hashPower);
           } else if (
-            this.plans[i].cryptoName === 'STX' &&
+            this.plans[i].cryptoName === 'LTCT' &&
             this.plans[i].planStatus
           ) {
-            this.STXPlansTotalMined += Number(this.plans[i].totalMined);
-            this.STXPlansMiningSpeed += Number(this.plans[i].hashPower);
+            this.LTCTPlansTotalMined += Number(this.plans[i].totalMined);
+            this.LTCTPlansMiningSpeed += Number(this.plans[i].hashPower);
           }
         }
       },
@@ -335,7 +335,7 @@ export class OverviewComponent implements OnInit {
       datasets: [
         {
           label: '',
-          data: this.stxMiningDetails,
+          data: this.LTCTMiningDetails,
           fill: true,
           borderColor: this.graphColor,
           tension: this.graphTension,
@@ -378,7 +378,7 @@ export class OverviewComponent implements OnInit {
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   goToPlans() {
-    this.router.navigate(['/user/dashboard/hashrate-plans']);
+    this.router.navigate(['/user/dashboard/choose-plan']);
   }
   goToWithdraw() {
     this.router.navigate(['/user/dashboard/withdraw']);
@@ -445,10 +445,10 @@ export class OverviewComponent implements OnInit {
     // })[0];
     return this.RVN.miningSpeed;
   }
-  getSTX() {
-    // this.STX = this.balances.filter((element) => {
-    //   return element.currency === 'STX';
+  getLTCT() {
+    // this.LTCT = this.balances.filter((element) => {
+    //   return element.currency === 'LTCT';
     // })[0];
-    return this.STX.miningSpeed;
+    return this.LTCT.miningSpeed;
   }
 }
