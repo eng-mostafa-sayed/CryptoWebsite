@@ -13,7 +13,6 @@
 > 1.  node -v to check the version of node <br>
 
 > 2. npm -v to check the version of npm <br>
->    <br>
 
 ## to run the app
 
