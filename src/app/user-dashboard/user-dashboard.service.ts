@@ -124,9 +124,9 @@ export class DashboardService {
     );
   }
   ///////////////////////////////////////////////////////////hasherate plans page
-  getHashrateContractPlans(c: any) {
+  getHashrateContractPlans() {
     return this.http.get<any>(
-      `https://cominer.herokuapp.com/api/plan?cryptoName=${c}&planType=long&key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4`,
+      `https://cominer.herokuapp.com/api/plan?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4`,
       this.header
     );
   }

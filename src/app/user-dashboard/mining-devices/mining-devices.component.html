@@ -3,125 +3,6 @@
   <p class="dash-heading__para">Manage & subscribe hashrate power plans</p>
 </header>
 <div class="dashboard-container">
-  <div class="row g-4" *ngIf="checkLength()">
-    <div class="col-12 col-lg-4">
-      <div class="miners-power">
-        <h3 class="miners-power__title">Active Hashrate Power</h3>
-        <div class="miners-power__item" *ngFor="let power of activeHash">
-          <div class="miners-power__item__sub">
-            <div class="miners-power__item__sub__icon">
-              <i class="fab fa-btc md"></i>
-            </div>
-            <div class="miners-power__item__sub__text">
-              <span>{{ power.crypto }}</span>
-              <span class="miners-power__item__sub__text__active">{{
-                power.plans
-              }}</span>
-            </div>
-          </div>
-          <span class="miners-power__item__sub__value"
-            >{{ power.speed }} GH/S
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-lg-8">
-      <div class="custom-taps">
-        <div class="custom-taps__heading tex-center row align-items-center">
-          <h4
-            class="custom-taps__heading__title col-12 col-lg-4 text-sm-start mb-sm-3 mb-md-0"
-          >
-            Miners gains
-          </h4>
-          <div
-            class="custom-taps__heading__taps d-flex justify-content-end col-12 col-lg-8"
-          >
-            <div
-              class="custom-taps__heading__taps__tap"
-              (click)="minedChartTap1()"
-              [ngClass]="{
-                'custom-taps__heading__taps__tap--active':
-                  minersChartOpend == 'tap1'
-              }"
-            >
-              <i class="fab fa-btc sm"></i> BTC
-            </div>
-            <div
-              class="custom-taps__heading__taps__tap"
-              (click)="minedChartTap2()"
-              [ngClass]="{
-                'custom-taps__heading__taps__tap--active':
-                  minersChartOpend == 'tap2'
-              }"
-            >
-              <i class="fab fa-ethereum sm"></i> ETH
-            </div>
-            <div
-              class="custom-taps__heading__taps__tap"
-              (click)="minedChartTap3()"
-              [ngClass]="{
-                'custom-taps__heading__taps__tap--active':
-                  minersChartOpend == 'tap3'
-              }"
-            >
-              <i class="fab fa-btc sm"></i> RVN
-            </div>
-            <div
-              class="custom-taps__heading__taps__tap"
-              (click)="minedChartTap4()"
-              [ngClass]="{
-                'custom-taps__heading__taps__tap--active':
-                  minersChartOpend == 'tap4'
-              }"
-            >
-              <i class="fab fa-ethereum sm"></i> LTCT
-            </div>
-          </div>
-        </div>
-        <div
-          class="custom-taps__body custom-taps__body--chart"
-          *ngIf="minersChartOpend == 'tap1'"
-        >
-          <p-chart
-            type="line"
-            [data]="tap1Data"
-            [options]="basicOptions"
-            [responsive]="true"
-          ></p-chart>
-        </div>
-        <div
-          class="custom-taps__body custom-taps__body--chart"
-          *ngIf="minersChartOpend == 'tap2'"
-        >
-          <p-chart
-            type="line"
-            [data]="tap2Data"
-            [options]="basicOptions"
-          ></p-chart>
-        </div>
-        <div
-          class="custom-taps__body custom-taps__body--chart"
-          *ngIf="minersChartOpend == 'tap3'"
-        >
-          <p-chart
-            type="line"
-            [data]="tap3Data"
-            [options]="basicOptions"
-          ></p-chart>
-        </div>
-        <div
-          class="custom-taps__body custom-taps__body--chart"
-          *ngIf="minersChartOpend == 'tap4'"
-        >
-          <p-chart
-            type="line"
-            [data]="tap4Data"
-            [options]="basicOptions"
-          ></p-chart>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="row">
     <div class="miners-header">
       <h2 class="miners-header__title">Your Miners ({{ miners.length }})</h2>
@@ -137,7 +18,8 @@
     <div class="col-12 col-lg-6 col-xl-4" *ngFor="let miner of miners">
       <ng-container *ngIf="checkLength()">
         <div class="miner">
-          <h3 class="miner__title">{{ miner.name }}</h3>
+          <!--whole class -->
+          <h3 class="miner__title">{{ miner.asicName }}</h3>
           <div class="miner__sub">
             <i class="fab fa-btc md" style="margin-right: 8px"></i> Bitcoin —
             SHA-256
@@ -146,18 +28,31 @@
           <div class="miner__details row g-3">
             <div class="col-6">
               <span class="miner__details__title">Contract Start</span>
-              <span class="miner__details__sub">{{ miner.start }}</span>
+              <span class="miner__details__sub">{{ miner.startDate }}</span>
             </div>
-            <div class="col-6"></div>
+            <div class="col-6">
+              <span class="miner__details__title">Asic status</span>
+              <span class="miner__details__sub">{{ miner.asicStatus }}</span>
+            </div>
             <div class="col-6">
               <span class="miner__details__title">Maintenance Price</span>
-              <span class="miner__details__sub"
-                >${{ miner.maintainancePrice }}</span
-              >
+              <span class="miner__details__sub">${{ miner.hostFees }}</span>
             </div>
             <div class="col-6">
-              <span class="miner__details__title">Status</span>
-              <span class="miner__details__sub">{{ miner.valid }}</span>
+              <span class="miner__details__title">expiration</span>
+              <span class="miner__details__sub">{{ miner.expired }}</span>
+            </div>
+            <div class="col-6">
+              <span class="miner__details__title">Total Mined </span>
+              <span class="miner__details__sub">{{ miner.totalMined }}</span>
+            </div>
+            <div class="col-6">
+              <span class="miner__details__title">Worker ID </span>
+              <span class="miner__details__sub">{{ miner.workerID }}</span>
+            </div>
+            <div class="col-12">
+              <span class="miner__details__title">Address: </span>
+              <span class="miner__details__sub"> {{ miner.address }}</span>
             </div>
           </div>
         </div>

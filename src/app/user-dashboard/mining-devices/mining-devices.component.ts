@@ -65,20 +65,24 @@ export class MiningDevicesComponent implements OnInit {
 
   myMiners = new Array();
   miners: {
-    name: string;
-    encrypt: string;
-    img: string;
-    start: string;
-    maintainancePrice: string;
-    valid: string;
+    asicName: string;
+    asicStatus: string;
+    expired: string;
+    startDate: string;
+    hostFees: string;
+    address: string;
+    totalMined: string;
+    workerID: string;
   }[] = [
     {
-      name: 'loading ... ',
-      encrypt: 'loading ... ',
-      img: 'loading ... ',
-      start: 'loading ... ',
-      maintainancePrice: 'loading ... ',
-      valid: 'loading ... ',
+      asicName: 'loading ... ',
+      asicStatus: 'loading ... ',
+      expired: 'loading ... ',
+      startDate: 'loading ... ',
+      hostFees: 'loading ... ',
+      address: 'loading ... ',
+      totalMined: 'loading ... ',
+      workerID: 'loading ... ',
     },
   ];
   constructor(private http: HttpClient, private dashboard: DashboardService) {}
@@ -88,19 +92,23 @@ export class MiningDevicesComponent implements OnInit {
       //console.log(res);
       for (let i = 0; i < res.length; i++) {
         const ele = {
-          name: res[i].name,
-          encrypt: 'TEST',
-          img: '',
-          start: res[i].startDate.substring(0, 10),
-          maintainancePrice: res[i].hostFees,
-          valid: !res[i].expired ? 'working' : 'expired',
+          asicName: res[i].asicName ? res[i].asicName : 'not initialized yet',
+          asicStatus:
+            res[i].asicStatus == 'false' || 'true'
+              ? res[i].asicStatus
+              : 'not initialized yet',
+          expired: res[i].expired ? 'expired' : 'working',
+          startDate: res[i].startDate.substring(0, 10),
+          hostFees: res[i].hostFees ? res[i].hostFees : 'not initialized yet',
+          address: res[i].address ? res[i].address : 'not initialized yet',
+          workerID: res[i].workerID ? res[i].workerID : 'not initialized yet',
+          totalMined: res[i].totalMined ? res[i].totalMined : 0,
         };
         this.myMiners.push(ele);
       }
       this.miners = [];
       this.miners = this.myMiners;
     });
-
     //////////////////////////////////////////////////////////////////////////////////
     this.tap1Data = {
       labels: this.graphData,

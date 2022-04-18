@@ -65,8 +65,8 @@ export class ChoosePlanComponent implements OnInit {
   /////here is general buy plan method
 
   //////////////////////////////////////////////////////////////////////////////////////////
-  ngOnInit(): void {
-    this.dashboard.getHashrateContractPlans('BTC').subscribe((res: any) => {
+  async ngOnInit(): Promise<void> {
+    this.dashboard.getHashrateContractPlans().subscribe((res: any) => {
       console.log(res);
       for (let i = 0; i < res.plans.length; i++) {
         const ele = {
@@ -104,120 +104,170 @@ export class ChoosePlanComponent implements OnInit {
         }
       }
     });
-    this.dashboard.getHashrateContractPlans('ETH').subscribe((res: any) => {
-      console.log(res);
-      for (let i = 0; i < res.plans.length; i++) {
-        const ele = {
-          id: res.plans[i]._id,
-          type: `${res.plans[i].planName} Miners`,
-          icon: '',
-          avilability: res.plans[i].availability,
-          duration: res.plans[i].planDuration,
-          crypto: `${res.plans[i].cryptoName}`,
-          power: res.PlansHashPower[1][i],
-          pricePer: '',
-          profitability: `${res.plans[i].profitability}`,
-          price: `${res.plans[i].price}`,
-        };
-        if (res.plans[i].planType.toLowerCase() == 'long') {
-          if (res.plans[i].cryptoName == 'BTC') {
-            this.BTCPlansLong.push(ele);
-          } else if (res.plans[i].cryptoName == 'ETH') {
-            this.ETHPlansLong.push(ele);
-          } else if (res.plans[i].cryptoName == 'RVN') {
-            this.RVNPlansLong.push(ele);
-          } else if (res.plans[i].cryptoName == 'LTCT') {
-            this.LTCTPlansLong.push(ele);
-          }
-        } else if (res.plans[i].planType.toLowerCase() == 'short') {
-          if (res.plans[i].cryptoName == 'BTC') {
-            this.BTCPlansShort.push(ele);
-          } else if (res.plans[i].cryptoName == 'ETH') {
-            this.ETHPlansShort.push(ele);
-          } else if (res.plans[i].cryptoName == 'RVN') {
-            this.RVNPlansShort.push(ele);
-          } else if (res.plans[i].cryptoName == 'LTCT') {
-            this.LTCTPlansShort.push(ele);
-          }
-        }
-      }
-    });
-    this.dashboard.getHashrateContractPlans('RVN').subscribe((res: any) => {
-      console.log(res);
-      for (let i = 0; i < res.plans.length; i++) {
-        const ele = {
-          id: res.plans[i]._id,
-          type: `${res.plans[i].planName} Miners`,
-          icon: '',
-          avilability: res.plans[i].availability,
-          duration: res.plans[i].planDuration,
-          crypto: `${res.plans[i].cryptoName}`,
-          power: res.PlansHashPower[1][i],
-          pricePer: '',
-          profitability: `${res.plans[i].profitability}`,
-          price: `${res.plans[i].price}`,
-        };
-        if (res.plans[i].planType.toLowerCase() == 'long') {
-          if (res.plans[i].cryptoName == 'BTC') {
-            this.BTCPlansLong.push(ele);
-          } else if (res.plans[i].cryptoName == 'ETH') {
-            this.ETHPlansLong.push(ele);
-          } else if (res.plans[i].cryptoName == 'RVN') {
-            this.RVNPlansLong.push(ele);
-          } else if (res.plans[i].cryptoName == 'LTCT') {
-            this.LTCTPlansLong.push(ele);
-          }
-        } else if (res.plans[i].planType.toLowerCase() == 'short') {
-          if (res.plans[i].cryptoName == 'BTC') {
-            this.BTCPlansShort.push(ele);
-          } else if (res.plans[i].cryptoName == 'ETH') {
-            this.ETHPlansShort.push(ele);
-          } else if (res.plans[i].cryptoName == 'RVN') {
-            this.RVNPlansShort.push(ele);
-          } else if (res.plans[i].cryptoName == 'LTCT') {
-            this.LTCTPlansShort.push(ele);
-          }
-        }
-      }
-    });
-    this.dashboard.getHashrateContractPlans('LTCT').subscribe((res: any) => {
-      console.log(res);
-      for (let i = 0; i < res.plans.length; i++) {
-        const ele = {
-          id: res.plans[i]._id,
-          type: `${res.plans[i].planName} Miners`,
-          icon: '',
-          avilability: res.plans[i].availability,
-          duration: res.plans[i].planDuration,
-          crypto: `${res.plans[i].cryptoName}`,
-          power: res.PlansHashPower[1][i],
-          pricePer: '',
-          profitability: `${res.plans[i].profitability}`,
-          price: `${res.plans[i].price}`,
-        };
-        if (res.plans[i].planType.toLowerCase() == 'long') {
-          if (res.plans[i].cryptoName == 'BTC') {
-            this.BTCPlansLong.push(ele);
-          } else if (res.plans[i].cryptoName == 'ETH') {
-            this.ETHPlansLong.push(ele);
-          } else if (res.plans[i].cryptoName == 'RVN') {
-            this.RVNPlansLong.push(ele);
-          } else if (res.plans[i].cryptoName == 'LTCT') {
-            this.LTCTPlansLong.push(ele);
-          }
-        } else if (res.plans[i].planType.toLowerCase() == 'short') {
-          if (res.plans[i].cryptoName == 'BTC') {
-            this.BTCPlansShort.push(ele);
-          } else if (res.plans[i].cryptoName == 'ETH') {
-            this.ETHPlansShort.push(ele);
-          } else if (res.plans[i].cryptoName == 'RVN') {
-            this.RVNPlansShort.push(ele);
-          } else if (res.plans[i].cryptoName == 'LTCT') {
-            this.LTCTPlansShort.push(ele);
-          }
-        }
-      }
-    });
+    //   (await this.dashboard.getHashrateContractPlans('BTC', 'long')).subscribe(
+    //     (res: any) => {
+    //       console.log(res);
+    //       for (let i = 0; i < res.plans.length; i++) {
+    //         const ele = {
+    //           id: res.plans[i]._id,
+    //           type: `${res.plans[i].planName} Miners`,
+    //           icon: '',
+    //           avilability: res.plans[i].availability,
+    //           duration: res.plans[i].planDuration,
+    //           crypto: `${res.plans[i].cryptoName}`,
+    //           power: res.PlansHashPower[1][i],
+    //           pricePer: '',
+    //           profitability: `${res.plans[i].profitability}`,
+    //           price: `${res.plans[i].price}`,
+    //         };
+    //         this.BTCPlansLong.push(ele);
+    //       }
+    //     }
+    //   );
+    //   (await this.dashboard.getHashrateContractPlans('ETH', 'long')).subscribe(
+    //     (res: any) => {
+    //       console.log(res);
+    //       for (let i = 0; i < res.plans.length; i++) {
+    //         const ele = {
+    //           id: res.plans[i]._id,
+    //           type: `${res.plans[i].planName} Miners`,
+    //           icon: '',
+    //           avilability: res.plans[i].availability,
+    //           duration: res.plans[i].planDuration,
+    //           crypto: `${res.plans[i].cryptoName}`,
+    //           power: res.PlansHashPower[1][i],
+    //           pricePer: '',
+    //           profitability: `${res.plans[i].profitability}`,
+    //           price: `${res.plans[i].price}`,
+    //         };
+    //         this.ETHPlansLong.push(ele);
+    //       }
+    //     }
+    //   );
+    //   (await this.dashboard.getHashrateContractPlans('RVN', 'long')).subscribe(
+    //     (res: any) => {
+    //       console.log(res);
+    //       for (let i = 0; i < res.plans.length; i++) {
+    //         const ele = {
+    //           id: res.plans[i]._id,
+    //           type: `${res.plans[i].planName} Miners`,
+    //           icon: '',
+    //           avilability: res.plans[i].availability,
+    //           duration: res.plans[i].planDuration,
+    //           crypto: `${res.plans[i].cryptoName}`,
+    //           power: res.PlansHashPower[1][i],
+    //           pricePer: '',
+    //           profitability: `${res.plans[i].profitability}`,
+    //           price: `${res.plans[i].price}`,
+    //         };
+    //         if (res.plans[i].planType == 'long') {
+    //           if (res.plans[i].cryptoName == 'RVN') {
+    //             this.RVNPlansLong.push(ele);
+    //           }
+    //         }
+    //       }
+    //     }
+    //   );
+    //   (await this.dashboard.getHashrateContractPlans('LTCT', 'long')).subscribe(
+    //     (res: any) => {
+    //       console.log(res);
+    //       for (let i = 0; i < res.plans.length; i++) {
+    //         const ele = {
+    //           id: res.plans[i]._id,
+    //           type: `${res.plans[i].planName} Miners`,
+    //           icon: '',
+    //           avilability: res.plans[i].availability,
+    //           duration: res.plans[i].planDuration,
+    //           crypto: `${res.plans[i].cryptoName}`,
+    //           power: res.PlansHashPower[1][i],
+    //           pricePer: '',
+    //           profitability: `${res.plans[i].profitability}`,
+    //           price: `${res.plans[i].price}`,
+    //         };
+    //         this.LTCTPlansLong.push(ele);
+    //       }
+    //     }
+    //   );
+    //   (await this.dashboard.getHashrateContractPlans('BTC', 'short')).subscribe(
+    //     (res: any) => {
+    //       console.log(res);
+    //       for (let i = 0; i < res.plans.length; i++) {
+    //         const ele = {
+    //           id: res.plans[i]._id,
+    //           type: `${res.plans[i].planName} Miners`,
+    //           icon: '',
+    //           avilability: res.plans[i].availability,
+    //           duration: res.plans[i].planDuration,
+    //           crypto: `${res.plans[i].cryptoName}`,
+    //           power: res.PlansHashPower[1][i],
+    //           pricePer: '',
+    //           profitability: `${res.plans[i].profitability}`,
+    //           price: `${res.plans[i].price}`,
+    //         };
+    //         this.BTCPlansShort.push(ele);
+    //       }
+    //     }
+    //   );
+    //   (await this.dashboard.getHashrateContractPlans('ETH', 'short')).subscribe(
+    //     (res: any) => {
+    //       console.log(res);
+    //       for (let i = 0; i < res.plans.length; i++) {
+    //         const ele = {
+    //           id: res.plans[i]._id,
+    //           type: `${res.plans[i].planName} Miners`,
+    //           icon: '',
+    //           avilability: res.plans[i].availability,
+    //           duration: res.plans[i].planDuration,
+    //           crypto: `${res.plans[i].cryptoName}`,
+    //           power: res.PlansHashPower[1][i],
+    //           pricePer: '',
+    //           profitability: `${res.plans[i].profitability}`,
+    //           price: `${res.plans[i].price}`,
+    //         };
+    //         this.ETHPlansShort.push(ele);
+    //       }
+    //     }
+    //   );
+    //   (await this.dashboard.getHashrateContractPlans('RVN', 'short')).subscribe(
+    //     (res: any) => {
+    //       console.log(res);
+    //       for (let i = 0; i < res.plans.length; i++) {
+    //         const ele = {
+    //           id: res.plans[i]._id,
+    //           type: `${res.plans[i].planName} Miners`,
+    //           icon: '',
+    //           avilability: res.plans[i].availability,
+    //           duration: res.plans[i].planDuration,
+    //           crypto: `${res.plans[i].cryptoName}`,
+    //           power: res.PlansHashPower[1][i],
+    //           pricePer: '',
+    //           profitability: `${res.plans[i].profitability}`,
+    //           price: `${res.plans[i].price}`,
+    //         };
+    //         this.RVNPlansShort.push(ele);
+    //       }
+    //     }
+    //   );
+    //   (await this.dashboard.getHashrateContractPlans('LTCT', 'short')).subscribe(
+    //     (res: any) => {
+    //       console.log(res);
+    //       for (let i = 0; i < res.plans.length; i++) {
+    //         const ele = {
+    //           id: res.plans[i]._id,
+    //           type: `${res.plans[i].planName} Miners`,
+    //           icon: '',
+    //           avilability: res.plans[i].availability,
+    //           duration: res.plans[i].planDuration,
+    //           crypto: `${res.plans[i].cryptoName}`,
+    //           power: res.PlansHashPower[1][i],
+    //           pricePer: '',
+    //           profitability: `${res.plans[i].profitability}`,
+    //           price: `${res.plans[i].price}`,
+    //         };
+    //         this.LTCTPlansShort.push(ele);
+    //       }
+    //     }
+    //   );
   }
 
   shortPlansTap1() {
