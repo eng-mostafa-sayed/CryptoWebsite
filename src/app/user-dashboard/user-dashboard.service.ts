@@ -123,12 +123,38 @@ export class DashboardService {
       this.header
     );
   }
-  ///////////////////////////////////////////////////////////hasherate plans page
-  getHashrateContractPlans() {
+  /////////////////////////////////////////////////////////// buy hasherate plans page
+  ////////////the generic function
+  getHashrateContractPlans(Currency: string, planType: string) {
     return this.http.get<any>(
-      `https://cominer.herokuapp.com/api/plan?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4`,
+      `https://cominer.herokuapp.com/api/plan?cryptoName=${Currency}&planType=${planType}&key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4`,
       this.header
     );
+  }
+  //////////customized functions
+  get_BTC_Long_HashrateContractPlans() {
+    return this.getHashrateContractPlans('BTC', 'long');
+  }
+  get_BTC_Short_HashrateContractPlans() {
+    return this.getHashrateContractPlans('BTC', 'short');
+  }
+  get_ETH_Long_HashrateContractPlans() {
+    return this.getHashrateContractPlans('ETH', 'long');
+  }
+  get_ETH_Short_HashrateContractPlans() {
+    return this.getHashrateContractPlans('ETH', 'short');
+  }
+  get_RVN_Long_HashrateContractPlans() {
+    return this.getHashrateContractPlans('RVN', 'long');
+  }
+  get_RVN_Short_HashrateContractPlans() {
+    return this.getHashrateContractPlans('RVN', 'short');
+  }
+  get_LTCT_Long_HashrateContractPlans() {
+    return this.getHashrateContractPlans('LTCT', 'long');
+  }
+  get_LTCT_Short_HashrateContractPlans() {
+    return this.getHashrateContractPlans('LTCT', 'short');
   }
 
   ///////////////////////////////////////////////////mining devices page get data from asic contract(my contracts )

@@ -84,7 +84,7 @@
               *ngFor="let plan of BTCPlansShort"
             >
               <div class="plan">
-                <h4 class="plan__title">{{ plan.type }}</h4>
+                <h4 class="plan__title">{{ plan.planName }}</h4>
                 <img
                   class="plan__img"
                   src="../../../../assets/Miners.svg"
@@ -92,15 +92,21 @@
                 />
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Mining Currency</h6>
-                  <p class="plan__box__sub-value">{{ plan.crypto }}</p>
+                  <p class="plan__box__sub-value">{{ plan.cryptoName }}</p>
+                </div>
+                <div class="plan__box">
+                  <h6 class="plan__box__sub">Mining algorithm</h6>
+                  <p class="plan__box__sub-value">{{ plan.algorithm }}</p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Power</h6>
-                  <p class="plan__box__sub-value">{{ plan.power }} MH/S</p>
+                  <p class="plan__box__sub-value">{{ plan.hashrate }} MH/S</p>
                 </div>
                 <div class="plan__box">
-                  <h6 class="plan__box__sub">Price Per 1 MH/S</h6>
-                  <p class="plan__box__sub-value">$ 0.0120</p>
+                  <h6 class="plan__box__sub">planDuration</h6>
+                  <p class="plan__box__sub-value">
+                    {{ plan.planDuration }} Months
+                  </p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Profitability</h6>
@@ -127,7 +133,7 @@
               *ngFor="let plan of ETHPlansShort"
             >
               <div class="plan">
-                <h4 class="plan__title">{{ plan.type }}</h4>
+                <h4 class="plan__title">{{ plan.planName }}</h4>
                 <img
                   class="plan__img"
                   src="../../../../assets/Miners.svg"
@@ -135,15 +141,21 @@
                 />
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Mining Currency</h6>
-                  <p class="plan__box__sub-value">{{ plan.crypto }}</p>
+                  <p class="plan__box__sub-value">{{ plan.cryptoName }}</p>
+                </div>
+                <div class="plan__box">
+                  <h6 class="plan__box__sub">Mining algorithm</h6>
+                  <p class="plan__box__sub-value">{{ plan.algorithm }}</p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Power</h6>
-                  <p class="plan__box__sub-value">{{ plan.power }} MH/S</p>
+                  <p class="plan__box__sub-value">{{ plan.hashrate }} MH/S</p>
                 </div>
                 <div class="plan__box">
-                  <h6 class="plan__box__sub">Price Per 1 MH/S</h6>
-                  <p class="plan__box__sub-value">$ 0.0120</p>
+                  <h6 class="plan__box__sub">planDuration</h6>
+                  <p class="plan__box__sub-value">
+                    {{ plan.planDuration }} Months
+                  </p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Profitability</h6>
@@ -170,7 +182,7 @@
               *ngFor="let plan of RVNPlansShort"
             >
               <div class="plan">
-                <h4 class="plan__title">{{ plan.type }}</h4>
+                <h4 class="plan__title">{{ plan.planName }}</h4>
                 <img
                   class="plan__img"
                   src="../../../../assets/Miners.svg"
@@ -178,15 +190,21 @@
                 />
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Mining Currency</h6>
-                  <p class="plan__box__sub-value">{{ plan.crypto }}</p>
+                  <p class="plan__box__sub-value">{{ plan.cryptoName }}</p>
+                </div>
+                <div class="plan__box">
+                  <h6 class="plan__box__sub">Mining algorithm</h6>
+                  <p class="plan__box__sub-value">{{ plan.algorithm }}</p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Power</h6>
-                  <p class="plan__box__sub-value">{{ plan.power }} MH/S</p>
+                  <p class="plan__box__sub-value">{{ plan.hashrate }} MH/S</p>
                 </div>
                 <div class="plan__box">
-                  <h6 class="plan__box__sub">Price Per 1 MH/S</h6>
-                  <p class="plan__box__sub-value">$ 0.0120</p>
+                  <h6 class="plan__box__sub">planDuration</h6>
+                  <p class="plan__box__sub-value">
+                    {{ plan.planDuration }} Months
+                  </p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Profitability</h6>
@@ -213,7 +231,7 @@
               *ngFor="let plan of LTCTPlansShort"
             >
               <div class="plan">
-                <h4 class="plan__title">{{ plan.type }}</h4>
+                <h4 class="plan__title">{{ plan.planName }}</h4>
                 <img
                   class="plan__img"
                   src="../../../../assets/Miners.svg"
@@ -221,15 +239,21 @@
                 />
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Mining Currency</h6>
-                  <p class="plan__box__sub-value">{{ plan.crypto }}</p>
+                  <p class="plan__box__sub-value">{{ plan.cryptoName }}</p>
+                </div>
+                <div class="plan__box">
+                  <h6 class="plan__box__sub">Mining algorithm</h6>
+                  <p class="plan__box__sub-value">{{ plan.algorithm }}</p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Power</h6>
-                  <p class="plan__box__sub-value">{{ plan.power }} MH/S</p>
+                  <p class="plan__box__sub-value">{{ plan.hashrate }} MH/S</p>
                 </div>
                 <div class="plan__box">
-                  <h6 class="plan__box__sub">Price Per 1 MH/S</h6>
-                  <p class="plan__box__sub-value">$ 0.0120</p>
+                  <h6 class="plan__box__sub">planDuration</h6>
+                  <p class="plan__box__sub-value">
+                    {{ plan.planDuration }} Months
+                  </p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Profitability</h6>
@@ -307,7 +331,7 @@
               *ngFor="let plan of BTCPlansLong"
             >
               <div class="plan">
-                <h4 class="plan__title">{{ plan.type }}</h4>
+                <h4 class="plan__title">{{ plan.planName }}</h4>
                 <img
                   class="plan__img"
                   src="../../../../assets/Miners.svg"
@@ -315,15 +339,21 @@
                 />
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Mining Currency</h6>
-                  <p class="plan__box__sub-value">{{ plan.crypto }}</p>
+                  <p class="plan__box__sub-value">{{ plan.cryptoName }}</p>
+                </div>
+                <div class="plan__box">
+                  <h6 class="plan__box__sub">Mining algorithm</h6>
+                  <p class="plan__box__sub-value">{{ plan.algorithm }}</p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Power</h6>
-                  <p class="plan__box__sub-value">{{ plan.power }} MH/S</p>
+                  <p class="plan__box__sub-value">{{ plan.hashrate }} MH/S</p>
                 </div>
                 <div class="plan__box">
-                  <h6 class="plan__box__sub">Price Per 1 MH/S</h6>
-                  <p class="plan__box__sub-value">$ 0.0120</p>
+                  <h6 class="plan__box__sub">planDuration</h6>
+                  <p class="plan__box__sub-value">
+                    {{ plan.planDuration }} Months
+                  </p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Profitability</h6>
@@ -350,7 +380,7 @@
               *ngFor="let plan of ETHPlansLong"
             >
               <div class="plan">
-                <h4 class="plan__title">{{ plan.type }}</h4>
+                <h4 class="plan__title">{{ plan.planName }}</h4>
                 <img
                   class="plan__img"
                   src="../../../../assets/Miners.svg"
@@ -358,15 +388,21 @@
                 />
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Mining Currency</h6>
-                  <p class="plan__box__sub-value">{{ plan.crypto }}</p>
+                  <p class="plan__box__sub-value">{{ plan.cryptoName }}</p>
+                </div>
+                <div class="plan__box">
+                  <h6 class="plan__box__sub">Mining algorithm</h6>
+                  <p class="plan__box__sub-value">{{ plan.algorithm }}</p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Power</h6>
-                  <p class="plan__box__sub-value">{{ plan.power }} MH/S</p>
+                  <p class="plan__box__sub-value">{{ plan.hashrate }} MH/S</p>
                 </div>
                 <div class="plan__box">
-                  <h6 class="plan__box__sub">Price Per 1 MH/S</h6>
-                  <p class="plan__box__sub-value">$ 0.0120</p>
+                  <h6 class="plan__box__sub">planDuration</h6>
+                  <p class="plan__box__sub-value">
+                    {{ plan.planDuration }} Months
+                  </p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Profitability</h6>
@@ -393,7 +429,7 @@
               *ngFor="let plan of RVNPlansLong"
             >
               <div class="plan">
-                <h4 class="plan__title">{{ plan.type }}</h4>
+                <h4 class="plan__title">{{ plan.planName }}</h4>
                 <img
                   class="plan__img"
                   src="../../../../assets/Miners.svg"
@@ -401,15 +437,21 @@
                 />
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Mining Currency</h6>
-                  <p class="plan__box__sub-value">{{ plan.crypto }}</p>
+                  <p class="plan__box__sub-value">{{ plan.cryptoName }}</p>
+                </div>
+                <div class="plan__box">
+                  <h6 class="plan__box__sub">Mining algorithm</h6>
+                  <p class="plan__box__sub-value">{{ plan.algorithm }}</p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Power</h6>
-                  <p class="plan__box__sub-value">{{ plan.power }} MH/S</p>
+                  <p class="plan__box__sub-value">{{ plan.hashrate }} MH/S</p>
                 </div>
                 <div class="plan__box">
-                  <h6 class="plan__box__sub">Price Per 1 MH/S</h6>
-                  <p class="plan__box__sub-value">$ 0.0120</p>
+                  <h6 class="plan__box__sub">planDuration</h6>
+                  <p class="plan__box__sub-value">
+                    {{ plan.planDuration }} Months
+                  </p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Profitability</h6>
@@ -436,7 +478,7 @@
               *ngFor="let plan of LTCTPlansLong"
             >
               <div class="plan">
-                <h4 class="plan__title">{{ plan.type }}</h4>
+                <h4 class="plan__title">{{ plan.planName }}</h4>
                 <img
                   class="plan__img"
                   src="../../../../assets/Miners.svg"
@@ -444,15 +486,21 @@
                 />
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Mining Currency</h6>
-                  <p class="plan__box__sub-value">{{ plan.crypto }}</p>
+                  <p class="plan__box__sub-value">{{ plan.cryptoName }}</p>
+                </div>
+                <div class="plan__box">
+                  <h6 class="plan__box__sub">Mining algorithm</h6>
+                  <p class="plan__box__sub-value">{{ plan.algorithm }}</p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Power</h6>
-                  <p class="plan__box__sub-value">{{ plan.power }} MH/S</p>
+                  <p class="plan__box__sub-value">{{ plan.hashrate }} MH/S</p>
                 </div>
                 <div class="plan__box">
-                  <h6 class="plan__box__sub">Price Per 1 MH/S</h6>
-                  <p class="plan__box__sub-value">$ 0.0120</p>
+                  <h6 class="plan__box__sub">planDuration</h6>
+                  <p class="plan__box__sub-value">
+                    {{ plan.planDuration }} Months
+                  </p>
                 </div>
                 <div class="plan__box">
                   <h6 class="plan__box__sub">Profitability</h6>
