@@ -93,11 +93,8 @@ export class MiningDevicesComponent implements OnInit {
       for (let i = 0; i < res.length; i++) {
         const ele = {
           asicName: res[i].asicName ? res[i].asicName : 'not initialized yet',
-          asicStatus:
-            res[i].asicStatus == 'false' || 'true'
-              ? res[i].asicStatus
-              : 'not initialized yet',
-          expired: res[i].expired ? 'expired' : 'working',
+          asicStatus: res[i].asicStatus ? 'working' : 'not working',
+          expired: res[i].expired ? 'expired' : 'valid',
           startDate: res[i].startDate.substring(0, 10),
           hostFees: res[i].hostFees ? res[i].hostFees : 'not initialized yet',
           address: res[i].address ? res[i].address : 'not initialized yet',
