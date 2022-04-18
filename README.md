@@ -16,7 +16,7 @@
 
 ## to run the app
 
-> - Download Node.js Installer<br>
+> - Download Node.js Installer and install it <br>
 
 > - At the command prompt inside the folder or inside the VS Code while opening the folder, type <code>npm install</code>.<br>
 
