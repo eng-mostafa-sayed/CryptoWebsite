@@ -73,7 +73,7 @@ export class ChoosePlanComponent implements OnInit {
     this.dashboard
       .get_BTC_Long_HashrateContractPlans()
       .subscribe((res: any) => {
-        console.log(res);
+        //console.log(res);
         for (let i = 0; i < res.plans.length; i++) {
           const ele = {
             id: res.plans[i]._id ? res.plans[i]._id : '0',
@@ -101,7 +101,7 @@ export class ChoosePlanComponent implements OnInit {
     this.dashboard
       .get_BTC_Short_HashrateContractPlans()
       .subscribe((res: any) => {
-        console.log(res);
+        //console.log(res);
         for (let i = 0; i < res.plans.length; i++) {
           const ele = {
             id: res.plans[i]._id ? res.plans[i]._id : '0',
@@ -131,7 +131,7 @@ export class ChoosePlanComponent implements OnInit {
     this.dashboard
       .get_ETH_Long_HashrateContractPlans()
       .subscribe((res: any) => {
-        console.log(res);
+        //console.log(res);
         for (let i = 0; i < res.plans.length; i++) {
           const ele = {
             id: res.plans[i]._id ? res.plans[i]._id : '0',
@@ -159,7 +159,7 @@ export class ChoosePlanComponent implements OnInit {
     this.dashboard
       .get_ETH_Short_HashrateContractPlans()
       .subscribe((res: any) => {
-        console.log(res);
+        //console.log(res);
         for (let i = 0; i < res.plans.length; i++) {
           const ele = {
             id: res.plans[i]._id ? res.plans[i]._id : '0',
@@ -189,7 +189,7 @@ export class ChoosePlanComponent implements OnInit {
     this.dashboard
       .get_RVN_Long_HashrateContractPlans()
       .subscribe((res: any) => {
-        console.log(res);
+        //console.log(res);
         for (let i = 0; i < res.plans.length; i++) {
           const ele = {
             id: res.plans[i]._id ? res.plans[i]._id : '0',
@@ -217,7 +217,7 @@ export class ChoosePlanComponent implements OnInit {
     this.dashboard
       .get_RVN_Short_HashrateContractPlans()
       .subscribe((res: any) => {
-        console.log(res);
+        //console.log(res);
         for (let i = 0; i < res.plans.length; i++) {
           const ele = {
             id: res.plans[i]._id ? res.plans[i]._id : '0',
@@ -247,7 +247,7 @@ export class ChoosePlanComponent implements OnInit {
     this.dashboard
       .get_LTCT_Long_HashrateContractPlans()
       .subscribe((res: any) => {
-        console.log(res);
+        //console.log(res);
         for (let i = 0; i < res.plans.length; i++) {
           const ele = {
             id: res.plans[i]._id ? res.plans[i]._id : '0',
@@ -275,7 +275,7 @@ export class ChoosePlanComponent implements OnInit {
     this.dashboard
       .get_LTCT_Short_HashrateContractPlans()
       .subscribe((res: any) => {
-        console.log(res);
+        //console.log(res);
         for (let i = 0; i < res.plans.length; i++) {
           const ele = {
             id: res.plans[i]._id ? res.plans[i]._id : '0',
