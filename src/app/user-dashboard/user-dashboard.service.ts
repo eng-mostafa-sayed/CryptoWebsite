@@ -66,7 +66,9 @@ export class DashboardService {
     return this.http.get<any>(this.rvnAPI);
   }
   getPriceOfLTCT() {
-    return this.http.get<any>(this.LTCTAPI);
+    return this.http.get<any>(
+      ' https://api.coinbase.com/v2/prices/LTC-USD/buy'
+    );
   }
 
   balances$ = new Subject<Balance[]>();

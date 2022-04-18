@@ -228,7 +228,7 @@ export class OverviewComponent implements OnInit {
     });
     await this.dashboard.getPriceOfLTCT().subscribe({
       next: (res) => {
-        this.LTCTPrice = res.USD;
+        this.LTCTPrice = res.data.amount ? res.data.amount : 0;
         this.balances.push({
           currency: 'LTCT',
           currencyBalance: this.UserData.balance_LTCT
