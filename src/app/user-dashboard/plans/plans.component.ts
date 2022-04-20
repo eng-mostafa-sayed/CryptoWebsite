@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 export interface Plan {
   date: string | any;
   name: string;
+  id: string | number;
   total: number;
   hashPower: number;
   expire: string;
@@ -19,6 +20,7 @@ export interface Plan {
 let expiredPlanData: Plan[] = [
   {
     date: '',
+    id: 0,
     name: 'Loading...',
     total: 0,
     hashPower: 0,
@@ -58,11 +60,12 @@ export class PlansComponent implements AfterViewInit, OnInit {
   ////////////////////////////////////////////////////////////////
   activePlanData2: any = new Array();
   element: object;
-  private i: number = 0;
+  //private i: number = 0;
   ///////////////////////////////////////////////////////////////////
   activePlanData = [
     {
       date: '',
+      id: 0,
       name: 'Loading...',
       total: 0,
       hashPower: 0,
@@ -74,10 +77,10 @@ export class PlansComponent implements AfterViewInit, OnInit {
   /////////////////
   plans: any;
 
-  BTCPlansMiningSpeed = 0;
-  ETHPlansMiningSpeed = 0;
-  LTCTPlansMiningSpeed = 0;
-  RVNPlansMiningSpeed = 0;
+  BTCPlansMiningSpeed = 1;
+  ETHPlansMiningSpeed = 1;
+  LTCTPlansMiningSpeed = 1;
+  RVNPlansMiningSpeed = 1;
   /////////////////////////////////////////////////////////////////
   minedChartTapOpend = 'tap1';
   tap1Data: any;
@@ -87,7 +90,7 @@ export class PlansComponent implements AfterViewInit, OnInit {
   basicOptions: any;
   displayedColumns = [
     { name: 'date', field: 'date' },
-    { name: 'name', field: 'name' },
+    { name: 'id', field: 'id' },
     { name: 'total', field: 'total' },
     { name: 'hashPower', field: 'hashPower' },
     { name: 'expire', field: 'expire' },
@@ -96,22 +99,38 @@ export class PlansComponent implements AfterViewInit, OnInit {
     {
       crypto: 'BTC',
       plans: this._activePlans,
-      speed: String(this.BTCPlansMiningSpeed),
+      speed: String(
+        this.BTCPlansMiningSpeed.toFixed(8)
+          ? this.BTCPlansMiningSpeed.toFixed(8)
+          : 0
+      ),
     },
     {
       crypto: 'ETH',
       plans: this._activePlans,
-      speed: String(this.ETHPlansMiningSpeed),
+      speed: String(
+        this.ETHPlansMiningSpeed.toFixed(8)
+          ? this.ETHPlansMiningSpeed.toFixed(8)
+          : 0
+      ),
     },
     {
       crypto: 'RVN',
       plans: this._activePlans,
-      speed: String(this.RVNPlansMiningSpeed),
+      speed: String(
+        this.RVNPlansMiningSpeed.toFixed(8)
+          ? this.RVNPlansMiningSpeed.toFixed(8)
+          : 0
+      ),
     },
     {
       crypto: 'LTCT',
       plans: this._activePlans,
-      speed: String(this.LTCTPlansMiningSpeed),
+      speed: String(
+        this.LTCTPlansMiningSpeed.toFixed(8)
+          ? this.LTCTPlansMiningSpeed.toFixed(8)
+          : 0
+      ),
     },
   ];
 
@@ -135,27 +154,48 @@ export class PlansComponent implements AfterViewInit, OnInit {
     ///////////////////////////////////get the active plans from user-dashboard-services
     this.dashboard.getPlans().subscribe((res) => {
       this.activePlanData2.push(res);
-      console.log(this.activePlanData2);
+      // console.log(this.activePlanData2);
       this.activePlanData = [];
       this.expiredPlanData = [];
-      for (this.i = 0; this.i < this.activePlanData2[0].length; this.i++) {
+      for (let i = 0; i < this.activePlanData2[0].length; i++) {
         //////////////////////////////////////////////////////chech if the plan active or not active
-        if (this.activePlanData2[0][this.i].planStatus) {
+        if (this.activePlanData2[0][i].planStatus) {
           this.activePlanData.push({
-            date: this.activePlanData2[0][this.i].startDate,
-            name: this.activePlanData2[0][this.i].cryptoName,
-            total: this.activePlanData2[0][this.i].totalMined.toFixed(8),
-            hashPower: this.activePlanData2[0][this.i].hashPower,
-            expire: this.activePlanData2[0][this.i].endDate,
+            date: this.activePlanData2[0][i].startDate,
+            name: this.activePlanData2[0][i]._id, //// i used name instead of id
+            id: this.activePlanData2[0][i]._id,
+            total: this.activePlanData2[0][i].totalMined.toFixed(8),
+            hashPower: this.activePlanData2[0][i].hashPower,
+            expire: this.activePlanData2[0][i].endDate,
           });
+          ///////////////////here calculating the total mined of each currency and mining speed for each currency
+          if (this.activePlanData2[0][i].cryptoName == 'BTC') {
+            this.BTCPlansMiningSpeed += Number(
+              this.activePlanData2[0][i].hashPower
+            );
+          } else if (this.activePlanData2[0][i].cryptoName == 'ETH') {
+            this.ETHPlansMiningSpeed += Number(
+              this.activePlanData2[0][i].hashPower
+            );
+          } else if (this.activePlanData2[0][i].cryptoName == 'RVN') {
+            this.RVNPlansMiningSpeed += Number(
+              this.activePlanData2[0][i].hashPower
+            );
+          } else if (this.activePlanData2[0][i].cryptoName == 'LTCT') {
+            this.LTCTPlansMiningSpeed += Number(
+              this.activePlanData2[0][i].hashPower
+            );
+          }
+          console.log(this.activePlanData2[0][i].hashPower);
         } else {
           ///////////////////////////////here the insertion inside the expiredPlanData array
           this.expiredPlanData.push({
-            date: this.activePlanData2[0][this.i].startDate,
-            name: this.activePlanData2[0][this.i].cryptoName,
-            total: this.activePlanData2[0][this.i].totalMined.toFixed(8),
-            hashPower: this.activePlanData2[0][this.i].hashPower,
-            expire: this.activePlanData2[0][this.i].endDate,
+            date: this.activePlanData2[0][i].startDate,
+            name: this.activePlanData2[0][i]._id, //// i used name instead of id
+            id: this.activePlanData2[0][i]._id,
+            total: this.activePlanData2[0][i].totalMined.toFixed(8),
+            hashPower: this.activePlanData2[0][i].hashPower,
+            expire: this.activePlanData2[0][i].endDate,
           });
         }
       }
@@ -164,22 +204,18 @@ export class PlansComponent implements AfterViewInit, OnInit {
 
     ////////////////////////////////////////////////////////////////////////
     ///////////////////here calculating the total mined of each currency and mining speed for each currency
-    this.dashboard.getPlans().subscribe({
-      next: (res) => {
-        this.plans = res;
-        for (let i = 0; i < this.plans.length; i++) {
-          if (this.plans[i].cryptoName === 'BTC') {
-            this.BTCPlansMiningSpeed += Number(this.plans[i].hashPower);
-          } else if (this.plans[i].cryptoName === 'ETH') {
-            this.ETHPlansMiningSpeed += Number(this.plans[i].hashPower);
-          } else if (this.plans[i].cryptoName === 'RVN') {
-            this.RVNPlansMiningSpeed += Number(this.plans[i].hashPower);
-          } else if (this.plans[i].cryptoName === 'LTCT') {
-            this.LTCTPlansMiningSpeed += Number(this.plans[i].hashPower);
-          }
-        }
-      },
-    });
+
+    // for (let i = 0; i < this.activePlanData.length; i++) {
+    //   if (this.plans[i].cryptoName == 'BTC') {
+    //     this.BTCPlansMiningSpeed += Number(this.plans[i].hashPower);
+    //   } else if (this.plans[i].cryptoName == 'ETH') {
+    //     this.ETHPlansMiningSpeed += Number(this.plans[i].hashPower);
+    //   } else if (this.plans[i].cryptoName == 'RVN') {
+    //     this.RVNPlansMiningSpeed += Number(this.plans[i].hashPower);
+    //   } else if (this.plans[i].cryptoName == 'LTCT') {
+    //     this.LTCTPlansMiningSpeed += Number(this.plans[i].hashPower);
+    //   }
+    // }
     ////////////////////////////////////////dummy data for active plans
 
     this.dataSourceActive.filterPredicate = function (
