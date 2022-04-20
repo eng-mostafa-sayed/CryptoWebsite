@@ -19,7 +19,7 @@
           </div>
           <div class="hashrate-active__item__value">
             <span
-              >{{ power.speed }} {{ power.crypto == "BTC" ? "TH/S" : "MH/S" }}
+              >{{ power.speed }} {{ power.crypto == "BTC" ? "TH/S" : "GH/S" }}
             </span>
           </div>
         </div>
@@ -152,7 +152,7 @@
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th pSortableColumn="date">
-            Date
+            Booking Date
             <p-columnFilter
               type="date"
               field="date"
@@ -160,26 +160,26 @@
             ></p-columnFilter>
             <p-sortIcon field="date"></p-sortIcon>
           </th>
-          <th pSortableColumn="name">
-            Name
+          <th pSortableColumn="id">
+            Contract ID
             <p-columnFilter
-              type="text"
-              field="name"
+              type="id"
+              field="id"
               display="menu"
             ></p-columnFilter>
-            <p-sortIcon field="name"></p-sortIcon>
+            <p-sortIcon field="id"></p-sortIcon>
           </th>
           <th pSortableColumn="total">
-            Total
+            Total Mined
             <p-sortIcon field="total"></p-sortIcon>
           </th>
           <th pSortableColumn="hashPower">
-            hashPower
+            Current HashPower
             <p-sortIcon field="hashPower"></p-sortIcon>
           </th>
 
           <th pSortableColumn="expire">
-            Expire
+            Expire on
             <p-columnFilter
               type="date"
               field="expire"
@@ -198,7 +198,8 @@
           <td><span class="p-column-title">Name</span>{{ plan.name }}</td>
           <td><span class="p-column-title">Total</span>{{ plan.total }}</td>
           <td>
-            <span class="p-column-title">hashPower</span>{{ plan.hashPower }}
+            <span class="p-column-title">hashPower</span
+            >{{ plan.hashPower }} GH/S
           </td>
 
           <td>
@@ -225,7 +226,7 @@
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th pSortableColumn="date">
-            Date
+            Booking Date
             <p-columnFilter
               type="date"
               field="date"
@@ -233,25 +234,25 @@
             ></p-columnFilter>
             <p-sortIcon field="date"></p-sortIcon>
           </th>
-          <th pSortableColumn="name">
-            Name
+          <th pSortableColumn="id">
+            Contract ID
             <p-columnFilter
-              type="text"
-              field="name"
+              type="id"
+              field="id"
               display="menu"
             ></p-columnFilter>
-            <p-sortIcon field="name"></p-sortIcon>
+            <p-sortIcon field="id"></p-sortIcon>
           </th>
           <th pSortableColumn="total">
-            Total
+            Total Mined
             <p-sortIcon field="total"></p-sortIcon>
           </th>
           <th pSortableColumn="hashPower">
-            hashPower
+            Current hashPower
             <p-sortIcon field="hashPower"></p-sortIcon>
           </th>
           <th pSortableColumn="expire">
-            Expire
+            Expire on
             <p-columnFilter
               type="date"
               field="expire"
@@ -270,7 +271,8 @@
           <td><span class="p-column-title">Name</span>{{ plan.name }}</td>
           <td><span class="p-column-title">Total</span>{{ plan.total }}</td>
           <td>
-            <span class="p-column-title">hashPower</span>{{ plan.hashPower }}
+            <span class="p-column-title">hashPower</span
+            >{{ plan.hashPower }} GH/S
           </td>
 
           <td>
