@@ -7,8 +7,12 @@ import { Balance } from './balance.model';
   providedIn: 'root',
 })
 export class DashboardService {
-  api: string =
-    'https://cominer.herokuapp.com/api/user/getUserData?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4';
+  //////our API
+  APIBaseUrl: string = 'https://cominer.herokuapp.com/api';
+  APIKey: string =
+    'c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4';
+  /////////////////
+  getUserDataAPI: string = `${this.APIBaseUrl}/user/getUserData?key=${this.APIKey}`;
   accessToken: any = sessionStorage.getItem('accessToken');
 
   //to store the user data
@@ -19,15 +23,16 @@ export class DashboardService {
   rvnPriceObj: any = { USD: 0.0 };
   LTCTPriceObj: any = { USD: 0.0 };
 
-  //currencies APIs
+  ////////currencies APIs
   btcAPI: any =
     'https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&api_key=43b6539c4d7f1fefd865f2580d4bd3fad07816ccca445c1055359ccdf57f0bf9';
   ethAPI: any =
     'https://min-api.cryptocompare.com/data/price?fsym=Eth&tsyms=USD&api_key=43b6539c4d7f1fefd865f2580d4bd3fad07816ccca445c1055359ccdf57f0bf9';
   rvnAPI: any =
     'https://min-api.cryptocompare.com/data/price?fsym=rvn&tsyms=USD&api_key=43b6539c4d7f1fefd865f2580d4bd3fad07816ccca445c1055359ccdf57f0bf9';
-  LTCTAPI =
-    'https://min-api.cryptocompare.com/data/price?fsym=LTCT&tsyms=USD&api_key=43b6539c4d7f1fefd865f2580d4bd3fad07816ccca445c1055359ccdf57f0bf9';
+
+  LTCTAPI = ' https://api.coinbase.com/v2/prices/LTC-USD/buy';
+  /////////////////
 
   ///part of the userData() function to get the user data from the backend
   header: any = {
@@ -36,23 +41,9 @@ export class DashboardService {
       `Bearer ${this.accessToken}`
     ),
   };
-  requestHeader = {
-    headers: new HttpHeaders({
-      'Content-Type': 'text/plain',
-      Authorization: `Bearer ${this.accessToken}`,
-    }),
-  };
 
-  async userData() {
-    await this.http.get<any>(this.api, this.header).subscribe({
-      next: (res) => {
-        this.obj = res;
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+  userData() {
+    return this.http.get<any>(this.getUserDataAPI, this.header);
   }
 
   /////external api to get the price of the currencies
@@ -66,9 +57,7 @@ export class DashboardService {
     return this.http.get<any>(this.rvnAPI);
   }
   getPriceOfLTCT() {
-    return this.http.get<any>(
-      ' https://api.coinbase.com/v2/prices/LTC-USD/buy'
-    );
+    return this.http.get<any>(this.LTCTAPI);
   }
 
   balances$ = new Subject<Balance[]>();
@@ -81,9 +70,9 @@ export class DashboardService {
         currencyBalance: this.obj.balance.btc,
         plans: this.obj.activePlans,
         devices: this.obj.devices,
-        price: Number(this.btcPriceObj),
-        miningSpeed: '3,230',
-        mined: 0.000003,
+        price: String(Number(this.btcPriceObj)),
+        miningSpeed: '8,299',
+        mined: 0.00999,
         minWithdraw: 0.00005,
       },
       {
@@ -91,7 +80,7 @@ export class DashboardService {
         currencyBalance: this.obj.balance.eth,
         plans: this.obj.activePlans,
         devices: this.obj.devices,
-        price: this.btcPriceObj,
+        price: this.ethPriceObj,
         miningSpeed: '8,299',
         mined: 0.00999,
         minWithdraw: 0.0021879,
@@ -121,7 +110,7 @@ export class DashboardService {
   ////////////////////////////hashrate plans page
   getPlans() {
     return this.http.get<any>(
-      'https://cominer.herokuapp.com/api/plan/x/contract?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
+      `${this.APIBaseUrl}/plan/x/contract?key=${this.APIKey}`,
       this.header
     );
   }
@@ -129,7 +118,7 @@ export class DashboardService {
   ////////////the generic function
   getHashrateContractPlans(Currency: string, planType: string) {
     return this.http.get<any>(
-      `https://cominer.herokuapp.com/api/plan?cryptoName=${Currency}&planType=${planType}&key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4`,
+      `${this.APIBaseUrl}/plan?cryptoName=${Currency}&planType=${planType}&key=${this.APIKey}`,
       this.header
     );
   }
@@ -163,7 +152,7 @@ export class DashboardService {
 
   getMyAsicDevices() {
     return this.http.get<any>(
-      'https://cominer.herokuapp.com/api/asic/x/contract?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
+      `${this.APIBaseUrl}/asic/x/contract?key=${this.APIKey}`,
       this.header
     );
   }
@@ -171,20 +160,13 @@ export class DashboardService {
 
   getAsicBTCDevicesContractPlans() {
     return this.http.get<any>(
-      'https://cominer.herokuapp.com/api/asic?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
+      `${this.APIBaseUrl}/asic?key=${this.APIKey}`,
       this.header
     );
   }
-  // getAsicETHDevicesContractPlans() {
-  //   return this.http.get<any>(
-  //     'https://cominer.herokuapp.com/api/asic?cryptoName=ETH&key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
-  //     this.header
-  //   );
-  // }
 
   /////////////////////////////////////buy plan dummy method
-  buyplanAPI =
-    'https://cominer.herokuapp.com/api/plan/x/contract/add?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4';
+  buyplanAPI = `${this.APIBaseUrl}/plan/x/contract/add?key=${this.APIKey}`;
   buyPlan(plan_id: String) {
     return this.http.post<any>(
       this.buyplanAPI,
@@ -199,7 +181,7 @@ export class DashboardService {
   ///////////////////////////////////////buy asic dummy
   buyAsic(asic_id: String) {
     return this.http.post<any>(
-      'https://cominer.herokuapp.com/api/asic/x/contract/add?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
+      `${this.APIBaseUrl}/asic/x/contract/add?key=${this.APIKey}`,
       {
         asicID: asic_id,
         currency: 'ETH',
