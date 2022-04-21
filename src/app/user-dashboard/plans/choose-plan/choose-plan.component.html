@@ -157,7 +157,8 @@
                 <div class="plan__box">
                   <h6 class="plan__box__sub">planDuration</h6>
                   <p class="plan__box__sub-value">
-                    {{ plan.planDuration }} Months
+                    {{ plan.planDuration }}
+                    {{ plan.planDuration == "1" ? "Month" : "Months" }}
                   </p>
                 </div>
                 <div class="plan__box">
