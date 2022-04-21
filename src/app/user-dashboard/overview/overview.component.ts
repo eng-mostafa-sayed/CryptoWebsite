@@ -152,6 +152,9 @@ export class OverviewComponent implements OnInit {
   async ngOnInit() {
     this.sharedSerivce.isLoading.next(true);
     this.UserData = this.authServics.UserData();
+
+    // this.UserData = this.authServics.UserData();
+
     //this fetches the data and push it in the balances$ stream
 
     //this is fetching the data from the server and the external API and load cards
@@ -170,8 +173,7 @@ export class OverviewComponent implements OnInit {
             ? this.UserData.devices
             : this._devices,
           price: this.btcPrice,
-          miningSpeed: '3,230',
-          mined: 0.000003,
+
           minWithdraw: 0.00005,
         });
 
@@ -197,8 +199,7 @@ export class OverviewComponent implements OnInit {
             ? this.UserData.devices
             : this._devices,
           price: this.ethPrice,
-          miningSpeed: '3,230',
-          mined: 0.000003,
+
           minWithdraw: 0.00005,
         });
         this.sharedSerivce.isLoading.next(false);
@@ -223,8 +224,7 @@ export class OverviewComponent implements OnInit {
             ? this.UserData.devices
             : this._devices,
           price: this.rvnPrice,
-          miningSpeed: '3,230',
-          mined: 0.000003,
+
           minWithdraw: 0.00005,
         });
         this.sharedSerivce.isLoading.next(false);
@@ -239,8 +239,8 @@ export class OverviewComponent implements OnInit {
         this.LTCTPrice = res.data.amount ? res.data.amount : 0;
         this.balances.push({
           currency: 'LTCT',
-          currencyBalance: this.UserData.balance_LTCT
-            ? this.UserData.balance_LTCT
+          currencyBalance: this.UserData.balance_ltct
+            ? this.UserData.balance_ltct
             : '0',
           plans: this.UserData.activePlans
             ? this.UserData.activePlans
@@ -249,8 +249,7 @@ export class OverviewComponent implements OnInit {
             ? this.UserData.devices
             : this._devices,
           price: this.LTCTPrice,
-          miningSpeed: '3,230',
-          mined: 0.000003,
+
           minWithdraw: 0.00005,
         });
 

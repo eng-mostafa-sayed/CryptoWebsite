@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/shared/shared.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -12,7 +13,11 @@ export class SignupComponent implements OnInit {
   loading = false;
   signupForm!: FormGroup;
   passwordShown = false;
-  constructor(private router: Router, public authService: AuthService) {}
+  constructor(
+    private router: Router,
+    public authService: AuthService,
+    private sharedSerivce: SharedService
+  ) {}
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
@@ -34,6 +39,7 @@ export class SignupComponent implements OnInit {
     });
   }
   onSignup() {
+    this.sharedSerivce.isLoading.next(true);
     if (
       this.signupForm.value.name &&
       this.signupForm.value.email &&
@@ -56,6 +62,7 @@ export class SignupComponent implements OnInit {
             console.log(err);
           },
         });
+      this.sharedSerivce.isLoading.next(false);
     }
   }
   changeInput(input: any): any {

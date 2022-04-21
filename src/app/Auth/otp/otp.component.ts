@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SharedService } from 'src/app/shared/shared.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -11,7 +12,10 @@ export class OtpComponent implements OnInit {
   loading = false;
   otpForm!: FormGroup;
   passwordShown = false;
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService,
+    private sharedSerivce: SharedService
+  ) {}
 
   ngOnInit(): void {
     this.otpForm = new FormGroup({
@@ -21,11 +25,16 @@ export class OtpComponent implements OnInit {
     });
   }
   onProcess() {
+    this.sharedSerivce.isLoading.next(true);
     if (this.otpForm.value.otp)
       this.authService.otpValidator(this.otpForm.value.otp);
+
+    this.sharedSerivce.isLoading.next(false);
   }
 
   resendOtp() {
+    this.sharedSerivce.isLoading.next(true);
     this.authService.resendOtp();
+    this.sharedSerivce.isLoading.next(false);
   }
 }

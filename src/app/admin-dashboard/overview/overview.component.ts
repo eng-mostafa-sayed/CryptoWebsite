@@ -41,10 +41,10 @@ export class OverviewComponent implements OnInit {
         this.totalAsicContarctsOnDemand = res.totalAsicContarctsOnDemand;
         this.totalWithdrawals = res.totalWithdrawals;
         this.totalDeposits = res.totalDeposits;
-        this.btc = res.balances.BTC.balancef;
-        this.eth = res.balances.ETH.balancef;
-        this.ltct = res.balances.LTCT.balancef;
-        this.rvn = res.balances.RVN.balancef;
+        // this.btc = res.balances.BTC.balancef;
+        // this.eth = res.balances.ETH.balancef;
+        // this.ltct = res.balances.LTCT.balancef;
+        // this.rvn = res.balances.RVN.balancef;
         this.plansSubs = res.planSubscribtion;
         this.minersSubs = res.asicSubscribtion;
       },

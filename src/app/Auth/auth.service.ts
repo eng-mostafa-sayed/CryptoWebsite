@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -16,6 +16,8 @@ export class AuthService {
   private balance: string | null;
   private balance_eth: string | null;
   private balance_btc: string | null;
+  private balance_rvn: string | null;
+  private balance_ltct: string | null;
   private activePlans: string | null;
   private activeDemoPlans: string | null;
   private devices: string | null;
@@ -23,7 +25,17 @@ export class AuthService {
   saveTimeout: any;
   constructor(private http: HttpClient, private router: Router) {}
 
+  header: any = {
+    headers: new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${sessionStorage.getItem('accessToken')}`
+    ),
+  };
   UserData() {
+    // return this.http.post<any>(
+    //   'https://cominer.herokuapp.com/api/user/getUserData?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
+    //   this.header
+    // );
     return {
       userId: this.userId,
       email: this.email,
@@ -31,11 +43,14 @@ export class AuthService {
       phone: this.phone,
       balance_eth: this.balance_eth,
       balance_btc: this.balance_btc,
+      balance_rvn: this.balance_rvn,
+      balance_ltct: this.balance_ltct,
       activePlans: this.activePlans,
       activeDemoPlans: this.activeDemoPlans,
       devices: this.devices,
     };
   }
+
   signup(name: String, email: String, phone: number, password: String) {
     return this.http.post<any>(
       'https://cominer.herokuapp.com/api/user/register?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
@@ -68,6 +83,7 @@ export class AuthService {
           } else if (res.message != 'Wrong credentials') {
             this.authStatusListner.next(true);
             this.router.navigate(['/user/otp']);
+            sessionStorage.removeItem('password');
           }
         },
         error: (err) => {
@@ -118,8 +134,10 @@ export class AuthService {
           this.email = res.user.email;
           this.name = res.user.name;
           this.phone = res.user.phone;
-          this.balance_eth = res.user.balance.eth.toFixed(5);
-          this.balance_btc = res.user.balance.btc.toFixed(5);
+          this.balance_eth = res.user.balance.eth.toFixed(8);
+          this.balance_btc = res.user.balance.btc.toFixed(8);
+          this.balance_rvn = res.user.balance.rvn.toFixed(8);
+          this.balance_ltct = res.user.balance.ltct.toFixed(8);
           this.activePlans = res.user.activePlans;
           this.activeDemoPlans = res.user.activeDemoPlans;
           this.devices = res.user.devices;
@@ -127,8 +145,9 @@ export class AuthService {
           sessionStorage.setItem('accessToken', `${this.accessToken}`);
           sessionStorage.setItem('balance_btc', `${this.balance_btc}`);
           sessionStorage.setItem('balance_eth', `${this.balance_eth}`);
+          sessionStorage.setItem('balance_ltct', `${this.balance_ltct}`);
+          sessionStorage.setItem('balance_rvn', `${this.balance_rvn}`);
           sessionStorage.setItem('activePlans', `${this.activePlans}`);
-          sessionStorage.setItem('devices', `${this.devices}`);
           this.authStatusListner.next(true);
           this.router.navigate(['/user/dashboard/overview']);
         },
@@ -193,6 +212,8 @@ export class AuthService {
     sessionStorage.removeItem('balance_btc');
     sessionStorage.removeItem('balance_eth');
     sessionStorage.removeItem('activePlans');
-    sessionStorage.removeItem('devices');
+
+    sessionStorage.removeItem('balance_ltct');
+    sessionStorage.removeItem('balance_rvn');
   }
 }
