@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="row g-5">
-    <div class="col-12 col-lg-6 col-xl-4" *ngFor="let miner of miners">
+    <div class="col-12 col-lg-6 col-xl-5" *ngFor="let miner of miners">
       <ng-container *ngIf="checkLength()">
         <div class="miner">
           <!--whole class -->
@@ -47,8 +47,8 @@
               <span class="miner__details__title">Worker ID </span>
               <span class="miner__details__sub">{{ miner.workerID }}</span>
             </div>
-            <div class="col-12">
-              <span class="miner__details__title">Address: </span>
+            <div class="col-12 d-lg-flex flex-lg-row flex-lg-wrap p-lg-2">
+              <span class="miner__details__title d-block">Address: </span>
               <span class="miner__details__sub"> {{ miner.address }}</span>
             </div>
           </div>
