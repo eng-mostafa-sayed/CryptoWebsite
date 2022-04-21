@@ -171,16 +171,16 @@ export class DashboardService {
 
   getAsicBTCDevicesContractPlans() {
     return this.http.get<any>(
-      'https://cominer.herokuapp.com/api/asic?cryptoName=BTC&key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
+      'https://cominer.herokuapp.com/api/asic?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
       this.header
     );
   }
-  getAsicETHDevicesContractPlans() {
-    return this.http.get<any>(
-      'https://cominer.herokuapp.com/api/asic?cryptoName=ETH&key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
-      this.header
-    );
-  }
+  // getAsicETHDevicesContractPlans() {
+  //   return this.http.get<any>(
+  //     'https://cominer.herokuapp.com/api/asic?cryptoName=ETH&key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
+  //     this.header
+  //   );
+  // }
 
   /////////////////////////////////////buy plan dummy method
   buyplanAPI =

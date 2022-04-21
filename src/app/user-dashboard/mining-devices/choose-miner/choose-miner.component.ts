@@ -25,11 +25,11 @@ export class ChooseMinerComponent implements OnInit {
     this.dashboard.getAsicBTCDevicesContractPlans().subscribe((res: any) => {
       this.miners2 = res;
       this.miners = this.miners2;
-      this.dashboard.getAsicETHDevicesContractPlans().subscribe((res: any) => {
-        this.miners3 = res;
-        this.miners.push(...this.miners3);
-        console.log(this.miners);
-      });
+      // this.dashboard.getAsicETHDevicesContractPlans().subscribe((res: any) => {
+      //   this.miners3 = res;
+      //   this.miners.push(...this.miners3);
+      //   console.log(this.miners);
+      // });
     });
   }
 }

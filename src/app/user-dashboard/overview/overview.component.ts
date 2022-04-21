@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { Numeric, stratify } from 'd3';
 import { AuthService } from 'src/app/Auth/auth.service';
+import { SharedService } from 'src/app/shared/shared.service';
 import { Balance } from '../balance.model';
 import { DashboardService } from '../user-dashboard.service';
 const data = {
@@ -138,12 +139,14 @@ export class OverviewComponent implements OnInit {
   constructor(
     private dashboard: DashboardService,
     private authServics: AuthService,
-    private router: Router
+    private router: Router,
+    private sharedSerivce: SharedService
   ) {
     Chart.register(...registerables);
   }
 
   async ngOnInit() {
+    this.sharedSerivce.isLoading.next(true);
     this.UserData = this.authServics.UserData();
     //this fetches the data and push it in the balances$ stream
 
@@ -169,6 +172,7 @@ export class OverviewComponent implements OnInit {
         });
 
         //console.log(res);
+        this.sharedSerivce.isLoading.next(false);
       },
       error: (err) => {
         console.log(err);
@@ -193,7 +197,7 @@ export class OverviewComponent implements OnInit {
           mined: 0.000003,
           minWithdraw: 0.00005,
         });
-
+        this.sharedSerivce.isLoading.next(false);
         // console.log(res);
       },
       error: (err) => {
