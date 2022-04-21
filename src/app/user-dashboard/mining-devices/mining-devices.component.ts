@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/shared/shared.service';
 import { DashboardService } from '../user-dashboard.service';
 
 @Component({
@@ -85,9 +86,15 @@ export class MiningDevicesComponent implements OnInit {
       workerID: 'loading ... ',
     },
   ];
-  constructor(private http: HttpClient, private dashboard: DashboardService) {}
+  //this.sharedSerivce.isLoading.next(false);
+  constructor(
+    private http: HttpClient,
+    private dashboard: DashboardService,
+    private sharedSerivce: SharedService
+  ) {}
 
   ngOnInit(): void {
+    this.sharedSerivce.isLoading.next(true);
     this.dashboard.getMyAsicDevices().subscribe((res: any) => {
       console.log(res);
       for (let i = 0; i < res.length; i++) {
@@ -105,6 +112,7 @@ export class MiningDevicesComponent implements OnInit {
       }
       this.miners = [];
       this.miners = this.myMiners;
+      this.sharedSerivce.isLoading.next(false);
     });
     //////////////////////////////////////////////////////////////////////////////////
     this.tap1Data = {

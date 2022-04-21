@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { newArray } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/shared/shared.service';
 import { DashboardService } from '../../user-dashboard.service';
 
 @Component({
@@ -19,12 +20,18 @@ export class ChooseMinerComponent implements OnInit {
     });
   }
 
-  constructor(private dashboard: DashboardService, private http: HttpClient) {}
+  constructor(
+    private dashboard: DashboardService,
+    private http: HttpClient,
+    private sharedSerivce: SharedService
+  ) {}
 
   ngOnInit() {
+    this.sharedSerivce.isLoading.next(true);
     this.dashboard.getAsicBTCDevicesContractPlans().subscribe((res: any) => {
       this.miners2 = res;
       this.miners = this.miners2;
+      this.sharedSerivce.isLoading.next(false);
       // this.dashboard.getAsicETHDevicesContractPlans().subscribe((res: any) => {
       //   this.miners3 = res;
       //   this.miners.push(...this.miners3);

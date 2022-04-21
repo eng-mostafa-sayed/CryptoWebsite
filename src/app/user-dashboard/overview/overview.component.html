@@ -10,14 +10,63 @@
         <div class="balance-overview__boxes__box">
           <div class="row">
             <div class="col-12 col-md-3">
-              <i
-                class="fab fa-btc lg"
-                *ngIf="balance.currency == 'BTC' || balance.currency == 'RVN'"
-              ></i>
-              <i
-                class="fab fa-ethereum lg"
-                *ngIf="balance.currency == 'ETH' || balance.currency == 'LTCT'"
-              ></i>
+              <!-- the icons in balance overview -->
+              <img
+                *ngIf="balance.currency == 'BTC'"
+                src="../../../assets/BTC-Crypto.svg"
+                alt=""
+                style="
+                  vertical-align: middle;
+                  background: white;
+                  border-radius: 50%;
+                  width: 45px;
+                  padding: 4%;
+                  margin-right: 7px;
+                  height: 41px;
+                "
+              />
+              <img
+                *ngIf="balance.currency == 'ETH'"
+                src="../../../assets/ETH-Crypto.svg"
+                alt=""
+                style="
+                  vertical-align: middle;
+                  background: white;
+                  border-radius: 50%;
+                  width: 45px;
+                  padding: 4%;
+                  margin-right: 7px;
+                  height: 41px;
+                "
+              />
+              <img
+                *ngIf="balance.currency == 'RVN'"
+                src="../../../assets/RVN-Crypto.svg"
+                alt=""
+                style="
+                  vertical-align: middle;
+                  background: white;
+                  border-radius: 50%;
+                  width: 45px;
+                  padding: 4%;
+                  margin-right: 7px;
+                  height: 41px;
+                "
+              />
+              <img
+                *ngIf="balance.currency == 'LTCT'"
+                src="../../../assets/LTCT-Crypto.png"
+                alt=""
+                style="
+                  vertical-align: middle;
+                  background: white;
+                  border-radius: 50%;
+                  width: 45px;
+                  padding: 4%;
+                  margin-right: 7px;
+                  height: 41px;
+                "
+              />
             </div>
             <div class="col-12 col-md-9">
               <span
@@ -99,7 +148,20 @@
                     minedTapOpend == 'tap1'
                 }"
               >
-                <i class="fab fa-btc sm"></i> BTC
+                <img
+                  src="../../../assets/BTC-Crypto.svg"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 27px;
+                    padding: 2%;
+                    margin-right: 7px;
+                    height: 26px;
+                  "
+                />
+                BTC
               </div>
               <div
                 class="custom-taps__heading__taps__tap"
@@ -109,7 +171,20 @@
                     minedTapOpend == 'tap2'
                 }"
               >
-                <i class="fab fa-ethereum sm"></i> ETH
+                <img
+                  src="../../../assets/ETH-Crypto.svg"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 27px;
+                    padding: 2%;
+                    margin-right: 7px;
+                    height: 26px;
+                  "
+                />
+                ETH
               </div>
               <div
                 class="custom-taps__heading__taps__tap"
@@ -119,7 +194,20 @@
                     minedTapOpend == 'tap3'
                 }"
               >
-                <i class="fab fa-btc sm"></i> RVN
+                <img
+                  src="../../../assets/RVN-Crypto.svg"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 27px;
+                    padding: 2%;
+                    margin-right: 7px;
+                    height: 26px;
+                  "
+                />
+                RVN
               </div>
               <div
                 class="custom-taps__heading__taps__tap"
@@ -129,7 +217,20 @@
                     minedTapOpend == 'tap4'
                 }"
               >
-                <i class="fab fa-ethereum sm"></i> LTCT
+                <img
+                  src="../../../assets/LTCT-Crypto.png"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 27px;
+                    padding: 2%;
+                    margin-right: 7px;
+                    height: 26px;
+                  "
+                />
+                LTCT
               </div>
             </div>
           </div>
@@ -152,7 +253,7 @@
                   <span>Total Mined </span>
                 </div>
                 <div class="summery__item__value">
-                  <h4>${{ BTCPlansTotalMined }} BTC</h4>
+                  <h4>{{ BTCPlansTotalMined }} BTC</h4>
                 </div>
               </div>
               <div class="summery__item col-12 col-lg-4">
@@ -167,7 +268,19 @@
             </div>
             <div class="balance">
               <div class="balance__total">
-                <i class="fab fa-btc lg"></i>
+                <img
+                  src="../../../assets/BTC-Crypto.svg"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 40px;
+                    padding: 1%;
+                    margin-right: 7px;
+                    height: 38px;
+                  "
+                />
                 <span>{{ _balance_btc }} BTC</span>
               </div>
               <div class="balance__min">
@@ -175,7 +288,20 @@
               </div>
             </div>
             <button class="btn btn--animated btn--darker">
-              <i class="fab fa-btc sm"></i> <span> Withdraw BTC </span>
+              <img
+                src="../../../assets/BTC-Crypto.svg"
+                alt=""
+                style="
+                  vertical-align: middle;
+                  background: white;
+                  border-radius: 50%;
+                  width: 31px;
+                  padding: 1%;
+                  margin-right: 7px;
+                  height: 32px;
+                "
+              />
+              <span> Withdraw BTC </span>
             </button>
           </div>
           <div class="custom-taps__body" *ngIf="minedTapOpend == 'tap2'">
@@ -196,7 +322,7 @@
                   <span>Total Mined </span>
                 </div>
                 <div class="summery__item__value">
-                  <h4>${{ ETHPlansTotalMined }} ETH</h4>
+                  <h4>{{ ETHPlansTotalMined }} ETH</h4>
                 </div>
               </div>
               <div class="summery__item col-12 col-md-4">
@@ -211,7 +337,19 @@
             </div>
             <div class="balance">
               <div class="balance__total">
-                <i class="fab fa-ethereum lg"></i>
+                <img
+                  src="../../../assets/ETH-Crypto.svg"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    padding: 1%;
+                    width: 40px;
+                    margin-right: 7px;
+                    height: 38px;
+                  "
+                />
                 <span>{{ _balance_eth }} ETH</span>
               </div>
               <div class="balance__min">
@@ -219,7 +357,20 @@
               </div>
             </div>
             <button class="btn btn--animated btn--darker">
-              <i class="fab fa-ethereum sm"></i> <span> Withdraw ETH </span>
+              <img
+                src="../../../assets/ETH-Crypto.svg"
+                alt=""
+                style="
+                  vertical-align: middle;
+                  background: white;
+                  border-radius: 50%;
+                  padding: 1%;
+                  width: 31px;
+                  margin-right: 7px;
+                  height: 32px;
+                "
+              />
+              <span> Withdraw ETH </span>
             </button>
           </div>
           <div class="custom-taps__body" *ngIf="minedTapOpend == 'tap3'">
@@ -240,7 +391,7 @@
                   <span>Total Mined </span>
                 </div>
                 <div class="summery__item__value">
-                  <h4>${{ RVNPlansTotalMined }} RVN</h4>
+                  <h4>{{ RVNPlansTotalMined }} RVN</h4>
                 </div>
               </div>
               <div class="summery__item col-12 col-md-4">
@@ -255,7 +406,20 @@
             </div>
             <div class="balance">
               <div class="balance__total">
-                <i class="fab fa-btc lg"></i>
+                <!-- <i class="fab fa-btc lg"></i> -->
+                <img
+                  src="../../../assets/RVN-Crypto.svg"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 40px;
+                    padding: 1%;
+                    margin-right: 7px;
+                    height: 38px;
+                  "
+                />
                 <span>{{ _balance_rvn }} RVN</span>
               </div>
               <div class="balance__min">
@@ -263,7 +427,20 @@
               </div>
             </div>
             <button class="btn btn--animated btn--darker">
-              <i class="fab fa-btc sm"></i> <span> Withdraw RVN </span>
+              <img
+                src="../../../assets/RVN-Crypto.svg"
+                alt=""
+                style="
+                  vertical-align: middle;
+                  background: white;
+                  border-radius: 50%;
+                  width: 31px;
+                  padding: 2%;
+                  margin-right: 7px;
+                  height: 32px;
+                "
+              />
+              <span> Withdraw RVN </span>
             </button>
           </div>
           <div class="custom-taps__body" *ngIf="minedTapOpend == 'tap4'">
@@ -284,7 +461,7 @@
                   <span>Total Mined </span>
                 </div>
                 <div class="summery__item__value">
-                  <h4>${{ LTCTPlansTotalMined }} LTCT</h4>
+                  <h4>{{ LTCTPlansTotalMined }} LTCT</h4>
                 </div>
               </div>
               <div class="summery__item col-12 col-lg-4">
@@ -299,7 +476,19 @@
             </div>
             <div class="balance">
               <div class="balance__total">
-                <i class="fab fa-ethereum lg"></i>
+                <img
+                  src="../../../assets/LTCT-Crypto.png"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 40px;
+                    padding: 1%;
+                    margin-right: 7px;
+                    height: 38px;
+                  "
+                />
                 <span>{{ _balance_LTCT }} LTCT</span>
               </div>
               <div class="balance__min">
@@ -307,7 +496,20 @@
               </div>
             </div>
             <button class="btn btn--animated btn--darker">
-              <i class="fab fa-ethereum sm"></i> <span> Withdraw LTCT </span>
+              <img
+                src="../../../assets/LTCT-Crypto.png"
+                alt=""
+                style="
+                  vertical-align: middle;
+                  background: white;
+                  border-radius: 50%;
+                  width: 31px;
+                  padding: 1%;
+                  margin-right: 7px;
+                  height: 32px;
+                "
+              />
+              <span> Withdraw LTCT </span>
             </button>
           </div>
         </div>
@@ -333,7 +535,20 @@
                     minedChartTapOpend == 'tap1'
                 }"
               >
-                <i class="fab fa-btc sm"></i> BTC
+                <img
+                  src="../../../assets/BTC-Crypto.svg"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 27px;
+                    padding: 1%;
+                    margin-right: 7px;
+                    height: 26px;
+                  "
+                />
+                BTC
               </div>
               <div
                 class="custom-taps__heading__taps__tap flex-xs-wrap flex-ms-wrap"
@@ -344,7 +559,20 @@
                     minedChartTapOpend == 'tap2'
                 }"
               >
-                <i class="fab fa-ethereum sm"></i> ETH
+                <img
+                  src="../../../assets/ETH-Crypto.svg"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 27px;
+                    padding: 1%;
+                    margin-right: 7px;
+                    height: 26px;
+                  "
+                />
+                ETH
               </div>
               <div
                 class="custom-taps__heading__taps__tap flex-xs-wrap flex-ms-wrap"
@@ -355,7 +583,20 @@
                     minedChartTapOpend == 'tap3'
                 }"
               >
-                <i class="fab fa-btc sm"></i> RVN
+                <img
+                  src="../../../assets/RVN-Crypto.svg"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 27px;
+                    padding: 1%;
+                    margin-right: 7px;
+                    height: 26px;
+                  "
+                />
+                RVN
               </div>
               <div
                 class="custom-taps__heading__taps__tap flex-xs-wrap flex-ms-wrap"
@@ -366,7 +607,20 @@
                     minedChartTapOpend == 'tap4'
                 }"
               >
-                <i class="fab fa-ethereum sm"></i> LTCT
+                <img
+                  src="../../../assets/LTCT-Crypto.png"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 27px;
+                    padding: 1%;
+                    margin-right: 7px;
+                    height: 26px;
+                  "
+                />
+                LTCT
               </div>
             </div>
           </div>

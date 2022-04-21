@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DashboardService } from '../../user-dashboard.service';
+import { SharedService } from 'src/app/shared/shared.service';
 
 @Component({
   selector: 'app-choose-plan',
@@ -55,7 +56,11 @@ export class ChoosePlanComponent implements OnInit {
   RVNPlansShort = new Array();
   LTCTPlansLong = new Array();
   LTCTPlansShort = new Array();
-  constructor(private http: HttpClient, private dashboard: DashboardService) {}
+  constructor(
+    private http: HttpClient,
+    private dashboard: DashboardService,
+    private sharedSerivce: SharedService
+  ) {}
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////here is buy  plan button
   //////////////////////////// each tab has its buttons even short or long and BTC or ETH or RVN or LTCT
@@ -70,6 +75,7 @@ export class ChoosePlanComponent implements OnInit {
 
   //////////////////////////////////////////////////////////////////////////////////////////
   ngOnInit() {
+    this.sharedSerivce.isLoading.next(true);
     this.dashboard
       .get_BTC_Long_HashrateContractPlans()
       .subscribe((res: any) => {
@@ -97,6 +103,7 @@ export class ChoosePlanComponent implements OnInit {
           };
           this.BTCPlansLong.push(ele);
         }
+        this.sharedSerivce.isLoading.next(false);
       });
     this.dashboard
       .get_BTC_Short_HashrateContractPlans()
@@ -125,6 +132,7 @@ export class ChoosePlanComponent implements OnInit {
           };
           this.BTCPlansShort.push(ele);
         }
+        this.sharedSerivce.isLoading.next(false);
       });
     ///////////////////////////////////////BTC END ///////////////////////////////////////////////
     ///////////////////////////////////////ETH START ///////////////////////////////////////////////

@@ -28,16 +28,20 @@ export class OverviewComponent implements OnInit {
   //////////////////////////////////////////////////////////added vars
   _name: any = sessionStorage.getItem('name');
   _balance_btc: any = sessionStorage.getItem('balance_btc')
-    ? Number(sessionStorage.getItem('balance_btc')).toFixed(0)
+    ? Number(sessionStorage.getItem('balance_btc')).toFixed(8)
     : '0';
   _balance_eth: any = sessionStorage.getItem('balance_eth')
-    ? Number(sessionStorage.getItem('balance_eth')).toFixed(5)
+    ? Number(sessionStorage.getItem('balance_eth')).toFixed(8)
     : '0';
   _activePlans: any = sessionStorage.getItem('activePlans');
   _devices: any = sessionStorage.getItem('devices');
 
-  _balance_rvn: any = '0';
-  _balance_LTCT: any = '0';
+  _balance_rvn: any = sessionStorage.getItem('balance_rvn')
+    ? Number(sessionStorage.getItem('balance_rvn')).toFixed(8)
+    : '0';
+  _balance_LTCT: any = sessionStorage.getItem('balance_ltct')
+    ? Number(sessionStorage.getItem('balance_ltct')).toFixed(8)
+    : '0';
   _miningSpeed = 3.23;
   //////////////////////////////////////////////////////////////////////
 
@@ -223,7 +227,7 @@ export class OverviewComponent implements OnInit {
           mined: 0.000003,
           minWithdraw: 0.00005,
         });
-
+        this.sharedSerivce.isLoading.next(false);
         // console.log(res);
       },
       error: (err) => {
@@ -251,6 +255,7 @@ export class OverviewComponent implements OnInit {
         });
 
         // console.log(res);
+        this.sharedSerivce.isLoading.next(false);
       },
       error: (err) => {
         console.log(err);
@@ -291,6 +296,7 @@ export class OverviewComponent implements OnInit {
             this.LTCTPlansMiningSpeed += Number(this.plans[i].hashPower);
           }
         }
+        this.sharedSerivce.isLoading.next(false);
       },
     });
 

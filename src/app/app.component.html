@@ -1,3 +1,2 @@
-<router-outlet></router-outlet>
-<!-- adding the loading spinenr to the website -->
-<!-- <app-spinner></app-spinner> -->
+<router-outlet></router-outlet> <app-spinner *ngIf="isLoading"></app-spinner>
+<app-notification *ngIf="showNotification"></app-notification>
