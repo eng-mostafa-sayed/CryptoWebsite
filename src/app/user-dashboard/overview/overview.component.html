@@ -22,7 +22,7 @@
                   width: 45px;
                   padding: 4%;
                   margin-right: 7px;
-                  height: 41px;
+                  height: 43px;
                 "
               />
               <img
@@ -36,7 +36,7 @@
                   width: 45px;
                   padding: 4%;
                   margin-right: 7px;
-                  height: 41px;
+                  height: 43px;
                 "
               />
               <img
@@ -50,7 +50,7 @@
                   width: 45px;
                   padding: 4%;
                   margin-right: 7px;
-                  height: 41px;
+                  height: 43px;
                 "
               />
               <img
@@ -64,7 +64,7 @@
                   width: 45px;
                   padding: 4%;
                   margin-right: 7px;
-                  height: 41px;
+                  height: 43px;
                 "
               />
             </div>
@@ -278,7 +278,7 @@
                     width: 40px;
                     padding: 1%;
                     margin-right: 7px;
-                    height: 38px;
+                    height: 40px;
                   "
                 />
                 <span>{{ _balance_btc }} BTC</span>
@@ -295,10 +295,10 @@
                   vertical-align: middle;
                   background: white;
                   border-radius: 50%;
-                  width: 31px;
+                  width: 33px;
                   padding: 1%;
                   margin-right: 7px;
-                  height: 32px;
+                  height: 31px;
                 "
               />
               <span> Withdraw BTC </span>
@@ -347,7 +347,7 @@
                     padding: 1%;
                     width: 40px;
                     margin-right: 7px;
-                    height: 38px;
+                    height: 40px;
                   "
                 />
                 <span>{{ _balance_eth }} ETH</span>
@@ -365,9 +365,10 @@
                   background: white;
                   border-radius: 50%;
                   padding: 1%;
-                  width: 31px;
+                  width: 33px;
+                  padding: 1%;
                   margin-right: 7px;
-                  height: 32px;
+                  height: 31px;
                 "
               />
               <span> Withdraw ETH </span>
@@ -417,7 +418,7 @@
                     width: 40px;
                     padding: 1%;
                     margin-right: 7px;
-                    height: 38px;
+                    height: 40px;
                   "
                 />
                 <span>{{ _balance_rvn }} RVN</span>
@@ -434,10 +435,10 @@
                   vertical-align: middle;
                   background: white;
                   border-radius: 50%;
-                  width: 31px;
-                  padding: 2%;
+                  width: 33px;
+                  padding: 1%;
                   margin-right: 7px;
-                  height: 32px;
+                  height: 31px;
                 "
               />
               <span> Withdraw RVN </span>
@@ -486,7 +487,7 @@
                     width: 40px;
                     padding: 1%;
                     margin-right: 7px;
-                    height: 38px;
+                    height: 40px;
                   "
                 />
                 <span>{{ _balance_LTCT }} LTCT</span>
@@ -503,10 +504,10 @@
                   vertical-align: middle;
                   background: white;
                   border-radius: 50%;
-                  width: 31px;
+                  width: 33px;
                   padding: 1%;
                   margin-right: 7px;
-                  height: 32px;
+                  height: 31px;
                 "
               />
               <span> Withdraw LTCT </span>
@@ -685,51 +686,83 @@
           <span>Learn more</span> <i class="fas fa-external-link-alt"></i>
         </button>
       </div>
-      <!-- <div class="gains-chart mt-5">
-        <div class="custom-taps">
-            <div class="custom-taps__heading">
-                <h4 class="custom-taps__heading__title mb-3">Daily Gains</h4>
-                <div class="custom-taps__heading__taps d-flex justify-content-end">
-                    <div class="custom-taps__heading__taps__tap" (click)="minedChartTap1()" [ngClass]="{
-                  'custom-taps__heading__taps__tap--active':
-                    minedChartTapOpend == 'tap1'
-                }">
-                        <i class="fab fa-btc sm"></i> BTC
-                    </div>
-                    <div class="custom-taps__heading__taps__tap" (click)="minedChartTap2()" [ngClass]="{
-                  'custom-taps__heading__taps__tap--active':
-                    minedChartTapOpend == 'tap2'
-                }">
-                        <i class="fab fa-ethereum sm"></i> ETH
-                    </div>
-                    <div class="custom-taps__heading__taps__tap" (click)="minedChartTap3()" [ngClass]="{
-                  'custom-taps__heading__taps__tap--active':
-                    minedChartTapOpend == 'tap3'
-                }">
-                        <i class="fab fa-btc sm"></i> RVN
-                    </div>
-                    <div class="custom-taps__heading__taps__tap" (click)="minedChartTap4()" [ngClass]="{
-                  'custom-taps__heading__taps__tap--active':
-                    minedChartTapOpend == 'tap4'
-                }">
-                        <i class="fab fa-ethereum sm"></i> LTCT
-                    </div>
-                </div>
+
+      <!-- <div class="custom-taps">
+        <div class="custom-taps__heading">
+          <h4 class="custom-taps__heading__title mb-3">Daily Gains</h4>
+          <div class="custom-taps__heading__taps d-flex justify-content-end">
+            <div
+              class="custom-taps__heading__taps__tap"
+              (click)="minedChartTap1()"
+              [ngClass]="{
+                'custom-taps__heading__taps__tap--active':
+                  minedChartTapOpend == 'tap1'
+              }"
+            >
+              <i class="fab fa-btc sm"></i> BTC
             </div>
-            <div class="custom-taps__body" *ngIf="minedChartTapOpend == 'tap1'">
-                <p-chart height="300px" type="line" [data]="tap1Data" [options]="basicOptions"></p-chart>
+            <div
+              class="custom-taps__heading__taps__tap"
+              (click)="minedChartTap2()"
+              [ngClass]="{
+                'custom-taps__heading__taps__tap--active':
+                  minedChartTapOpend == 'tap2'
+              }"
+            >
+              <i class="fab fa-ethereum sm"></i> ETH
             </div>
-            <div class="custom-taps__body" *ngIf="minedChartTapOpend == 'tap2'">
-                <p-chart type="line" [data]="tap2Data" [options]="basicOptions"></p-chart>
+            <div
+              class="custom-taps__heading__taps__tap"
+              (click)="minedChartTap3()"
+              [ngClass]="{
+                'custom-taps__heading__taps__tap--active':
+                  minedChartTapOpend == 'tap3'
+              }"
+            >
+              <i class="fab fa-btc sm"></i> RVN
             </div>
-            <div class="custom-taps__body" *ngIf="minedChartTapOpend == 'tap3'">
-                <p-chart type="line" [data]="tap3Data" [options]="basicOptions"></p-chart>
+            <div
+              class="custom-taps__heading__taps__tap"
+              (click)="minedChartTap4()"
+              [ngClass]="{
+                'custom-taps__heading__taps__tap--active':
+                  minedChartTapOpend == 'tap4'
+              }"
+            >
+              <i class="fab fa-ethereum sm"></i> LTCT
             </div>
-            <div class="custom-taps__body" *ngIf="minedChartTapOpend == 'tap4'">
-                <p-chart type="line" [data]="tap4Data" [options]="basicOptions"></p-chart>
-            </div>
+          </div>
         </div>
-    </div> -->
+        <div class="custom-taps__body" *ngIf="minedChartTapOpend == 'tap1'">
+          <p-chart
+            height="300px"
+            type="line"
+            [data]="tap1Data"
+            [options]="basicOptions"
+          ></p-chart>
+        </div>
+        <div class="custom-taps__body" *ngIf="minedChartTapOpend == 'tap2'">
+          <p-chart
+            type="line"
+            [data]="tap2Data"
+            [options]="basicOptions"
+          ></p-chart>
+        </div>
+        <div class="custom-taps__body" *ngIf="minedChartTapOpend == 'tap3'">
+          <p-chart
+            type="line"
+            [data]="tap3Data"
+            [options]="basicOptions"
+          ></p-chart>
+        </div>
+        <div class="custom-taps__body" *ngIf="minedChartTapOpend == 'tap4'">
+          <p-chart
+            type="line"
+            [data]="tap4Data"
+            [options]="basicOptions"
+          ></p-chart>
+        </div>
+      </div> -->
     </div>
   </div>
 </div>

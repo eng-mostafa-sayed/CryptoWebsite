@@ -10,7 +10,63 @@
         <div class="col-12 col-md-6 col-xl-3" *ngFor="let balance of balances">
           <div class="wallet__balance__box">
             <div class="wallet__balance__box__icon">
-              <i class="fab fa-btc lg"></i>
+              <!-- //// this is the balance icons from the assets folder -->
+              <img
+                *ngIf="balance.name == 'ETH'"
+                src="../../../assets/ETH-Crypto.svg"
+                alt=""
+                style="
+                  vertical-align: middle;
+                  background: white;
+                  border-radius: 50%;
+                  width: 45px;
+                  padding: 4%;
+                  margin-right: 6px;
+                  height: 44px;
+                "
+              />
+              <img
+                *ngIf="balance.name == 'BTC'"
+                src="../../../assets/BTC-Crypto.svg"
+                alt=""
+                style="
+                  vertical-align: middle;
+                  background: white;
+                  border-radius: 50%;
+                  width: 45px;
+                  padding: 4%;
+                  margin-right: 6px;
+                  height: 44px;
+                "
+              />
+              <img
+                *ngIf="balance.name == 'RVN'"
+                src="../../../assets/RVN-Crypto.svg"
+                alt=""
+                style="
+                  vertical-align: middle;
+                  background: white;
+                  border-radius: 50%;
+                  width: 45px;
+                  padding: 4%;
+                  margin-right: 6px;
+                  height: 44px;
+                "
+              />
+              <img
+                *ngIf="balance.name == 'LTCT'"
+                src="../../../assets/LTCT-Crypto.png"
+                alt=""
+                style="
+                  vertical-align: middle;
+                  background: white;
+                  border-radius: 50%;
+                  width: 45px;
+                  padding: 4%;
+                  margin-right: 6px;
+                  height: 44px;
+                "
+              />
             </div>
             <div>
               <h4 class="wallet__balance__box__name">
@@ -85,7 +141,20 @@
                     cryptoTapOpend == 'tap1'
                 }"
               >
-                <i class="fab fa-btc sm"></i> BTC
+                <img
+                  src="../../../assets/BTC-Crypto.svg"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 29px;
+                    padding: 4%;
+                    margin-right: 6px;
+                    height: 26px;
+                  "
+                />
+                BTC
               </div>
               <div
                 class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
@@ -95,7 +164,20 @@
                     cryptoTapOpend == 'tap2'
                 }"
               >
-                <i class="fab fa-ethereum sm"></i> ETH
+                <img
+                  src="../../../assets/ETH-Crypto.svg"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 29px;
+                    padding: 4%;
+                    margin-right: 6px;
+                    height: 26px;
+                  "
+                />
+                ETH
               </div>
               <div
                 class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
@@ -105,7 +187,20 @@
                     cryptoTapOpend == 'tap3'
                 }"
               >
-                <i class="fab fa-btc sm"></i> RVN
+                <img
+                  src="../../../assets/RVN-Crypto.svg"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 29px;
+                    padding: 4%;
+                    margin-right: 6px;
+                    height: 26px;
+                  "
+                />
+                RVN
               </div>
               <div
                 class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
@@ -115,7 +210,20 @@
                     cryptoTapOpend == 'tap4'
                 }"
               >
-                <i class="fab fa-ethereum sm"></i> LTCT
+                <img
+                  src="../../../assets/LTCT-Crypto.png"
+                  alt=""
+                  style="
+                    vertical-align: middle;
+                    background: white;
+                    border-radius: 50%;
+                    width: 29px;
+                    padding: 4%;
+                    margin-right: 6px;
+                    height: 26px;
+                  "
+                />
+                LTCT
               </div>
             </div>
           </div>
