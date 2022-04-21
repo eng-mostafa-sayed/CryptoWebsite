@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { AdminAuthService } from 'src/app/Auth/admin-auth.service';
 
 @Component({
   selector: 'app-dash-header',
@@ -12,7 +13,7 @@ export class DashHeaderComponent implements OnInit {
   dropdownCollapsed = false;
   collapsed = false;
   toggleMenu = false;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AdminAuthService) {}
 
   ngOnInit(): void {
     //to survive a reload
@@ -52,5 +53,8 @@ export class DashHeaderComponent implements OnInit {
           this.currentRoute = 'Mining devices';
         }
       });
+  }
+  logout() {
+    this.authService.logout();
   }
 }

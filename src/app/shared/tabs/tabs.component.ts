@@ -9,7 +9,7 @@ import { Balance } from '../../user-dashboard/balance.model';
 export class TabsComponent implements OnInit {
   @Input() leftTitle: string;
   @Input() topTitle: string;
-  // @Input() miningSpeed: { BTC: string; ETH: string; RVN: string; LTCT: string };
+  // @Input() miningSpeed: { BTC: string; ETH: string; RVN: string; STX: string };
   // @Input() plans: string;
   // @Input() mined: string;
   // @Input() currencyBalance: string;
@@ -17,7 +17,7 @@ export class TabsComponent implements OnInit {
   @Input() BTCbalance: Balance;
   @Input() ETHbalance: Balance;
   @Input() RVNbalance: Balance;
-  @Input() LTCTbalance: Balance;
+  @Input() STXbalance: Balance;
 
   constructor() {}
 

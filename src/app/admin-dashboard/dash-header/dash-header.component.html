@@ -1,9 +1,18 @@
 <div class="main-nav main-nav--trans fixed-top">
   <h3 class="main-nav__title">{{ currentRoute }}</h3>
   <div class="main-nav__user">
-    <span class="main-nav__user__name">Ahmed Khalil</span>
-    <div class="main-nav__user__icon">
-      <i class="fas fa-user"></i>
+    <span
+      class="main-nav__user__name"
+      (click)="logout()"
+      style="cursor: pointer"
+      >Logout</span
+    >
+    <div
+      class="main-nav__user__icon"
+      (click)="logout()"
+      style="cursor: pointer"
+    >
+      <i class="fas fa-sign-out-alt"></i>
     </div>
     <!-- <div
       class="main-nav__user__icon main-nav__user__icon--menu"

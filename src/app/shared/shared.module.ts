@@ -7,6 +7,7 @@ import { TimelineChartComponent } from './timeline-chart/timeline-chart.componen
 import { MatTabsModule } from '@angular/material/tabs';
 import { ChartModule } from 'primeng/chart';
 import { CustomTapsComponent } from './custom-taps/custom-taps.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { CustomTapsComponent } from './custom-taps/custom-taps.component';
     TabsComponent,
     TimelineChartComponent,
     CustomTapsComponent,
+    NotificationComponent,
   ],
   exports: [
     HeaderComponent,
@@ -23,6 +25,7 @@ import { CustomTapsComponent } from './custom-taps/custom-taps.component';
     TimelineChartComponent,
     ChartModule,
     CustomTapsComponent,
+    NotificationComponent,
   ],
   imports: [CommonModule, MatTabsModule],
 })

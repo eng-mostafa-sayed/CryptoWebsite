@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/shared/shared.service';
+import { AdminDashboardService } from '../admin-dashboard.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-sub-users',
@@ -6,149 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sub-users.component.scss'],
 })
 export class SubUsersComponent implements OnInit {
-  usersData = [
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-    {
-      date: '30 Jan 2022,02:00 pm',
-      info: {
-        name: 'Ahmed Khalil',
-        email: 'Ahmed@example.com',
-      },
-      phone: '+02 01112345678',
-      plans: 5,
-      devices: 3,
-    },
-  ];
-  constructor() {}
+  usersData: User[] = [];
+  usersLength: number;
+  constructor(
+    private dashboardService: AdminDashboardService,
+    private sharedSerivce: SharedService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sharedSerivce.isLoading.next(true);
+    this.dashboardService.getSubscribedUsers().subscribe({
+      next: (res) => {
+        this.usersData = res;
+        this.usersLength = res.length;
+        this.sharedSerivce.isLoading.next(false);
+      },
+    });
+  }
 }

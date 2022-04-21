@@ -8,6 +8,7 @@ import { SignupComponent } from './Auth/signup/signup.component';
 import { UserComponent } from './Auth/user/user.component';
 import { ChoosePlanComponent } from './user-dashboard/plans/choose-plan/choose-plan.component';
 import { WithdrawComponent } from './user-dashboard/withdraw/withdraw.component';
+import { AdminComponent } from './Auth/admin/admin.component';
 
 const routes: Routes = [
   {
@@ -42,11 +43,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: UserComponent,
-    children: [
-      { path: 'signin', component: SigninComponent },
-      { path: 'signup', component: SignupComponent },
-      { path: 'reset-your-password', component: ResetPasswordComponent },
-    ],
+    children: [{ path: 'signin', component: AdminComponent }],
   },
   // { path: '', redirectTo: 'user/signin', pathMatch: 'full' },
   // { path: '**', redirectTo: 'user/signin' },

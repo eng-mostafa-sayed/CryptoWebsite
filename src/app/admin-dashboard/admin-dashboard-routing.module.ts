@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../Auth/auth.guard';
+import { AdminAuthGuard } from '../Auth/admin-auth.guard';
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import { MinersComponent } from './miners/miners.component';
 import { OverviewComponent } from './overview/overview.component';
@@ -13,12 +13,12 @@ const routes: Routes = [
   {
     path: '',
     component: AdminDashboardComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AdminAuthGuard],
     children: [
       { path: 'overview', component: OverviewComponent },
       { path: 'hashrate-plans', component: PlansComponent },
       { path: 'subscribed-users', component: SubUsersComponent },
-      { path: 'profile', component: SubUserComponent },
+      { path: 'profile/:userID', component: SubUserComponent },
       { path: 'miners', component: MinersComponent },
       { path: 'request', component: RequestComponent },
     ],

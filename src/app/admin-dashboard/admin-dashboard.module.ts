@@ -21,6 +21,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { InputTextModule } from 'primeng/inputtext';
 import { SubUserComponent } from './sub-user/sub-user.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AdminDashboardComponent,
@@ -35,6 +37,8 @@ import { SubUserComponent } from './sub-user/sub-user.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     AdminDashboardRoutingModule,
     TableModule,
     CalendarModule,

@@ -1,7 +1,6 @@
-<header class="dash-heading dash-heading--trans">
-  <h2 class="dash-heading__title">Subscribed users</h2>
-</header>
-<div class="dashboard-container">
+<div class="dashboard-container dashboard-container--admin">
+  <h2 class="dash-heading__title mb-5">Subscribed users</h2>
+
   <div class="table">
     <p-table
       [value]="usersData"
@@ -11,38 +10,53 @@
       [rowsPerPageOptions]="[10, 15, 20]"
     >
       <ng-template pTemplate="caption">
-        Subscribed users ({{ usersData.length }})
+        Subscribed users ({{ usersLength }})
       </ng-template>
-      <ng-template pTemplate="header" let-columns>
+      <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="date">
+          <th pSortableColumn="createdAt">
             Joined date
             <p-columnFilter
               type="date"
-              field="date"
+              field="createdAt"
               display="menu"
             ></p-columnFilter>
-            <p-sortIcon field="date"></p-sortIcon>
+            <p-sortIcon field="createdAt"></p-sortIcon>
           </th>
-          <th pSortableColumn="name">
+          <th pSortableColumn="userName">
             User info
             <p-columnFilter
               type="text"
-              field="info"
+              field="userName"
               display="menu"
             ></p-columnFilter>
-            <p-sortIcon field="info"></p-sortIcon>
+            <p-sortIcon field="userName"></p-sortIcon>
           </th>
-          <th pSortableColumn="total">
+          <th pSortableColumn="phone">
             Phone number
+            <p-columnFilter
+              type="text"
+              field="phone"
+              display="menu"
+            ></p-columnFilter>
             <p-sortIcon field="phone"></p-sortIcon>
           </th>
-          <th pSortableColumn="current">
+          <th pSortableColumn="activePlans">
             Subscribed Hashrate plans
-            <p-sortIcon field="plans"></p-sortIcon>
+            <p-columnFilter
+              type="text"
+              field="activePlans"
+              display="menu"
+            ></p-columnFilter>
+            <p-sortIcon field="activePlans"></p-sortIcon>
           </th>
-          <th pSortableColumn="average">
+          <th pSortableColumn="devices">
             Mining devices
+            <p-columnFilter
+              type="text"
+              field="devices"
+              display="menu"
+            ></p-columnFilter>
             <p-sortIcon field="devices"></p-sortIcon>
           </th>
           <th>Action</th>
@@ -51,29 +65,31 @@
       <ng-template pTemplate="body" let-user>
         <tr>
           <td>
-            <span class="p-column-title"> Joined date </span
-            >{{ user.date | date: "dd MMM yyyy" }}
+            <span class="p-column-title"> Joined date </span>
+            <span class="table__sub">{{ user.createdAt | date }}</span>
           </td>
           <td>
             <span class="p-column-title"> User info</span>
-            <p>{{ user.info.name }}</p>
-            <p>{{ user.info.email }}</p>
+            <div class="table__header">{{ user.userName }}</div>
+            <div class="table__sub">{{ user.email }}</div>
           </td>
           <td>
-            <span class="p-column-title"> Phone number</span>{{ user.phone }}
+            <span class="p-column-title"> Phone number</span>
+            <span class="table__header">{{ user.phone }}</span>
           </td>
           <td>
-            <span class="p-column-title"> Subscribed Hashrate plans</span
-            >{{ user.plans }}
+            <span class="p-column-title"> Subscribed Hashrate plans</span>
+            <span class="table__header">{{ user.activePlans }}</span>
           </td>
           <td>
-            <span class="p-column-title">Mining devices</span>{{ user.devices }}
+            <span class="p-column-title">Mining devices</span>
+            <span class="table__header">{{ user.devices }}</span>
           </td>
           <td>
             <span class="p-column-title">Action</span>
             <button
               class="btn btn--darker btn--animated"
-              [routerLink]="['../profile']"
+              routerLink="../profile/{{ user._id }}"
             >
               See Profile
             </button>
