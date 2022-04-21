@@ -1,5 +1,5 @@
 .p-datatable {
-  position: static;
+  position: static !important;
   background-color: $color-background-dark;
   font-weight: 700;
   font-size: 1.4rem;
@@ -52,6 +52,25 @@
   color: $color-white-2;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+}
+.table {
+  &__header {
+    color: $color-white;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    i {
+      color: $color-primary;
+      margin-left: 2px;
+      cursor: pointer;
+    }
+  }
+  &__sub {
+    color: $color-white-2;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+  }
 }
 
 // .table {

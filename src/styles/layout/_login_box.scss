@@ -65,6 +65,17 @@
       color: $color-primary-dark;
     }
   }
+  &__second-action {
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.9rem;
+    color: $color-primary;
+    margin-left: auto;
+    &:hover {
+      cursor: pointer;
+      color: $color-primary-dark;
+    }
+  }
   &__icon {
     background: #302c3f;
     border-radius: 80px;

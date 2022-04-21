@@ -15,10 +15,81 @@
     </div>
   </div>
   <div class="row g-5">
-    <div class="col-12 col-lg-6 col-xl-5" *ngFor="let miner of miners">
-      <ng-container *ngIf="checkLength()">
-        <div class="miner">
-          <!--whole class -->
+    <!-- col-xl-4 replaced by col-xl-5 in the below line-->
+    <div class="col-12 col-lg-6 col-xl-4" *ngFor="let miner of miners">
+      <ng-container>
+        <div
+          class="miner"
+          [ngClass]="{
+            'miner--online': miner.asicStatus == true,
+            'miner--offline':
+              miner.asicStatus == false && miner.expired == true,
+            'miner--demand': miner.asicStatus == false && miner.expired == false
+          }"
+        >
+          <span class="miner__online" *ngIf="miner.asicStatus == true"
+            >Online</span
+          >
+          <span
+            class="miner__offline"
+            *ngIf="miner.asicStatus == false && miner.expired == true"
+            >Offline</span
+          >
+          <span
+            class="miner__demand"
+            *ngIf="miner.asicStatus == false && miner.expired == false"
+            >On Demand</span
+          >
+          <h3 class="miner__title">{{ miner.asicName }}</h3>
+          <!-- <div class="miner__sub">
+                <i class="fab fa-btc md" style="margin-right: 8px"></i>
+                Bitcoin — SHA-256
+              </div> -->
+          <img class="miner__img" src="../../../assets/miner.svg" alt="" />
+          <div class="miner__details row g-3">
+            <div
+              class="col-12"
+              style="
+                font-weight: 400;
+                font-size: 1.4re;
+                color: #b7b4c7;
+                margin-bottom: 1rem;
+              "
+            >
+              Device Bought on: {{ miner.startDate | date }}
+            </div>
+            <div class="col-6">
+              <span class="miner__details__title">Host Fees</span>
+              <span class="miner__details__sub">{{ miner.hostFees }}%</span>
+            </div>
+            <div class="col-6">
+              <span class="miner__details__title">Worker ID</span>
+              <span class="miner__details__sub">{{ miner.workerID }}</span>
+            </div>
+            <div class="col-6">
+              <span class="miner__details__title">Total Mined</span>
+              <span class="miner__details__sub">{{ miner.totalMined }}</span>
+            </div>
+            <div class="col-12">
+              <span class="miner__details__title">Address</span>
+              <span
+                class="miner__details__sub"
+                style="overflow-wrap: anywhere"
+                >{{ miner.address }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <!-- <ng-container *ngIf="checkLength()">
+        <div
+          class="miner"
+          [ngClass]="{
+            'miner--online': miner.asicStatus,
+            'miner--offline': miner.asicStatus
+          }"
+        >
+          
           <h3 class="miner__title">{{ miner.asicName }}</h3>
           <div class="miner__sub"></div>
           <img class="miner__img" src="../../../assets/miner.svg" alt="" />
@@ -47,13 +118,13 @@
               <span class="miner__details__title">Worker ID </span>
               <span class="miner__details__sub">{{ miner.workerID }}</span>
             </div>
-            <div class="col-12 d-lg-flex flex-lg-row flex-lg-wrap p-lg-2">
+            <div class="col-12">
               <span class="miner__details__title d-block">Address: </span>
               <span class="miner__details__sub"> {{ miner.address }}</span>
             </div>
           </div>
         </div>
-      </ng-container>
+      </ng-container> -->
     </div>
     <div
       class="col-12 col-lg-6 col-xl-4"

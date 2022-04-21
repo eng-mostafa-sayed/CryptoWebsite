@@ -7,11 +7,19 @@
   background: #1d1a27;
   box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  min-width: 32rem;
-  max-width: 35rem;
+  width: 34rem;
+  max-width: 36rem;
   padding: 2.4rem;
   margin: 0 auto;
-
+  &--online {
+    border: 2px solid green !important;
+  }
+  &--offline {
+    border: 2px solid $color-error !important;
+  }
+  &--demand {
+    border: 2px solid $color-secondary !important;
+  }
   &__title {
     font-weight: 700;
     font-size: 2.8rem;
@@ -21,17 +29,74 @@
     font-size: 1.4rem;
     color: $color-white-2;
   }
+  &__offline,
+  &__online,
+  &__demand {
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+  }
+  &__offline {
+    color: $color-error;
+    &::before {
+      background-color: $color-error;
+    }
+  }
+  &__online {
+    color: green;
+    &::before {
+      background-color: green;
+    }
+  }
+  &__demand {
+    color: $color-secondary;
+    &::before {
+      background-color: $color-secondary;
+    }
+  }
   &__menu {
-    background: #302c3f;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 4rem;
-    width: 4rem;
-    border-radius: 50%;
-    cursor: pointer;
-    i {
-      color: $color-white-2;
+    position: relative;
+    &__btn {
+      background: #302c3f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 4rem;
+      width: 4rem;
+      border-radius: 50%;
+      cursor: pointer;
+
+      i {
+        color: $color-white-2;
+      }
+    }
+    &__body {
+      position: absolute;
+      top: 4.4rem;
+      right: -2rem;
+      width: 14rem;
+      background-color: $color-background-dark;
+      border-radius: 8px;
+      padding: 4px 0;
+      &__item {
+        padding: 5px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        &:first-child:hover {
+          background-color: $color-white-2;
+        }
+        &:last-child {
+          color: $color-error;
+        }
+      }
     }
   }
   &__box {

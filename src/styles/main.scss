@@ -16,18 +16,26 @@
 @import "components/table";
 @import "components/input";
 @import "components/miner";
+@import "components/divider";
+@import "components/notification";
+@import "components/confirmation";
+@import "components/accept-popup-form";
+@import "components/admin-overview";
 
 @import "layout/grid";
 @import "layout/main-nav";
 @import "layout/sidenav";
 @import "layout/login_box";
 @import "layout/menu-nav";
+@import "layout/new-edit-form";
 
 @import "pages/overview";
-@import "pages/hashrate-plans";
+@import "pages/user-plans";
+@import "pages/admin-plans";
 @import "pages/choose-plan";
 @import "pages/mining-devices";
 @import "pages/choose-miner";
+@import "pages/subscribed-users";
 @import "pages/wallet";
 
 @import "shame";

@@ -70,7 +70,15 @@
       background-color: $color-secondary;
     }
   }
-
+  &--red {
+    border: 1px solid red;
+    color: red;
+    padding: 1rem 3rem;
+    &:hover {
+      color: rgb(179, 2, 2);
+      border: 1px solid rgb(179, 2, 2);
+    }
+  }
   &--disabled {
     background: #302c3f;
     color: #b7b4c7;
@@ -101,6 +109,26 @@
         opacity: 0;
       }
     }
+  }
+  &--success,
+  &--failed,
+  &--pending {
+    max-width: 10.5rem;
+    height: 32px;
+    border-radius: 3.2rem;
+    font-family: Nunito Sans;
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.9rem;
+  }
+  &--success {
+    background: #38c172;
+  }
+  &--failed {
+    background: #f03d3e;
+  }
+  &--pending {
+    background: $color-secondary;
   }
 }
 button.mat-paginator-navigation-next {

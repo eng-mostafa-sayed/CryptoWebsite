@@ -69,6 +69,41 @@
     }
   }
 }
+.horizontal-taps {
+  background: $color-background-dark;
+  border: 1px solid rgba(13, 23, 66, 0.1);
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-top: 2rem;
+  &__heading {
+    display: flex;
+    justify-content: flex-start;
+    box-shadow: inset 0px -1px 0px #302c3f;
+    &__item {
+      width: 17rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s;
+      padding: 2.4rem 0;
+      font-weight: 700;
+      font-size: 1.6rem;
+      line-height: 2rem;
+      &:hover,
+      &--active {
+        color: $color-primary;
+        box-shadow: inset 0px -1px 0px $color-primary;
+      }
+    }
+  }
+  &__body {
+    &__title {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 25px;
+      padding: 2.4rem;
+    }
+  }
+}
 
 //   .taps-header {
 //     margin-top: 10px;

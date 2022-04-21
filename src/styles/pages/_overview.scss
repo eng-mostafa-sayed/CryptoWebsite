@@ -45,12 +45,17 @@
           font-weight: 700;
           font-size: 1.6rem;
           line-height: 2rem;
+          i {
+            margin-right: 8px;
+          }
         }
         &__value {
           font-weight: 700;
-          font-size: rem;
+          font-size: 2rem;
           line-height: 2.5rem;
-          letter-spacing: 0.02em;
+          i {
+            margin-left: 8px;
+          }
         }
       }
       i {

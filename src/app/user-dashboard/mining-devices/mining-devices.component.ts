@@ -66,8 +66,8 @@ export class MiningDevicesComponent implements OnInit {
   myMiners = new Array();
   miners: {
     asicName: string;
-    asicStatus: string;
-    expired: string;
+    asicStatus: boolean;
+    expired: boolean;
     startDate: string;
     hostFees: string;
     address: string;
@@ -76,8 +76,8 @@ export class MiningDevicesComponent implements OnInit {
   }[] = [
     {
       asicName: 'loading ... ',
-      asicStatus: 'loading ... ',
-      expired: 'loading ... ',
+      asicStatus: false,
+      expired: false,
       startDate: 'loading ... ',
       hostFees: 'loading ... ',
       address: 'loading ... ',
@@ -89,12 +89,12 @@ export class MiningDevicesComponent implements OnInit {
 
   ngOnInit(): void {
     this.dashboard.getMyAsicDevices().subscribe((res: any) => {
-      //console.log(res);
+      console.log(res);
       for (let i = 0; i < res.length; i++) {
         const ele = {
           asicName: res[i].asicName ? res[i].asicName : 'not initialized yet',
-          asicStatus: res[i].asicStatus ? 'working' : 'not working',
-          expired: res[i].expired ? 'expired' : 'valid',
+          asicStatus: res[i].asicStatus,
+          expired: res[i].expired,
           startDate: res[i].startDate.substring(0, 10),
           hostFees: res[i].hostFees ? res[i].hostFees : 'not initialized yet',
           address: res[i].address ? res[i].address : 'not initialized yet',
