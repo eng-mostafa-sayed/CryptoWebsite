@@ -38,28 +38,28 @@ export class MiningDevicesComponent implements OnInit {
   tap3Data: any;
   tap4Data: any;
   basicOptions: any;
-  activeHash = [
-    {
-      crypto: 'BTC (Bitcoin)',
-      plans: `${sessionStorage.getItem('activePlans')} active plans`,
-      speed: '23 580',
-    },
-    {
-      crypto: 'ETH (Ethereum)',
-      plans: `${sessionStorage.getItem('activePlans')} active plans`,
-      speed: '23 580',
-    },
-    {
-      crypto: 'RVN (Ravencoin)',
-      plans: 'No active plan',
-      speed: '0',
-    },
-    {
-      crypto: 'LTCT (Stacks)',
-      plans: 'No active plan',
-      speed: '0',
-    },
-  ];
+  // activeHash = [
+  //   {
+  //     crypto: 'BTC (Bitcoin)',
+  //     plans: `${sessionStorage.getItem('activePlans')} active plans`,
+  //     speed: '23 580',
+  //   },
+  //   {
+  //     crypto: 'ETH (Ethereum)',
+  //     plans: `${sessionStorage.getItem('activePlans')} active plans`,
+  //     speed: '23 580',
+  //   },
+  //   {
+  //     crypto: 'RVN (Ravencoin)',
+  //     plans: 'No active plan',
+  //     speed: '0',
+  //   },
+  //   {
+  //     crypto: 'LTCT (Stacks)',
+  //     plans: 'No active plan',
+  //     speed: '0',
+  //   },
+  // ];
   ////////////////////////////////////////////////////your miners
   myBTCMinersHashratePower = 0; //not used
   myETHMinersHashratePower = 0; //not used
@@ -74,18 +74,7 @@ export class MiningDevicesComponent implements OnInit {
     address: string;
     totalMined: string;
     workerID: string;
-  }[] = [
-    {
-      asicName: 'loading ... ',
-      asicStatus: false,
-      expired: false,
-      startDate: 'loading ... ',
-      hostFees: 'loading ... ',
-      address: 'loading ... ',
-      totalMined: 'loading ... ',
-      workerID: 'loading ... ',
-    },
-  ];
+  }[] = [];
   //this.sharedSerivce.isLoading.next(false);
   constructor(
     private http: HttpClient,
@@ -96,7 +85,7 @@ export class MiningDevicesComponent implements OnInit {
   ngOnInit(): void {
     this.sharedSerivce.isLoading.next(true);
     this.dashboard.getMyAsicDevices().subscribe((res: any) => {
-      console.log(res);
+      //console.log(res);
       for (let i = 0; i < res.length; i++) {
         const ele = {
           asicName: res[i].asicName ? res[i].asicName : 'not initialized yet',
@@ -112,7 +101,6 @@ export class MiningDevicesComponent implements OnInit {
       }
       this.miners = [];
       this.miners = this.myMiners;
-      this.sharedSerivce.isLoading.next(false);
     });
     //////////////////////////////////////////////////////////////////////////////////
     this.tap1Data = {
@@ -199,6 +187,9 @@ export class MiningDevicesComponent implements OnInit {
         },
       },
     };
+    setTimeout(() => {
+      this.sharedSerivce.isLoading.next(false);
+    }, 1200);
   }
   minedChartTap1() {
     this.minersChartOpend = 'tap1';

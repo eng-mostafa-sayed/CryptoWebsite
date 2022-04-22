@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from 'src/app/Auth/auth.service';
+import { SharedService } from 'src/app/shared/shared.service';
+import { DashboardService } from '../user-dashboard.service';
 
 @Component({
   selector: 'app-dash-header',
@@ -9,20 +11,37 @@ import { AuthService } from 'src/app/Auth/auth.service';
   styleUrls: ['./dash-header.component.scss'],
 })
 export class DashHeaderComponent implements OnInit {
-  _name: any = sessionStorage.getItem('name');
   UserData: any;
-  name: String = 'test Name';
+  _name: any; // sessionStorage.getItem('name');
+
   currentRoute: string = 'Overview';
   collapsed = false;
   toggleMenu = false;
   logout() {
     this.authServics.logout();
   }
-  constructor(private router: Router, private authServics: AuthService) {}
+  constructor(
+    private router: Router,
+    private authServics: AuthService,
+    private dashboard: DashboardService,
+    private sharedSerivce: SharedService
+  ) {}
 
-  ngOnInit(): void {
-    this.UserData = this.authServics.UserData();
-    this.name = this.UserData.name;
+  async ngOnInit(): Promise<void> {
+    this.sharedSerivce.isLoading.next(true);
+    // this.UserData = this.authServics.UserData();
+    await this.dashboard.userData().subscribe({
+      next: (res) => {
+        // console.log(res);
+        this.UserData = res;
+        this._name = this.UserData.userName;
+        this.sharedSerivce.isLoading.next(false);
+      },
+      error: (err) => {
+        console.log(err);
+        this.sharedSerivce.isLoading.next(false);
+      },
+    });
 
     //to survive a reload
     if (this.router.url == '/user-dashboard/overview') {

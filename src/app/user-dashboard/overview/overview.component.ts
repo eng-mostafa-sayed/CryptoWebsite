@@ -25,27 +25,23 @@ const data = {
   styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent implements OnInit {
+  //time i used to delay if fetching the cards data
+  waitingTime: number = 1000;
+  UserData: any = {
+    userName: '',
+    balance: '',
+    activePlans: 0,
+  };
   //////////////////////////////////////////////////////////added vars
-  _name: any = sessionStorage.getItem('name');
-  _balance_btc: any = sessionStorage.getItem('balance_btc')
-    ? Number(sessionStorage.getItem('balance_btc')).toFixed(8)
-    : '0';
-  _balance_eth: any = sessionStorage.getItem('balance_eth')
-    ? Number(sessionStorage.getItem('balance_eth')).toFixed(8)
-    : '0';
-  _activePlans: any = sessionStorage.getItem('activePlans');
-  _devices: any = sessionStorage.getItem('devices');
 
-  _balance_rvn: any = sessionStorage.getItem('balance_rvn')
-    ? Number(sessionStorage.getItem('balance_rvn')).toFixed(8)
-    : '0';
-  _balance_LTCT: any = sessionStorage.getItem('balance_ltct')
-    ? Number(sessionStorage.getItem('balance_ltct')).toFixed(8)
-    : '0';
-  _miningSpeed = 3.23;
+  _balance_btc: any;
+  _balance_eth: any;
+  _balance_rvn: any;
+  _balance_LTCT: any;
+  _activePlans: any;
+
   //////////////////////////////////////////////////////////////////////
 
-  UserData: any;
   minedTapOpend = 'tap1';
   minedChartTapOpend = 'tap1';
   gainsChartTapOpend = 'tap1';
@@ -151,124 +147,115 @@ export class OverviewComponent implements OnInit {
 
   async ngOnInit() {
     this.sharedSerivce.isLoading.next(true);
-    this.UserData = this.authServics.UserData();
 
     // this.UserData = this.authServics.UserData();
-
+    await this.dashboard.userData().subscribe({
+      next: (res) => {
+        //console.log(res);
+        this.UserData = res;
+        this._balance_btc = this.UserData.balance.btc;
+        this._balance_eth = this.UserData.balance.eth;
+        this._balance_LTCT = this.UserData.balance.ltct;
+        this._balance_rvn = this.UserData.balance.rvn;
+        // this.sharedSerivce.isLoading.next(false);
+      },
+      error: (err) => {
+        console.log(err);
+        //  this.sharedSerivce.isLoading.next(false);
+      },
+    });
     //this fetches the data and push it in the balances$ stream
 
     //this is fetching the data from the server and the external API and load cards
-    await this.dashboard.getPriceOfBitcoin().subscribe({
-      next: (res) => {
-        this.btcPrice = res.USD;
-        this.balances.push({
-          currency: 'BTC',
-          currencyBalance: this.UserData.balance_btc
-            ? this.UserData.balance_btc
-            : this._balance_btc,
-          plans: this.UserData.activePlans
-            ? this.UserData.activePlans
-            : this._activePlans,
-          devices: this.UserData.devices
-            ? this.UserData.devices
-            : this._devices,
-          price: this.btcPrice,
 
-          minWithdraw: 0.00005,
-        });
+    /////////////////////////////here i added waiting by 1 sec to load the latest data
+    await setTimeout(() => {
+      this.dashboard.getPriceOfBitcoin().subscribe({
+        next: (res) => {
+          ///////////////////////
+          this.btcPrice = res.USD;
+          this.balances.push({
+            currency: 'BTC',
+            currencyBalance: this.UserData.balance.btc.toFixed(8),
+            plans: this.UserData.activePlans,
+            price: this.btcPrice,
+            minWithdraw: 0.00005,
+          });
 
-        //console.log(res);
-        this.sharedSerivce.isLoading.next(false);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-    await this.dashboard.getPriceOfEth().subscribe({
-      next: (res) => {
-        this.ethPrice = res.USD;
-        this.balances.push({
-          currency: 'ETH',
-          currencyBalance: this.UserData.balance_eth
-            ? this.UserData.balance_eth
-            : this._balance_eth,
-          plans: this.UserData.activePlans
-            ? this.UserData.activePlans
-            : this._activePlans,
-          devices: this.UserData.devices
-            ? this.UserData.devices
-            : this._devices,
-          price: this.ethPrice,
+          //console.log(res);
+          // this.sharedSerivce.isLoading.next(false);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }, this.waitingTime);
 
-          minWithdraw: 0.00005,
-        });
-        this.sharedSerivce.isLoading.next(false);
-        // console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-    await this.dashboard.getPriceOfRVN().subscribe({
-      next: (res) => {
-        this.rvnPrice = res.USD;
-        this.balances.push({
-          currency: 'RVN',
-          currencyBalance: this.UserData.balance_rvn
-            ? this.UserData.balance_rvn
-            : '0',
-          plans: this.UserData.activePlans
-            ? this.UserData.activePlans
-            : this._activePlans,
-          devices: this.UserData.devices
-            ? this.UserData.devices
-            : this._devices,
-          price: this.rvnPrice,
+    await setTimeout(() => {
+      this.dashboard.getPriceOfEth().subscribe({
+        next: (res) => {
+          this.ethPrice = res.USD;
+          this.balances.push({
+            currency: 'ETH',
+            currencyBalance: this.UserData.balance.eth.toFixed(8),
+            plans: this.UserData.activePlans,
+            price: this.ethPrice,
+            minWithdraw: 0.00005,
+          });
+          //  this.sharedSerivce.isLoading.next(false);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }, this.waitingTime);
 
-          minWithdraw: 0.00005,
-        });
-        this.sharedSerivce.isLoading.next(false);
-        // console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-    await this.dashboard.getPriceOfLTCT().subscribe({
-      next: (res) => {
-        this.LTCTPrice = res.data.amount ? res.data.amount : 0;
-        this.balances.push({
-          currency: 'LTCT',
-          currencyBalance: this.UserData.balance_ltct
-            ? this.UserData.balance_ltct
-            : '0',
-          plans: this.UserData.activePlans
-            ? this.UserData.activePlans
-            : this._activePlans,
-          devices: this.UserData.devices
-            ? this.UserData.devices
-            : this._devices,
-          price: this.LTCTPrice,
+    await setTimeout(() => {
+      this.dashboard.getPriceOfRVN().subscribe({
+        next: (res) => {
+          this.rvnPrice = res.USD;
+          this.balances.push({
+            currency: 'RVN',
+            currencyBalance: this.UserData.balance.rvn.toFixed(8),
+            plans: this.UserData.activePlans,
+            price: this.rvnPrice,
+            minWithdraw: 0.00005,
+          });
+          // this.sharedSerivce.isLoading.next(false);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }, this.waitingTime);
 
-          minWithdraw: 0.00005,
-        });
+    await setTimeout(() => {
+      this.dashboard.getPriceOfLTCT().subscribe({
+        next: (res) => {
+          this.LTCTPrice = res.data.amount ? res.data.amount : 0;
+          this.balances.push({
+            currency: 'LTCT',
+            currencyBalance: this.UserData.balance.ltct.toFixed(8),
+            plans: this.UserData.activePlans,
+            price: this.LTCTPrice,
+            minWithdraw: 0.00005,
+          });
+          //  this.sharedSerivce.isLoading.next(false);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }, this.waitingTime);
 
-        // console.log(res);
-        this.sharedSerivce.isLoading.next(false);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-
-    this.BTC = this._balance_btc;
-    this.ETH = this._balance_eth;
+    this.BTC = this.balances[0];
+    this.ETH = this.balances[1];
     this.RVN = this.balances[2];
     this.LTCT = this.balances[3];
 
     ////////////////////////////////////////////////////////////////////////
     ///////////////////here calculating the total mined of each currency and mining speed for each currency
-    this.dashboard.getPlans().subscribe({
+    await this.dashboard.getPlans().subscribe({
       next: (res) => {
         this.plans = res;
         for (let i = 0; i < this.plans.length; i++) {
@@ -295,7 +282,7 @@ export class OverviewComponent implements OnInit {
             this.LTCTPlansMiningSpeed += Number(this.plans[i].hashPower);
           }
         }
-        this.sharedSerivce.isLoading.next(false);
+        // this.sharedSerivce.isLoading.next(false);
       },
     });
 
@@ -384,6 +371,9 @@ export class OverviewComponent implements OnInit {
         },
       },
     };
+    setTimeout(() => {
+      this.sharedSerivce.isLoading.next(false);
+    }, this.waitingTime + 200);
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   goToPlans() {
@@ -431,33 +421,19 @@ export class OverviewComponent implements OnInit {
     this.gainsChartTapOpend = 'tap4';
   }
   //////////////////////////////////////////////////////////// i edit this to make the widget work
-  getBTC() {
-    // this.BTC = this.balances.filter((element) => {
-    //   return element.currency === 'BTC';
-    // })[0];
-
+  async getBTC() {
     this.item = this.array.filter((item) =>
       item.title.toLowerCase().includes('BTC')
     );
-    // console.log('inside the filter' + this.item.balance_btc);
-    return this.item.miningSpeed;
+    return await this.item.miningSpeed;
   }
-  getETH() {
-    // this.ETH = this.balances.filter((element) => {
-    //   return element.currency === 'ETH';
-    // })[0];
-    return this.ETH.miningSpeed;
+  async getETH() {
+    return await this.ETH.miningSpeed;
   }
-  getRVN() {
-    // this.RVN = this.balances.filter((element) => {
-    //   return element.currency === 'RVN';
-    // })[0];
-    return this.RVN.miningSpeed;
+  async getRVN() {
+    return await this.RVN.miningSpeed;
   }
-  getLTCT() {
-    // this.LTCT = this.balances.filter((element) => {
-    //   return element.currency === 'LTCT';
-    // })[0];
-    return this.LTCT.miningSpeed;
+  async getLTCT() {
+    return await this.LTCT.miningSpeed;
   }
 }

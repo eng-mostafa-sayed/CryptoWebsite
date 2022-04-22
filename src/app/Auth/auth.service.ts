@@ -7,6 +7,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+  APIBaseUrl: string = 'https://cominer.herokuapp.com/api';
+  APIKey: string =
+    'c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4';
+
   private userId: string | null;
   private email: string | null;
   private accessToken: string | null;
@@ -31,29 +35,24 @@ export class AuthService {
       `Bearer ${sessionStorage.getItem('accessToken')}`
     ),
   };
-  UserData() {
-    // return this.http.post<any>(
-    //   'https://cominer.herokuapp.com/api/user/getUserData?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
-    //   this.header
-    // );
-    return {
-      userId: this.userId,
-      email: this.email,
-      name: this.name,
-      phone: this.phone,
-      balance_eth: this.balance_eth,
-      balance_btc: this.balance_btc,
-      balance_rvn: this.balance_rvn,
-      balance_ltct: this.balance_ltct,
-      activePlans: this.activePlans,
-      activeDemoPlans: this.activeDemoPlans,
-      devices: this.devices,
-    };
-  }
+  // UserData() {
+  //   // return this.http.post<any>(
+  //   //   `${this.APIBaseUrl}/user/getUserData?key=${this.APIKey}`,
+  //   //   this.header
+  //   // );
+  //   return {
+  //     name: this.name,
+  //     balance_eth: this.balance_eth,
+  //     balance_btc: this.balance_btc,
+  //     balance_rvn: this.balance_rvn,
+  //     balance_ltct: this.balance_ltct,
+  //     activePlans: this.activePlans,
+  //   };
+  // }
 
   signup(name: String, email: String, phone: number, password: String) {
     return this.http.post<any>(
-      'https://cominer.herokuapp.com/api/user/register?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
+      `${this.APIBaseUrl}/user/register?key=${this.APIKey}`,
       {
         name,
         email,
@@ -67,13 +66,10 @@ export class AuthService {
     sessionStorage.setItem('name', `${userName}`);
     sessionStorage.setItem('password', `${password}`);
     this.http
-      .post<any>(
-        'https://cominer.herokuapp.com/api/user/FFactorAuth?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
-        {
-          userName: userName,
-          password: password,
-        }
-      )
+      .post<any>(`${this.APIBaseUrl}/user/FFactorAuth?key=${this.APIKey}`, {
+        userName: userName,
+        password: password,
+      })
       .subscribe({
         next: (res) => {
           console.log(res);
@@ -100,12 +96,9 @@ export class AuthService {
   }
   logingOut() {
     this.http
-      .post<any>(
-        'https://cominer.herokuapp.com/api/user/logout?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
-        {
-          token: this.refreshToken,
-        }
-      )
+      .post<any>(`${this.APIBaseUrl}/user/logout?key=${this.APIKey}`, {
+        token: this.refreshToken,
+      })
       .subscribe({
         next: (res) => {
           console.log(res);
@@ -118,36 +111,19 @@ export class AuthService {
   ///////////////////////////////////////////////////////////////
   async otpValidator(otp: string) {
     await this.http
-      .post<any>(
-        'https://cominer.herokuapp.com/api/user/TwoFactorAuth?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
-        {
-          userName: sessionStorage.getItem('name'),
-          otp: otp,
-        }
-      )
+      .post<any>(`${this.APIBaseUrl}/user/TwoFactorAuth?key=${this.APIKey}`, {
+        userName: sessionStorage.getItem('name'),
+        otp: otp,
+      })
       .subscribe({
         next: (res) => {
           console.log(res);
           this.accessToken = res.jwt.accessToken;
           this.refreshToken = res.jwt.refreshToken;
-          this.userId = res.user.userID;
-          this.email = res.user.email;
-          this.name = res.user.name;
-          this.phone = res.user.phone;
-          this.balance_eth = res.user.balance.eth.toFixed(8);
-          this.balance_btc = res.user.balance.btc.toFixed(8);
-          this.balance_rvn = res.user.balance.rvn.toFixed(8);
-          this.balance_ltct = res.user.balance.ltct.toFixed(8);
-          this.activePlans = res.user.activePlans;
-          this.activeDemoPlans = res.user.activeDemoPlans;
-          this.devices = res.user.devices;
+
           // ///////////////////////////////session storage set values
           sessionStorage.setItem('accessToken', `${this.accessToken}`);
-          sessionStorage.setItem('balance_btc', `${this.balance_btc}`);
-          sessionStorage.setItem('balance_eth', `${this.balance_eth}`);
-          sessionStorage.setItem('balance_ltct', `${this.balance_ltct}`);
-          sessionStorage.setItem('balance_rvn', `${this.balance_rvn}`);
-          sessionStorage.setItem('activePlans', `${this.activePlans}`);
+
           this.authStatusListner.next(true);
           this.router.navigate(['/user/dashboard/overview']);
         },
@@ -161,6 +137,24 @@ export class AuthService {
     let n = sessionStorage.getItem('name');
     let p = sessionStorage.getItem('password');
     this.signin(n ? n : 'dummy data', p ? p : 'dummy data');
+  }
+
+  // //////////////////////////////////////////////////////////////
+  async resetPassword(forgetEmail: string) {
+    this.http
+      .post<any>(`${this.APIBaseUrl}/user/forgetPassword?key=${this.APIKey}`, {
+        email: forgetEmail,
+      })
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.authStatusListner.next(true);
+          // this.router.navigate(['/user/dashboard/overview']);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
   /////////////////////////////////////////////////////////////
   autoAuth() {
@@ -209,11 +203,5 @@ export class AuthService {
   private clearAuthData() {
     sessionStorage.removeItem('name');
     sessionStorage.removeItem('accessToken');
-    sessionStorage.removeItem('balance_btc');
-    sessionStorage.removeItem('balance_eth');
-    sessionStorage.removeItem('activePlans');
-
-    sessionStorage.removeItem('balance_ltct');
-    sessionStorage.removeItem('balance_rvn');
   }
 }
