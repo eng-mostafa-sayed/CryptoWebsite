@@ -103,7 +103,7 @@ export class ChoosePlanComponent implements OnInit {
           };
           this.BTCPlansLong.push(ele);
         }
-        this.sharedSerivce.isLoading.next(false);
+        //this.sharedSerivce.isLoading.next(false);
       });
     this.dashboard
       .get_BTC_Short_HashrateContractPlans()
@@ -132,7 +132,7 @@ export class ChoosePlanComponent implements OnInit {
           };
           this.BTCPlansShort.push(ele);
         }
-        this.sharedSerivce.isLoading.next(false);
+        //this.sharedSerivce.isLoading.next(false);
       });
     ///////////////////////////////////////BTC END ///////////////////////////////////////////////
     ///////////////////////////////////////ETH START ///////////////////////////////////////////////
@@ -473,6 +473,9 @@ export class ChoosePlanComponent implements OnInit {
     //       }
     //     }
     //   );
+    setTimeout(() => {
+      this.sharedSerivce.isLoading.next(false);
+    }, 1600);
   } //on init ends
 
   shortPlansTap1() {
