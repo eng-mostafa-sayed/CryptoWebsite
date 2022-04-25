@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from 'src/app/shared/shared.service';
 import { DashboardService } from '../user-dashboard.service';
-
+import { QRCodeModule } from 'angularx-qrcode';
 @Component({
   selector: 'app-deposite',
   templateUrl: './deposite.component.html',
@@ -12,6 +12,12 @@ export class DepositeComponent implements OnInit {
   crypto = true;
   cryptoTapOpend = 'tap1';
   depositeForm: FormGroup;
+
+  addresses: { address: string };
+  BTC_address: any;
+  ETH_address: any;
+  RVN_address: any;
+  LTCT_address: any;
 
   waitingTime = 1200;
 
@@ -101,16 +107,27 @@ export class DepositeComponent implements OnInit {
       },
     });
     ///////////////////////////
-
+    await this.getAddress('BTC');
+    await this.getAddress('ETH');
+    await this.getAddress('RVN');
+    await this.getAddress('LTCT');
     ///////////////////////////////
     setTimeout(() => {
       this.sharedSerivce.isLoading.next(false);
     }, this.waitingTime + 200);
   }
-  onDeposite(currency: string) {
-    ////////////////wrong
-    this.dashboardd.getUserDepositAddress(currency).subscribe({});
+  async getAddress(currency: string) {
+    this.dashboardd.getUserDepositAddress(currency).subscribe({
+      next: (res) => {
+        if (currency === 'BTC') this.BTC_address = res;
+        else if (currency === 'ETH') this.ETH_address = res;
+        else if (currency === 'RVN') this.RVN_address = res;
+        else if (currency === 'LTCT') this.LTCT_address = res;
+      },
+    });
   }
+
+  onDeposite() {}
   cryptoPlansTap1() {
     this.cryptoTapOpend = 'tap1';
   }

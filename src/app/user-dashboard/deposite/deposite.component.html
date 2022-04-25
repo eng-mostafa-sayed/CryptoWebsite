@@ -232,7 +232,7 @@
             *ngIf="cryptoTapOpend == 'tap1'"
           >
             <div class="wallet__funds__body__content">
-              <form (ngSubmit)="onDeposite('BTC')" [formGroup]="depositeForm">
+              <form (ngSubmit)="onDeposite()" [formGroup]="depositeForm">
                 <div class="input-field-group">
                   <label class="input-field-group__label" for="address"
                     >Bitcoin address</label
@@ -250,35 +250,15 @@
                         depositeForm.get('address')?.dirty
                     }"
                   >
-                    <span> MPWavU6VbPVgMtQJrXgJGCVsoaPxmoXYT2</span>
+                    <span>
+                      {{
+                        BTC_address.address ? BTC_address.address : "not valid"
+                      }}</span
+                    >
                     <i class="fas fa-copy"></i>
                   </div>
                 </div>
-                <div class="input-field-group">
-                  <label class="input-field-group__label" for="amount"
-                    >Amount</label
-                  >
-                  <input
-                    class="input-field-group__input"
-                    placeholder="Enter your amount"
-                    id="amount"
-                    name="amount"
-                    type="number"
-                    formControlName="amount"
-                    [ngClass]="{
-                      'input-field-group__input--invalid':
-                        depositeForm.get('amount')?.invalid &&
-                        depositeForm.get('amount')?.dirty
-                    }"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  class="login-box__btn btn btn--light btn--animated"
-                  routerLink=""
-                >
-                  Withdraw Funds
-                </button>
+                ///////////////////////////////////////////////////////here
               </form>
             </div>
           </div>
@@ -287,7 +267,7 @@
             *ngIf="cryptoTapOpend == 'tap2'"
           >
             <div class="wallet__funds__body__content">
-              <form (ngSubmit)="onDeposite('ETH')" [formGroup]="depositeForm">
+              <form (ngSubmit)="onDeposite()" [formGroup]="depositeForm">
                 <div class="input-field-group">
                   <label class="input-field-group__label" for="address"
                     >Etherum address</label
@@ -305,35 +285,15 @@
                         depositeForm.get('address')?.dirty
                     }"
                   >
-                    <span> MPWavU6VbPVgMtQJrXgJGCVsoaPxmoXYT2</span>
+                    <span>
+                      {{
+                        ETH_address.address ? ETH_address.address : "not valid"
+                      }}</span
+                    >
                     <i class="fas fa-copy"></i>
                   </div>
                 </div>
-                <div class="input-field-group">
-                  <label class="input-field-group__label" for="amount"
-                    >Amount</label
-                  >
-                  <input
-                    class="input-field-group__input"
-                    placeholder="Enter your amount"
-                    id="amount"
-                    name="amount"
-                    type="number"
-                    formControlName="amount"
-                    [ngClass]="{
-                      'input-field-group__input--invalid':
-                        depositeForm.get('amount')?.invalid &&
-                        depositeForm.get('amount')?.dirty
-                    }"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  class="login-box__btn btn btn--light btn--animated"
-                  routerLink=""
-                >
-                  Withdraw Funds
-                </button>
+                ///////////////////////////////////////////////////////here
               </form>
             </div>
           </div>
@@ -342,7 +302,7 @@
             *ngIf="cryptoTapOpend == 'tap3'"
           >
             <div class="wallet__funds__body__content">
-              <form (ngSubmit)="onDeposite('RVN')" [formGroup]="depositeForm">
+              <form (ngSubmit)="onDeposite()" [formGroup]="depositeForm">
                 <div class="input-field-group">
                   <label class="input-field-group__label" for="address"
                     >RVN address</label
@@ -360,35 +320,15 @@
                         depositeForm.get('address')?.dirty
                     }"
                   >
-                    <span> MPWavU6VbPVgMtQJrXgJGCVsoaPxmoXYT2</span>
+                    <span>
+                      {{
+                        RVN_address.address ? RVN_address.address : "not valid"
+                      }}</span
+                    >
                     <i class="fas fa-copy"></i>
                   </div>
                 </div>
-                <div class="input-field-group">
-                  <label class="input-field-group__label" for="amount"
-                    >Amount</label
-                  >
-                  <input
-                    class="input-field-group__input"
-                    placeholder="Enter your amount"
-                    id="amount"
-                    name="amount"
-                    type="number"
-                    formControlName="amount"
-                    [ngClass]="{
-                      'input-field-group__input--invalid':
-                        depositeForm.get('amount')?.invalid &&
-                        depositeForm.get('amount')?.dirty
-                    }"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  class="login-box__btn btn btn--light btn--animated"
-                  routerLink=""
-                >
-                  Withdraw Funds
-                </button>
+                ///////////////////////////////////////////////////////here
               </form>
             </div>
           </div>
@@ -397,7 +337,7 @@
             *ngIf="cryptoTapOpend == 'tap4'"
           >
             <div class="wallet__funds__body__content">
-              <form (ngSubmit)="onDeposite('LTCT')" [formGroup]="depositeForm">
+              <form (ngSubmit)="onDeposite()" [formGroup]="depositeForm">
                 <div class="input-field-group">
                   <label class="input-field-group__label" for="address"
                     >LTCT address</label
@@ -415,35 +355,18 @@
                         depositeForm.get('address')?.dirty
                     }"
                   >
-                    <span> MPWavU6VbPVgMtQJrXgJGCVsoaPxmoXYT2</span>
+                    <span>
+                      {{
+                        LTCT_address.address
+                          ? LTCT_address.address
+                          : "not valid"
+                      }}</span
+                    >
                     <i class="fas fa-copy"></i>
                   </div>
                 </div>
-                <div class="input-field-group">
-                  <label class="input-field-group__label" for="amount"
-                    >Amount</label
-                  >
-                  <input
-                    class="input-field-group__input"
-                    placeholder="Enter your amount"
-                    id="amount"
-                    name="amount"
-                    type="number"
-                    formControlName="amount"
-                    [ngClass]="{
-                      'input-field-group__input--invalid':
-                        depositeForm.get('amount')?.invalid &&
-                        depositeForm.get('amount')?.dirty
-                    }"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  class="login-box__btn btn btn--light btn--animated"
-                  routerLink=""
-                >
-                  Withdraw Funds
-                </button>
+
+                ///////////////////////////////////////////////////////here
               </form>
             </div>
           </div>

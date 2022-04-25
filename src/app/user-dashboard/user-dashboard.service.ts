@@ -215,7 +215,7 @@ export class DashboardService {
     );
   }
   getUserDepositAddress(currency: string) {
-    return this.http.get<any>(
+    return this.http.get<{ address: string }>(
       `${this.APIBaseUrl}/transaction/getdepositaddress?currency=${currency}`,
       this.header
     );

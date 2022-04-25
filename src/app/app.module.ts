@@ -50,12 +50,14 @@ import { AdminComponent } from './Auth/admin/admin.component';
 import { RecoveryMessageComponent } from './Auth/reset-password/recovery-message/recovery-message.component';
 import { NewPasswordComponent } from './Auth/reset-password/new-password/new-password.component';
 import { OtpComponent } from './Auth/otp/otp.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 ///////////////////////////////
 
 /////////////////////////////////////
 @NgModule({
   declarations: [
+    AppComponent,
     AppComponent,
     SignupComponent,
     SigninComponent,
@@ -70,6 +72,9 @@ import { OtpComponent } from './Auth/otp/otp.component';
     OtpComponent,
   ],
   imports: [
+    BrowserModule,
+    QRCodeModule,
+    QRCodeModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
