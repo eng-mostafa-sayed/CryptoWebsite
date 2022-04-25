@@ -11,9 +11,24 @@ import { DashboardService } from '../user-dashboard.service';
 export class DepositeComponent implements OnInit {
   crypto = true;
   cryptoTapOpend = 'tap1';
-  withdrawForm: FormGroup;
+  depositeForm: FormGroup;
 
   waitingTime = 1200;
+
+  depositLogsLength = 0;
+  depositLogs: any = [
+    {
+      _id: 'hi',
+      address: 'hi',
+      amount: 'hi',
+      currency: 'hi',
+      transactionStatus: 'hi',
+      userID: 'hi',
+      createdAt: 'hi',
+      updatedAt: 'hi',
+      txn_id: 'hi',
+    },
+  ];
 
   _balance_btc: any;
   _balance_eth: any;
@@ -67,7 +82,7 @@ export class DepositeComponent implements OnInit {
     }, 1200);
 
     ////////////////////////////////////////////////////////////
-    this.withdrawForm = new FormGroup({
+    this.depositeForm = new FormGroup({
       address: new FormControl(null, {
         validators: [
           Validators.required,
@@ -79,11 +94,23 @@ export class DepositeComponent implements OnInit {
         validators: [Validators.required, Validators.pattern(/^[0-9]+$/)],
       }),
     });
+    //////////////////////////////
+    this.dashboardd.getUserDepositLogs().subscribe({
+      next: (res) => {
+        this.depositLogs = res;
+      },
+    });
+    ///////////////////////////
+
+    ///////////////////////////////
     setTimeout(() => {
       this.sharedSerivce.isLoading.next(false);
     }, this.waitingTime + 200);
   }
-  onWithdraw() {}
+  onDeposite(currency: string) {
+    ////////////////wrong
+    this.dashboardd.getUserDepositAddress(currency).subscribe({});
+  }
   cryptoPlansTap1() {
     this.cryptoTapOpend = 'tap1';
   }
