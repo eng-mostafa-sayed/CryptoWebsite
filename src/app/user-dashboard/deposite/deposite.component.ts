@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from 'src/app/shared/shared.service';
 import { DashboardService } from '../user-dashboard.service';
-import { QRCodeModule } from 'angularx-qrcode';
+
 @Component({
   selector: 'app-deposite',
   templateUrl: './deposite.component.html',
@@ -17,7 +17,12 @@ export class DepositeComponent implements OnInit {
   BTC_address: any;
   ETH_address: any;
   RVN_address: any;
-  LTCT_address: any;
+  LTCT_address: any = 'mostafa';
+
+  BTC_img_src: string;
+  ETH_img_src: string;
+  RVN_img_src: string;
+  LTCT_img_src: string;
 
   waitingTime = 1200;
 
@@ -42,6 +47,7 @@ export class DepositeComponent implements OnInit {
   _balance_ltct: any;
   UserData: any;
   balances: any;
+
   constructor(
     private sharedSerivce: SharedService,
     private dashboardd: DashboardService
@@ -49,6 +55,7 @@ export class DepositeComponent implements OnInit {
 
   async ngOnInit() {
     this.sharedSerivce.isLoading.next(true);
+    //this.sharedSerivce.showQR.next(true);
 
     // this.UserData = this.authServics.UserData();
     this.dashboardd.userData().subscribe({
@@ -111,23 +118,34 @@ export class DepositeComponent implements OnInit {
     await this.getAddress('ETH');
     await this.getAddress('RVN');
     await this.getAddress('LTCT');
+
     ///////////////////////////////
     setTimeout(() => {
       this.sharedSerivce.isLoading.next(false);
-    }, this.waitingTime + 200);
+    }, this.waitingTime + 500);
   }
   async getAddress(currency: string) {
     this.dashboardd.getUserDepositAddress(currency).subscribe({
       next: (res) => {
-        if (currency === 'BTC') this.BTC_address = res;
-        else if (currency === 'ETH') this.ETH_address = res;
-        else if (currency === 'RVN') this.RVN_address = res;
-        else if (currency === 'LTCT') this.LTCT_address = res;
+        if (currency === 'BTC') {
+          this.BTC_address = res;
+          this.BTC_img_src = `https://api.qrserver.com/v1/create-qr-code/?data=${this.BTC_address.address}&size=[120]x[120]`;
+        } else if (currency === 'ETH') {
+          this.ETH_address = res;
+          this.ETH_img_src = `https://api.qrserver.com/v1/create-qr-code/?data=${this.ETH_address.address}&size=[120]x[120]`;
+        } else if (currency === 'RVN') {
+          this.RVN_address = res;
+          this.RVN_img_src = `https://api.qrserver.com/v1/create-qr-code/?data=${this.RVN_address.address}&size=[120]x[120]`;
+        } else if (currency === 'LTCT') {
+          this.LTCT_address = res;
+          this.LTCT_img_src = `https://api.qrserver.com/v1/create-qr-code/?data=${this.LTCT_address.address}&size=[120]x[120]`;
+        }
       },
     });
   }
 
   onDeposite() {}
+
   cryptoPlansTap1() {
     this.cryptoTapOpend = 'tap1';
   }

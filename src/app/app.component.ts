@@ -11,6 +11,8 @@ export class AppComponent {
   title = 'Mining-Website';
   isLoading = false;
   showNotification = false;
+  QR = false;
+  QRData: any;
   constructor(
     private authService: AdminAuthService,
     private sharedService: SharedService
@@ -24,6 +26,9 @@ export class AppComponent {
       if (message != '') {
         this.showNotification = true;
       } else this.showNotification = false;
+    });
+    this.sharedService.showQR.subscribe((show) => {
+      this.QR = show;
     });
   }
 }

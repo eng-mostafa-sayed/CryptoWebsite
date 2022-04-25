@@ -6,6 +6,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class SharedService {
   public isLoading = new Subject<boolean>();
+  public showQR = new Subject<boolean>();
   public sentMessage = new BehaviorSubject<string>('');
   constructor() {}
 }

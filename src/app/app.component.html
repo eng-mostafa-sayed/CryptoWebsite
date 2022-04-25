@@ -1,10 +1,9 @@
 <router-outlet></router-outlet> <app-spinner *ngIf="isLoading"></app-spinner>
 <app-notification *ngIf="showNotification"></app-notification>
 
-<h1>How to Generate QR Code in Angular 13? - Tutsmake.com</h1>
-
 <qrcode
-  [qrdata]="'myAngularxQrCode'"
-  [width]="200"
-  [errorCorrectionLevel]="'M'"
+  *ngIf="QR"
+  [qrdata]="'33Jcuhv5crViFto69jHNapgi7NpwrdiiyM'"
+  [width]="170"
+  [errorCorrectionLevel]="'H'"
 ></qrcode>

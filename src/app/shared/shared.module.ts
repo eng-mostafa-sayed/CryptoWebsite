@@ -8,6 +8,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ChartModule } from 'primeng/chart';
 import { CustomTapsComponent } from './custom-taps/custom-taps.component';
 import { NotificationComponent } from './notification/notification.component';
+import { QrComponent } from './qr/qr.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,10 @@ import { NotificationComponent } from './notification/notification.component';
     TimelineChartComponent,
     CustomTapsComponent,
     NotificationComponent,
+    QrComponent,
   ],
   exports: [
+    QRCodeModule,
     HeaderComponent,
     SpinnerComponent,
     TabsComponent,
