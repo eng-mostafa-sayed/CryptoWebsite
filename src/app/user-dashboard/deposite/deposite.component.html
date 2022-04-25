@@ -232,7 +232,7 @@
             *ngIf="cryptoTapOpend == 'tap1'"
           >
             <div class="wallet__funds__body__content">
-              <form (ngSubmit)="onWithdraw()" [formGroup]="withdrawForm">
+              <form (ngSubmit)="onDeposite('BTC')" [formGroup]="depositeForm">
                 <div class="input-field-group">
                   <label class="input-field-group__label" for="address"
                     >Bitcoin address</label
@@ -246,8 +246,8 @@
                     formControlName="address"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('address')?.invalid &&
-                        withdrawForm.get('address')?.dirty
+                        depositeForm.get('address')?.invalid &&
+                        depositeForm.get('address')?.dirty
                     }"
                   >
                     <span> MPWavU6VbPVgMtQJrXgJGCVsoaPxmoXYT2</span>
@@ -267,8 +267,8 @@
                     formControlName="amount"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('amount')?.invalid &&
-                        withdrawForm.get('amount')?.dirty
+                        depositeForm.get('amount')?.invalid &&
+                        depositeForm.get('amount')?.dirty
                     }"
                   />
                 </div>
@@ -287,7 +287,7 @@
             *ngIf="cryptoTapOpend == 'tap2'"
           >
             <div class="wallet__funds__body__content">
-              <form (ngSubmit)="onWithdraw()" [formGroup]="withdrawForm">
+              <form (ngSubmit)="onDeposite('ETH')" [formGroup]="depositeForm">
                 <div class="input-field-group">
                   <label class="input-field-group__label" for="address"
                     >Etherum address</label
@@ -301,8 +301,8 @@
                     formControlName="address"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('address')?.invalid &&
-                        withdrawForm.get('address')?.dirty
+                        depositeForm.get('address')?.invalid &&
+                        depositeForm.get('address')?.dirty
                     }"
                   >
                     <span> MPWavU6VbPVgMtQJrXgJGCVsoaPxmoXYT2</span>
@@ -322,8 +322,8 @@
                     formControlName="amount"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('amount')?.invalid &&
-                        withdrawForm.get('amount')?.dirty
+                        depositeForm.get('amount')?.invalid &&
+                        depositeForm.get('amount')?.dirty
                     }"
                   />
                 </div>
@@ -342,7 +342,7 @@
             *ngIf="cryptoTapOpend == 'tap3'"
           >
             <div class="wallet__funds__body__content">
-              <form (ngSubmit)="onWithdraw()" [formGroup]="withdrawForm">
+              <form (ngSubmit)="onDeposite('RVN')" [formGroup]="depositeForm">
                 <div class="input-field-group">
                   <label class="input-field-group__label" for="address"
                     >RVN address</label
@@ -356,8 +356,8 @@
                     formControlName="address"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('address')?.invalid &&
-                        withdrawForm.get('address')?.dirty
+                        depositeForm.get('address')?.invalid &&
+                        depositeForm.get('address')?.dirty
                     }"
                   >
                     <span> MPWavU6VbPVgMtQJrXgJGCVsoaPxmoXYT2</span>
@@ -377,8 +377,8 @@
                     formControlName="amount"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('amount')?.invalid &&
-                        withdrawForm.get('amount')?.dirty
+                        depositeForm.get('amount')?.invalid &&
+                        depositeForm.get('amount')?.dirty
                     }"
                   />
                 </div>
@@ -397,7 +397,7 @@
             *ngIf="cryptoTapOpend == 'tap4'"
           >
             <div class="wallet__funds__body__content">
-              <form (ngSubmit)="onWithdraw()" [formGroup]="withdrawForm">
+              <form (ngSubmit)="onDeposite('LTCT')" [formGroup]="depositeForm">
                 <div class="input-field-group">
                   <label class="input-field-group__label" for="address"
                     >LTCT address</label
@@ -411,8 +411,8 @@
                     formControlName="address"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('address')?.invalid &&
-                        withdrawForm.get('address')?.dirty
+                        depositeForm.get('address')?.invalid &&
+                        depositeForm.get('address')?.dirty
                     }"
                   >
                     <span> MPWavU6VbPVgMtQJrXgJGCVsoaPxmoXYT2</span>
@@ -432,8 +432,8 @@
                     formControlName="amount"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('amount')?.invalid &&
-                        withdrawForm.get('amount')?.dirty
+                        depositeForm.get('amount')?.invalid &&
+                        depositeForm.get('amount')?.dirty
                     }"
                   />
                 </div>
@@ -450,5 +450,97 @@
         </div>
       </div>
     </div>
+  </div>
+  <br />
+  <br />
+  <div class="table">
+    <p-table
+      [value]="depositLogs"
+      responsiveLayout="stack"
+      [paginator]="true"
+      [rows]="8"
+      [rowsPerPageOptions]="[8, 16, 24]"
+      sortField="createdAt"
+      [sortOrder]="-1"
+    >
+      <ng-template pTemplate="caption">
+        Total Logs ({{ depositLogs.length }})
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            Reference ID
+            <p-columnFilter
+              type="text"
+              field="_id"
+              display="menu"
+            ></p-columnFilter>
+          </th>
+          <th>
+            Deposit Source
+            <p-columnFilter
+              type="text"
+              field="depositSource"
+              display="menu"
+            ></p-columnFilter>
+          </th>
+          <th pSortableColumn="createdAt">
+            Time
+            <p-columnFilter
+              type="date"
+              field="createdAt"
+              display="menu"
+            ></p-columnFilter>
+            <p-sortIcon field="createdAt"></p-sortIcon>
+          </th>
+          <th pSortableColumn="amount">
+            Amount
+            <p-columnFilter
+              type="text"
+              field="amount"
+              display="menu"
+            ></p-columnFilter>
+            <p-sortIcon field="amount"></p-sortIcon>
+          </th>
+          <th>Status</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-log>
+        <tr>
+          <td>
+            <span class="p-column-title"> Reference ID </span>
+            <span class="table__header">{{ log._id }}</span>
+          </td>
+          <td>
+            <span class="p-column-title"> Deposit Source </span>
+            <span class="table__header">{{ log.depositSource }}</span>
+          </td>
+          <td>
+            <span class="p-column-title">Time</span>
+            <span class="table__header"
+              >{{ log.createdAt | date: "medium" }}
+            </span>
+          </td>
+          <td>
+            <span class="p-column-title">Amount</span>
+            <span class="table__header"
+              >{{ log.amount }} {{ log.currency }}</span
+            >
+          </td>
+          <td>
+            <span class="p-column-title">Status</span>
+            <span
+              class="btn"
+              [ngClass]="{
+                'btn--success': log.transactionStatus == 'SUCCESS',
+                'btn--failed': log.transactionStatus == 'FAILED',
+                'btn--pending': log.transactionStatus == 'PENDING'
+              }"
+              >{{ log.transactionStatus | titlecase }}</span
+            >
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 </div>

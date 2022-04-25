@@ -189,4 +189,35 @@ export class DashboardService {
       this.header
     );
   }
+  //////////////////////////////////////////// deposite and withdraw logs
+  getUserDepositLogs() {
+    return this.http.get<any>(
+      `${this.APIBaseUrl}/transaction/getdeposits`,
+      this.header
+    );
+  }
+  getUserWithdrawLogs() {
+    return this.http.get<any>(
+      `${this.APIBaseUrl}/transaction/getwithdraws`,
+      this.header
+    );
+  }
+  //////////////////////////////////////////////////deposite and withdraw opertaions
+  UserWithdrawRequest(Currency: string, Amount: number, Address: string) {
+    return this.http.post<any>(
+      `${this.APIBaseUrl}/transaction/setwithdrawrequest`,
+      {
+        currency: Currency,
+        amount: Amount,
+        address: Address,
+      },
+      this.header
+    );
+  }
+  getUserDepositAddress(currency: string) {
+    return this.http.get<any>(
+      `${this.APIBaseUrl}/transaction/getdepositaddress?currency=${currency}`,
+      this.header
+    );
+  }
 }

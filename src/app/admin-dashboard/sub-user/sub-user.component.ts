@@ -50,7 +50,7 @@ export class SubUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sharedSerivce.isLoading.next(true);
+    //    this.sharedSerivce.isLoading.next(true);
     this.sub = this.activatedRoute.paramMap.subscribe((params) => {
       this.userID = params.get('userID')!;
       this.dashboardService.getUserData(this.userID).subscribe({
@@ -94,7 +94,6 @@ export class SubUserComponent implements OnInit {
         next: (res) => {
           this.userAsics = res;
           this.userAsicsLength = res.length;
-          console.log(res);
         },
       });
       this.dashboardService.getUserDepositLogs(this.userID).subscribe({

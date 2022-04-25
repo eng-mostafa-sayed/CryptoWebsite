@@ -20,6 +20,21 @@ export class WithdrawComponent implements OnInit {
 
   waitingTime = 1200;
 
+  withdrawLogsLength = 0;
+  withdrawLogs: any = [
+    {
+      _id: '',
+      address: '',
+      amount: '',
+      currency: '',
+      transactionStatus: '',
+      userID: '',
+      createdAt: '',
+      updatedAt: '',
+      txn_id: '',
+    },
+  ];
+
   balances: any;
   dashboard: any;
   constructor(
@@ -80,12 +95,34 @@ export class WithdrawComponent implements OnInit {
         validators: [Validators.required, Validators.pattern(/^[0-9]+$/)],
       }),
     });
+    /////////////////////////////////
+    this.dashboardd.getUserWithdrawLogs().subscribe({
+      next: (res) => {
+        this.withdrawLogs = res;
+      },
+    });
+    ///////////////////////////
 
+    ///////////////////////////
     setTimeout(() => {
       this.sharedSerivce.isLoading.next(false);
     }, this.waitingTime + 200);
   }
-  onWithdraw() {}
+
+  onWithdraw(tap: string) {
+    // if(this.cryptoTapOpend=='tap1')
+    this.dashboardd
+      .UserWithdrawRequest(
+        '',
+        this.withdrawForm.value.amount,
+        this.withdrawForm.value.address
+      )
+      .subscribe({
+        next: (res) => {
+          this.withdrawLogs = res;
+        },
+      });
+  }
   cryptoPlansTap1() {
     this.cryptoTapOpend = 'tap1';
   }

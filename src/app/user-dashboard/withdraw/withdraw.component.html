@@ -239,7 +239,7 @@
                   wallet</span
                 >
               </div>
-              <form (ngSubmit)="onWithdraw()" [formGroup]="withdrawForm">
+              <form (ngSubmit)="onWithdraw('btc')" [formGroup]="withdrawForm">
                 <div class="input-field-group">
                   <label class="input-field-group__label" for="address"
                     >Bitcoin address</label
@@ -298,7 +298,7 @@
                   wallet</span
                 >
               </div>
-              <form (ngSubmit)="onWithdraw()">
+              <form (ngSubmit)="onWithdraw('eth')">
                 <div class="input-field-group">
                   <label class="input-field-group__label" for="address"
                     >Etherum address</label
@@ -356,7 +356,7 @@
                   You can only withdraw from RVN balance to RVN wallet</span
                 >
               </div>
-              <form (ngSubmit)="onWithdraw()">
+              <form (ngSubmit)="onWithdraw('rvn')">
                 <div class="input-field-group">
                   <label class="input-field-group__label" for="address"
                     >RVN address</label
@@ -414,7 +414,7 @@
                   You can only withdraw from LTCT balance to LTCT wallet</span
                 >
               </div>
-              <form (ngSubmit)="onWithdraw()">
+              <form (ngSubmit)="onWithdraw('ltct')">
                 <div class="input-field-group">
                   <label class="input-field-group__label" for="address"
                     >LTCT address</label
@@ -464,5 +464,106 @@
         </div>
       </div>
     </div>
+  </div>
+  <br />
+  <br />
+  <div class="table">
+    <p-table
+      [value]="withdrawLogs"
+      responsiveLayout="stack"
+      [paginator]="true"
+      [rows]="8"
+      [rowsPerPageOptions]="[8, 16, 24]"
+      sortField="createdAt"
+      [sortOrder]="-1"
+    >
+      <ng-template pTemplate="caption">
+        Total Logs ({{ withdrawLogs.length }})
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            Reference ID
+            <p-columnFilter
+              type="text"
+              field="_id"
+              display="menu"
+            ></p-columnFilter>
+          </th>
+          <th pSortableColumn="createdAt">
+            Time
+            <p-columnFilter
+              type="date"
+              field="createdAt"
+              display="menu"
+            ></p-columnFilter>
+            <p-sortIcon field="createdAt"></p-sortIcon>
+          </th>
+          <th>
+            Address
+            <p-columnFilter
+              type="date"
+              field="address"
+              display="menu"
+            ></p-columnFilter>
+          </th>
+          <th pSortableColumn="amount">
+            Amount
+            <p-columnFilter
+              type="text"
+              field="amount"
+              display="menu"
+            ></p-columnFilter>
+            <p-sortIcon field="amount"></p-sortIcon>
+          </th>
+          <th>Status</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-log>
+        <tr>
+          <td>
+            <span class="p-column-title"> Reference ID </span>
+            <span class="table__header">{{ log._id }}</span>
+          </td>
+          <td>
+            <span class="p-column-title">Time</span>
+            <span class="table__header"
+              >{{ log.createdAt | date: "medium" }}
+            </span>
+          </td>
+          <td>
+            <span class="p-column-title">Address</span>
+            <span class="table__header">{{ log.address }}</span>
+          </td>
+          <!-- <td>
+                    <span class="p-column-title"> Transaction ID</span>
+                    <span
+                      class="table__header"
+                      style="text-overflow: ellipsis"
+                      >{{ log.txn_id }}</span
+                    >
+                  </td> -->
+
+          <td>
+            <span class="p-column-title">Amount</span>
+            <span class="table__header"
+              >{{ log.amount }} {{ log.currency }}</span
+            >
+          </td>
+          <td>
+            <span class="p-column-title">Status</span>
+            <span
+              class="btn"
+              [ngClass]="{
+                'btn--success': log.transactionStatus == 'SUCCESS',
+                'btn--failed': log.transactionStatus == 'FAILED',
+                'btn--pending': log.transactionStatus == 'PENDING'
+              }"
+              >{{ log.transactionStatus | titlecase }}</span
+            >
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 </div>
