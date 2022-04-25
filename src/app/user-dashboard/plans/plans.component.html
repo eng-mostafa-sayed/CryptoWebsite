@@ -7,6 +7,7 @@
     <div class="col-12 col-lg-4">
       <div class="hashrate-active">
         <h3 class="hashrate-active__title">Active Hashrate Power</h3>
+
         <div class="hashrate-active__item" *ngFor="let power of activeHash">
           <div class="hashrate-active__item__name">
             <div>
@@ -69,14 +70,18 @@
               />
             </div>
             <div style="display: flex; flex-direction: column">
-              <span>{{ power.crypto }}</span>
-              <span></span>
+              <ng-container *ngIf="_reload">
+                <span>{{ power.crypto }}</span>
+                <span></span>
+              </ng-container>
             </div>
           </div>
           <div class="hashrate-active__item__value">
+            <ng-container *ngIf="_reload"></ng-container>
             <span
               >{{ power.speed }} {{ power.crypto == "BTC" ? "GH/S" : "GH/S" }}
             </span>
+            <ng-container *ngIf="_reload"></ng-container>
           </div>
         </div>
       </div>

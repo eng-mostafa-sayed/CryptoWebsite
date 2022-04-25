@@ -65,19 +65,19 @@ export class WithdrawComponent implements OnInit {
       this.balances = [
         {
           name: 'BTC',
-          value: this._balance_btc ? this._balance_btc.toFixed(8) : '2',
+          value: this._balance_btc ? this._balance_btc.toFixed(8) : '0',
         },
         {
           name: 'ETH',
-          value: this._balance_eth ? this._balance_eth.toFixed(8) : '2',
+          value: this._balance_eth ? this._balance_eth.toFixed(8) : '0',
         },
         {
           name: 'RVN',
-          value: this._balance_rvn ? this._balance_rvn.toFixed(8) : '2',
+          value: this._balance_rvn ? this._balance_rvn.toFixed(8) : '0',
         },
         {
           name: 'LTCT',
-          value: this._balance_ltct ? this._balance_ltct.toFixed(8) : '2',
+          value: this._balance_ltct ? this._balance_ltct.toFixed(8) : '0',
         },
       ];
     }, this.waitingTime);
@@ -109,17 +109,22 @@ export class WithdrawComponent implements OnInit {
     }, this.waitingTime + 200);
   }
 
-  onWithdraw(tap: string) {
-    // if(this.cryptoTapOpend=='tap1')
+  onWithdraw(currency: string) {
     this.dashboardd
       .UserWithdrawRequest(
-        '',
-        this.withdrawForm.value.amount,
+        currency,
+        Number(this.withdrawForm.value.amount),
         this.withdrawForm.value.address
       )
       .subscribe({
         next: (res) => {
-          this.withdrawLogs = res;
+          ///this is to display the notification
+          this.sharedSerivce.sentMessage.next(
+            'the property has been added successfully wait for the confirmation'
+          );
+        },
+        error: (err) => {
+          console.log(err);
         },
       });
   }

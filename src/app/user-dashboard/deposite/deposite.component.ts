@@ -54,6 +54,7 @@ export class DepositeComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    this.reload();
     this.sharedSerivce.isLoading.next(true);
     //this.sharedSerivce.showQR.next(true);
 
@@ -148,15 +149,36 @@ export class DepositeComponent implements OnInit {
 
   cryptoPlansTap1() {
     this.cryptoTapOpend = 'tap1';
+    this.reload();
   }
   cryptoPlansTap2() {
     this.cryptoTapOpend = 'tap2';
+    this.reload();
   }
   cryptoPlansTap3() {
+    this.sharedSerivce.isLoading.next(true);
     this.cryptoTapOpend = 'tap3';
+    this.reload();
+
+    setTimeout(() => {
+      this.sharedSerivce.isLoading.next(false);
+    }, 500);
   }
   cryptoPlansTap4() {
     this.cryptoTapOpend = 'tap4';
+    this.reload();
   }
+
+  /////////////////////////////////////this is to reload compoment
+  // i added <ng-container *ngIf="_reload">
+  //     components here
+  // </ng-container>
+  //////////////in the html file and the blew function here
+  public _reload = true;
+
+  private reload() {
+    setTimeout(() => (this._reload = true), 100);
+  }
+
   //to do https://stackoverflow.com/questions/49102724/angular-5-copy-to-clipboard
 }

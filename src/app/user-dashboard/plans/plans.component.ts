@@ -77,10 +77,10 @@ export class PlansComponent implements AfterViewInit, OnInit {
   /////////////////
   plans: any;
 
-  BTCPlansMiningSpeed = 1;
-  ETHPlansMiningSpeed = 1;
-  LTCTPlansMiningSpeed = 1;
-  RVNPlansMiningSpeed = 1;
+  BTCPlansMiningSpeed: number = 0;
+  ETHPlansMiningSpeed: number = 0;
+  LTCTPlansMiningSpeed: number = 0;
+  RVNPlansMiningSpeed: number = 0;
   /////////////////////////////////////////////////////////////////
   minedChartTapOpend = 'tap1';
   tap1Data: any;
@@ -170,21 +170,23 @@ export class PlansComponent implements AfterViewInit, OnInit {
           });
           ///////////////////here calculating the total mined of each currency and mining speed for each currency
           if (this.activePlanData2[0][i].cryptoName == 'BTC') {
-            this.BTCPlansMiningSpeed += Number(
-              this.activePlanData2[0][i].hashPower
-            );
+            this.BTCPlansMiningSpeed += this.activePlanData2[0][i].hashPower;
+            //this.reload();
           } else if (this.activePlanData2[0][i].cryptoName == 'ETH') {
             this.ETHPlansMiningSpeed += Number(
               this.activePlanData2[0][i].hashPower
             );
+            //this.reload();
           } else if (this.activePlanData2[0][i].cryptoName == 'RVN') {
             this.RVNPlansMiningSpeed += Number(
               this.activePlanData2[0][i].hashPower
             );
+            //this.reload();
           } else if (this.activePlanData2[0][i].cryptoName == 'LTCT') {
             this.LTCTPlansMiningSpeed += Number(
               this.activePlanData2[0][i].hashPower
             );
+            //this.reload();
           }
           console.log(this.activePlanData2[0][i].hashPower);
         } else {
@@ -197,6 +199,7 @@ export class PlansComponent implements AfterViewInit, OnInit {
             hashPower: this.activePlanData2[0][i].hashPower,
             expire: this.activePlanData2[0][i].endDate,
           });
+          //this.reload();
         }
       }
     });
@@ -207,7 +210,8 @@ export class PlansComponent implements AfterViewInit, OnInit {
 
     // for (let i = 0; i < this.activePlanData.length; i++) {
     //   if (this.plans[i].cryptoName == 'BTC') {
-    //     this.BTCPlansMiningSpeed += Number(this.plans[i].hashPower);
+    //     this.BTCPlansMiningSpeed =
+    //       this.BTCPlansMiningSpeed + this.plans[i].hashPower;
     //   } else if (this.plans[i].cryptoName == 'ETH') {
     //     this.ETHPlansMiningSpeed += Number(this.plans[i].hashPower);
     //   } else if (this.plans[i].cryptoName == 'RVN') {
@@ -320,8 +324,21 @@ export class PlansComponent implements AfterViewInit, OnInit {
         },
       },
     };
+    //this.reload();
+  }
+  /////////////////////////////////////this is to reload compoment
+  // i added <ng-container *ngIf="_reload">
+  //     components here
+  // </ng-container>
+  //////////////in the html file and the blew function here
+  public _reload = true;
+
+  private reload() {
+    setTimeout(() => (this._reload = false), 100);
+    setTimeout(() => (this._reload = true), 100);
   }
 
+  //////////////////////////////////////////////////////////
   minedChartTap1() {
     this.minedChartTapOpend = 'tap1';
   }

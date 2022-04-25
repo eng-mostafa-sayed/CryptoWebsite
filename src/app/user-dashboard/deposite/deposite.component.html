@@ -126,270 +126,278 @@
         </div>
       </div>
       <div class="wallet__funds__body">
-        <div *ngIf="crypto" class="custom-taps custom-taps--trans">
-          <div
-            class="custom-taps__heading custom-taps__heading--trans row align-items-center justify-content-center"
-          >
+        <ng-container *ngIf="_reload">
+          <div *ngIf="crypto" class="custom-taps custom-taps--trans">
             <div
-              class="custom-taps__heading__taps d-flex justify-content-center col-12 col-lg-8"
+              class="custom-taps__heading custom-taps__heading--trans row align-items-center justify-content-center"
             >
               <div
-                class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
-                (click)="cryptoPlansTap1()"
-                [ngClass]="{
-                  'custom-taps__heading__taps__tap--active ':
-                    cryptoTapOpend == 'tap1'
-                }"
+                class="custom-taps__heading__taps d-flex justify-content-center col-12 col-lg-8"
               >
-                <img
-                  src="../../../assets/BTC-Crypto.svg"
-                  alt=""
-                  style="
-                    vertical-align: middle;
-                    background: white;
-                    border-radius: 50%;
-                    width: 29px;
-                    padding: 4%;
-                    margin-right: 6px;
-                    height: 26px;
-                  "
-                />
-                BTC
-              </div>
-              <div
-                class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
-                (click)="cryptoPlansTap2()"
-                [ngClass]="{
-                  'custom-taps__heading__taps__tap--active':
-                    cryptoTapOpend == 'tap2'
-                }"
-              >
-                <img
-                  src="../../../assets/ETH-Crypto.svg"
-                  alt=""
-                  style="
-                    vertical-align: middle;
-                    background: white;
-                    border-radius: 50%;
-                    width: 29px;
-                    padding: 4%;
-                    margin-right: 6px;
-                    height: 26px;
-                  "
-                />
-                ETH
-              </div>
-              <div
-                class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
-                (click)="cryptoPlansTap3()"
-                [ngClass]="{
-                  'custom-taps__heading__taps__tap--active':
-                    cryptoTapOpend == 'tap3'
-                }"
-              >
-                <img
-                  src="../../../assets/RVN-Crypto.svg"
-                  alt=""
-                  style="
-                    vertical-align: middle;
-                    background: white;
-                    border-radius: 50%;
-                    width: 29px;
-                    padding: 4%;
-                    margin-right: 6px;
-                    height: 26px;
-                  "
-                />
-                RVN
-              </div>
-              <div
-                class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
-                (click)="cryptoPlansTap4()"
-                [ngClass]="{
-                  'custom-taps__heading__taps__tap--active':
-                    cryptoTapOpend == 'tap4'
-                }"
-              >
-                <img
-                  src="../../../assets/LTCT-Crypto.png"
-                  alt=""
-                  style="
-                    vertical-align: middle;
-                    background: white;
-                    border-radius: 50%;
-                    width: 29px;
-                    padding: 4%;
-                    margin-right: 6px;
-                    height: 26px;
-                  "
-                />
-                LTCT
-              </div>
-            </div>
-          </div>
-          <div
-            class="custom-taps__body custom-taps__body--small"
-            *ngIf="cryptoTapOpend == 'tap1'"
-          >
-            <div class="wallet__funds__body__content">
-              <form (ngSubmit)="onDeposite()" [formGroup]="depositeForm">
-                <div class="input-field-group">
-                  <label class="input-field-group__label" for="address"
-                    >Bitcoin address</label
-                  >
-                  <div
-                    class="wallet__funds__body__content__note wallet__funds__body__content__note--copy"
-                    placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
-                    id="address"
-                    name="address"
-                    type="text"
-                    formControlName="address"
-                    [ngClass]="{
-                      'input-field-group__input--invalid':
-                        depositeForm.get('address')?.invalid &&
-                        depositeForm.get('address')?.dirty
-                    }"
-                  >
-                    <span>
-                      {{
-                        BTC_address.address ? BTC_address.address : "not valid"
-                      }}</span
-                    >
-                    <i class="fas fa-copy"></i>
-                  </div>
+                <div
+                  class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
+                  (click)="cryptoPlansTap1()"
+                  [ngClass]="{
+                    'custom-taps__heading__taps__tap--active ':
+                      cryptoTapOpend == 'tap1'
+                  }"
+                >
+                  <img
+                    src="../../../assets/BTC-Crypto.svg"
+                    alt=""
+                    style="
+                      vertical-align: middle;
+                      background: white;
+                      border-radius: 50%;
+                      width: 29px;
+                      padding: 4%;
+                      margin-right: 6px;
+                      height: 26px;
+                    "
+                  />
+                  BTC
                 </div>
-                <img
-                  class="d-block m-auto"
-                  src="{{ BTC_img_src }}"
-                  alt="QR CODE"
-                />
-                <!-- ///////////////////////////////////////////////////////here -->
-              </form>
-            </div>
-          </div>
-          <div
-            class="custom-taps__body custom-taps__body--small"
-            *ngIf="cryptoTapOpend == 'tap2'"
-          >
-            <div class="wallet__funds__body__content">
-              <form (ngSubmit)="onDeposite()" [formGroup]="depositeForm">
-                <div class="input-field-group">
-                  <label class="input-field-group__label" for="address"
-                    >Etherum address</label
-                  >
-                  <div
-                    class="wallet__funds__body__content__note wallet__funds__body__content__note--copy"
-                    placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
-                    id="address"
-                    name="address"
-                    type="text"
-                    formControlName="address"
-                    [ngClass]="{
-                      'input-field-group__input--invalid':
-                        depositeForm.get('address')?.invalid &&
-                        depositeForm.get('address')?.dirty
-                    }"
-                  >
-                    <span>
-                      {{
-                        ETH_address.address ? ETH_address.address : "not valid"
-                      }}</span
-                    >
-                    <i class="fas fa-copy"></i>
-                  </div>
+                <div
+                  class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
+                  (click)="cryptoPlansTap2()"
+                  [ngClass]="{
+                    'custom-taps__heading__taps__tap--active':
+                      cryptoTapOpend == 'tap2'
+                  }"
+                >
+                  <img
+                    src="../../../assets/ETH-Crypto.svg"
+                    alt=""
+                    style="
+                      vertical-align: middle;
+                      background: white;
+                      border-radius: 50%;
+                      width: 29px;
+                      padding: 4%;
+                      margin-right: 6px;
+                      height: 26px;
+                    "
+                  />
+                  ETH
                 </div>
-                <img
-                  class="d-block m-auto"
-                  src="{{ ETH_img_src }}"
-                  alt="QR CODE"
-                />
-                <!-- ///////////////////////////////////////////////////////here -->
-              </form>
-            </div>
-          </div>
-          <div
-            class="custom-taps__body custom-taps__body--small"
-            *ngIf="cryptoTapOpend == 'tap3'"
-          >
-            <div class="wallet__funds__body__content">
-              <form (ngSubmit)="onDeposite()" [formGroup]="depositeForm">
-                <div class="input-field-group">
-                  <label class="input-field-group__label" for="address"
-                    >RVN address</label
-                  >
-                  <div
-                    class="wallet__funds__body__content__note wallet__funds__body__content__note--copy"
-                    placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
-                    id="address"
-                    name="address"
-                    type="text"
-                    formControlName="address"
-                    [ngClass]="{
-                      'input-field-group__input--invalid':
-                        depositeForm.get('address')?.invalid &&
-                        depositeForm.get('address')?.dirty
-                    }"
-                  >
-                    <span>
-                      {{
-                        RVN_address.address ? RVN_address.address : "not valid"
-                      }}</span
-                    >
-                    <i class="fas fa-copy"></i>
-                  </div>
+                <div
+                  class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
+                  (click)="cryptoPlansTap3()"
+                  [ngClass]="{
+                    'custom-taps__heading__taps__tap--active':
+                      cryptoTapOpend == 'tap3'
+                  }"
+                >
+                  <img
+                    src="../../../assets/RVN-Crypto.svg"
+                    alt=""
+                    style="
+                      vertical-align: middle;
+                      background: white;
+                      border-radius: 50%;
+                      width: 29px;
+                      padding: 4%;
+                      margin-right: 6px;
+                      height: 26px;
+                    "
+                  />
+                  RVN
                 </div>
-                <img
-                  class="d-block m-auto"
-                  src="{{ RVN_img_src }}"
-                  alt="QR CODE"
-                />
-                <!-- ///////////////////////////////////////////////////////here -->
-              </form>
-            </div>
-          </div>
-          <div
-            class="custom-taps__body custom-taps__body--small"
-            *ngIf="cryptoTapOpend == 'tap4'"
-          >
-            <div class="wallet__funds__body__content">
-              <form (ngSubmit)="onDeposite()" [formGroup]="depositeForm">
-                <div class="input-field-group">
-                  <label class="input-field-group__label" for="address"
-                    >LTCT address</label
-                  >
-                  <div
-                    class="wallet__funds__body__content__note wallet__funds__body__content__note--copy"
-                    placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
-                    id="address"
-                    name="address"
-                    type="text"
-                    formControlName="address"
-                    [ngClass]="{
-                      'input-field-group__input--invalid':
-                        depositeForm.get('address')?.invalid &&
-                        depositeForm.get('address')?.dirty
-                    }"
-                  >
-                    <span>
-                      {{
-                        LTCT_address.address
-                          ? LTCT_address.address
-                          : "not valid"
-                      }}</span
-                    >
-                    <i class="fas fa-copy"></i>
-                  </div>
+                <div
+                  class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
+                  (click)="cryptoPlansTap4()"
+                  [ngClass]="{
+                    'custom-taps__heading__taps__tap--active':
+                      cryptoTapOpend == 'tap4'
+                  }"
+                >
+                  <img
+                    src="../../../assets/LTCT-Crypto.png"
+                    alt=""
+                    style="
+                      vertical-align: middle;
+                      background: white;
+                      border-radius: 50%;
+                      width: 29px;
+                      padding: 4%;
+                      margin-right: 6px;
+                      height: 26px;
+                    "
+                  />
+                  LTCT
                 </div>
-                <img
-                  class="d-block m-auto"
-                  src="{{ LTCT_img_src }}"
-                  alt="QR CODE"
-                />
-                <!-- ///////////////////////////////////////////////////////here -->
-              </form>
+              </div>
+            </div>
+            <div
+              class="custom-taps__body custom-taps__body--small"
+              *ngIf="cryptoTapOpend == 'tap1'"
+            >
+              <div class="wallet__funds__body__content">
+                <form (ngSubmit)="onDeposite()" [formGroup]="depositeForm">
+                  <div class="input-field-group">
+                    <label class="input-field-group__label" for="address"
+                      >Bitcoin address</label
+                    >
+                    <div
+                      class="wallet__funds__body__content__note wallet__funds__body__content__note--copy"
+                      placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
+                      id="address"
+                      name="address"
+                      type="text"
+                      formControlName="address"
+                      [ngClass]="{
+                        'input-field-group__input--invalid':
+                          depositeForm.get('address')?.invalid &&
+                          depositeForm.get('address')?.dirty
+                      }"
+                    >
+                      <span>
+                        {{
+                          BTC_address.address
+                            ? BTC_address.address
+                            : "not valid"
+                        }}</span
+                      >
+                      <i class="fas fa-copy"></i>
+                    </div>
+                  </div>
+                  <img
+                    class="d-block m-auto"
+                    src="{{ BTC_img_src }}"
+                    alt="QR CODE"
+                  />
+                  <!-- ///////////////////////////////////////////////////////here -->
+                </form>
+              </div>
+            </div>
+            <div
+              class="custom-taps__body custom-taps__body--small"
+              *ngIf="cryptoTapOpend == 'tap2'"
+            >
+              <div class="wallet__funds__body__content">
+                <form (ngSubmit)="onDeposite()" [formGroup]="depositeForm">
+                  <div class="input-field-group">
+                    <label class="input-field-group__label" for="address"
+                      >Etherum address</label
+                    >
+                    <div
+                      class="wallet__funds__body__content__note wallet__funds__body__content__note--copy"
+                      placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
+                      id="address"
+                      name="address"
+                      type="text"
+                      formControlName="address"
+                      [ngClass]="{
+                        'input-field-group__input--invalid':
+                          depositeForm.get('address')?.invalid &&
+                          depositeForm.get('address')?.dirty
+                      }"
+                    >
+                      <span>
+                        {{
+                          ETH_address.address
+                            ? ETH_address.address
+                            : "not valid"
+                        }}</span
+                      >
+                      <i class="fas fa-copy"></i>
+                    </div>
+                  </div>
+                  <img
+                    class="d-block m-auto"
+                    src="{{ ETH_img_src }}"
+                    alt="QR CODE"
+                  />
+                  <!-- ///////////////////////////////////////////////////////here -->
+                </form>
+              </div>
+            </div>
+            <div
+              class="custom-taps__body custom-taps__body--small"
+              *ngIf="cryptoTapOpend == 'tap3'"
+            >
+              <div class="wallet__funds__body__content">
+                <form (ngSubmit)="onDeposite()" [formGroup]="depositeForm">
+                  <div class="input-field-group">
+                    <label class="input-field-group__label" for="address"
+                      >RVN address</label
+                    >
+                    <div
+                      class="wallet__funds__body__content__note wallet__funds__body__content__note--copy"
+                      placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
+                      id="address"
+                      name="address"
+                      type="text"
+                      formControlName="address"
+                      [ngClass]="{
+                        'input-field-group__input--invalid':
+                          depositeForm.get('address')?.invalid &&
+                          depositeForm.get('address')?.dirty
+                      }"
+                    >
+                      <span>
+                        {{
+                          RVN_address.address
+                            ? RVN_address.address
+                            : "not valid"
+                        }}</span
+                      >
+                      <i class="fas fa-copy"></i>
+                    </div>
+                  </div>
+                  <img
+                    class="d-block m-auto"
+                    src="{{ RVN_img_src }}"
+                    alt="QR CODE"
+                  />
+                  <!-- ///////////////////////////////////////////////////////here -->
+                </form>
+              </div>
+            </div>
+            <div
+              class="custom-taps__body custom-taps__body--small"
+              *ngIf="cryptoTapOpend == 'tap4'"
+            >
+              <div class="wallet__funds__body__content">
+                <form (ngSubmit)="onDeposite()" [formGroup]="depositeForm">
+                  <div class="input-field-group">
+                    <label class="input-field-group__label" for="address"
+                      >LTCT address</label
+                    >
+                    <div
+                      class="wallet__funds__body__content__note wallet__funds__body__content__note--copy"
+                      placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
+                      id="address"
+                      name="address"
+                      type="text"
+                      formControlName="address"
+                      [ngClass]="{
+                        'input-field-group__input--invalid':
+                          depositeForm.get('address')?.invalid &&
+                          depositeForm.get('address')?.dirty
+                      }"
+                    >
+                      <span>
+                        {{
+                          LTCT_address.address
+                            ? LTCT_address.address
+                            : "not valid"
+                        }}</span
+                      >
+                      <i class="fas fa-copy"></i>
+                    </div>
+                  </div>
+                  <img
+                    class="d-block m-auto"
+                    src="{{ LTCT_img_src }}"
+                    alt="QR CODE"
+                  />
+                  <!-- ///////////////////////////////////////////////////////here -->
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+        </ng-container>
       </div>
     </div>
   </div>

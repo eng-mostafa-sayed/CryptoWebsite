@@ -69,6 +69,8 @@ export class ChoosePlanComponent implements OnInit {
     this.dashboard.buyPlan(n[0]).subscribe((res: any) => {
       console.log(n[0]);
     });
+    ///this is to display the notification
+    this.sharedSerivce.sentMessage.next('the plan has been added successfully');
   }
 
   /////here is general buy plan method
