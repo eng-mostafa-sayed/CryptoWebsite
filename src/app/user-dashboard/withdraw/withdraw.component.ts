@@ -25,7 +25,7 @@ export class WithdrawComponent implements OnInit {
     {
       _id: '',
       address: '',
-      amount: '',
+      amount: 0,
       currency: '',
       transactionStatus: '',
       userID: '',
@@ -44,8 +44,20 @@ export class WithdrawComponent implements OnInit {
 
   async ngOnInit() {
     this.sharedSerivce.isLoading.next(true);
-
-    // this.UserData = this.authServics.UserData();
+    //////////////////////////////////
+    this.withdrawForm = new FormGroup({
+      address: new FormControl(null, {
+        validators: [
+          Validators.required,
+          Validators.minLength(34),
+          Validators.maxLength(34),
+        ],
+      }),
+      amount: new FormControl(0.1, Validators.required),
+      //   validators: [Validators.required, Validators.pattern(/^[0-9]+$/)],
+      // }),
+    });
+    /////////////////////////////////
     this.dashboardd.userData().subscribe({
       next: (res) => {
         // console.log(res);
@@ -83,19 +95,7 @@ export class WithdrawComponent implements OnInit {
     }, this.waitingTime);
 
     ////////////////////////////////////////////////////////////
-    this.withdrawForm = new FormGroup({
-      address: new FormControl(null, {
-        validators: [
-          Validators.required,
-          Validators.minLength(32),
-          Validators.maxLength(32),
-        ],
-      }),
-      amount: new FormControl(null, {
-        validators: [Validators.required, Validators.pattern(/^[0-9]+$/)],
-      }),
-    });
-    /////////////////////////////////
+
     this.dashboardd.getUserWithdrawLogs().subscribe({
       next: (res) => {
         this.withdrawLogs = res;
@@ -110,24 +110,33 @@ export class WithdrawComponent implements OnInit {
   }
 
   onWithdraw(currency: string) {
-    this.dashboardd
-      .UserWithdrawRequest(
-        currency,
-        Number(this.withdrawForm.value.amount),
-        this.withdrawForm.value.address
-      )
-      .subscribe({
-        next: (res) => {
-          ///this is to display the notification
-          this.sharedSerivce.sentMessage.next(
-            'the property has been added successfully wait for the confirmation'
-          );
-        },
-        error: (err) => {
-          console.log(err);
-          this.sharedSerivce.sentMessage.next('something went wrong');
-        },
-      });
+    console.log('currency11');
+    console.log(currency);
+    console.log('amount1212');
+    console.log(Number(this.withdrawForm.value.amount));
+    if (this.withdrawForm.value.amount > 0.0) {
+      console.log('wallet');
+      console.log(this.withdrawForm.value.address);
+    } else if (this.withdrawForm.value.amount > 1000) {
+      this.dashboardd
+        .UserWithdrawRequest(
+          currency,
+          parseFloat(this.withdrawForm.value.amount),
+          this.withdrawForm.value.address
+        )
+        .subscribe({
+          next: (res) => {
+            ///this is to display the notification
+            this.sharedSerivce.sentMessage.next(
+              'the property has been added successfully wait for the confirmation'
+            );
+          },
+          error: (err) => {
+            console.log(err);
+            this.sharedSerivce.sentMessage.next('something went wrong');
+          },
+        });
+    }
   }
   cryptoPlansTap1() {
     this.cryptoTapOpend = 'tap1';

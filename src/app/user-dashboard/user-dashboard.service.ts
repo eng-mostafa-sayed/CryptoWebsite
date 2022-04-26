@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Balance } from './balance.model';
+import { AuthService } from '../Auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class DashboardService {
     'c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4';
   /////////////////
   getUserDataAPI: string = `${this.APIBaseUrl}/user/getUserData?key=${this.APIKey}`;
-  accessToken: any = sessionStorage.getItem('accessToken');
+  accessToken: any = localStorage.getItem('accessToken');
 
   //to store the user data
   obj: any;
@@ -61,7 +62,9 @@ export class DashboardService {
   }
 
   balances$ = new Subject<Balance[]>();
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {
+    this.accessToken = this.authService.getAccessToken();
+  }
 
   updateBalances() {
     this.balances$.next([
@@ -208,7 +211,7 @@ export class DashboardService {
       `${this.APIBaseUrl}/transaction/setwithdrawrequest`,
       {
         currency: Currency,
-        amount: Amount,
+        amount: Amount + '',
         address: Address,
       },
       this.header

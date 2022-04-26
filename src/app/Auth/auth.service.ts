@@ -13,7 +13,7 @@ export class AuthService {
     'c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4';
 
   private email: String | null;
-  private accessToken: String | null;
+  public accessToken: String | null;
   private name: String | null;
   private refreshToken: String | null;
   private resetToken: String = '';
@@ -25,13 +25,12 @@ export class AuthService {
     private router: Router,
     private sharedSerivce: SharedService
   ) {}
-  //////////////////////////////////////////////the auth autherization
-  header: any = {
-    headers: new HttpHeaders().set(
-      'Authorization',
-      `Bearer ${sessionStorage.getItem('accessToken')}`
-    ),
-  };
+
+  getAccessToken() {
+    sessionStorage.setItem('accessToken', `${this.accessToken}`);
+    return this.accessToken;
+  }
+
   //////////////////////////////////////////////////////////////////////////////////the auth functions////////////////////////////////
   signup(name: String, email: String, phone: number, password: String) {
     return this.http.post<any>(
@@ -105,13 +104,9 @@ export class AuthService {
       })
       .subscribe({
         next: (res) => {
-          //console.log(res);
           this.accessToken = res.jwt.accessToken;
           this.refreshToken = res.jwt.refreshToken;
-
-          // ///////////////////////////////session storage set values
-          sessionStorage.setItem('accessToken', `${this.accessToken}`);
-
+          localStorage.setItem('accessToken', `${this.accessToken}`);
           this.authStatusListner.next(true);
           this.router.navigate(['/user/dashboard/overview']);
         },
