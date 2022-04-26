@@ -12,7 +12,7 @@ import { DashboardService } from '../user-dashboard.service';
 })
 export class DashHeaderComponent implements OnInit {
   UserData: any;
-  _name: any; // sessionStorage.getItem('name');
+  _name: any;
 
   currentRoute: string = 'Overview';
   collapsed = false;

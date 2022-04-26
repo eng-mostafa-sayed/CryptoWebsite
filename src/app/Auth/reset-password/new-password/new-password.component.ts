@@ -47,7 +47,6 @@ export class NewPasswordComponent implements OnInit {
         )
       ).subscribe({
         next: (res) => {
-          console.log('new password reseting here');
           this.router.navigate(['/']);
           sessionStorage.removeItem('code');
           sessionStorage.removeItem('email');

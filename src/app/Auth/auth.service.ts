@@ -12,11 +12,11 @@ export class AuthService {
   APIKey: string =
     'c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4';
 
-  private email: string | null;
-  private accessToken: string | null;
-  private refreshToken: string | null;
-  private name: string | null;
-  private resetToken: string = '';
+  private email: String | null;
+  private accessToken: String | null;
+  private name: String | null;
+  private refreshToken: String | null;
+  private resetToken: String = '';
 
   authStatusListner = new BehaviorSubject<boolean>(false);
   saveTimeout: any;
@@ -46,7 +46,7 @@ export class AuthService {
   }
   async signin(userName: String, password: String) {
     //here i added the income username to the session storage to use it
-    sessionStorage.setItem('name', `${userName}`);
+    this.name = userName;
     sessionStorage.setItem('password', `${password}`);
     this.http
       .post<any>(`${this.APIBaseUrl}/user/FFactorAuth?key=${this.APIKey}`, {
@@ -100,7 +100,7 @@ export class AuthService {
   async otpValidator(otp: string) {
     await this.http
       .post<any>(`${this.APIBaseUrl}/user/TwoFactorAuth?key=${this.APIKey}`, {
-        userName: sessionStorage.getItem('name'),
+        userName: this.name,
         otp: otp,
       })
       .subscribe({
@@ -125,7 +125,7 @@ export class AuthService {
   }
   //////////////////////////////////////////////////////////////
   resendOtp() {
-    let n = sessionStorage.getItem('name');
+    let n = this.name;
     let p = sessionStorage.getItem('password');
     this.signin(n ? n : 'dummy data', p ? p : 'dummy data');
   }
@@ -181,57 +181,14 @@ export class AuthService {
       {
         headers: new HttpHeaders().set(
           'Authorization',
-          `Bearer ${sessionStorage.getItem('resetToken')}`
+          `Bearer ${this.resetToken}`
         ),
       }
     );
   }
   /////////////////////////////////////////////////////////////
-  autoAuth() {
-    const authInfo = this.getAuthData();
-    if (!authInfo) {
-      return;
-    }
-    const newExpirDate = Number(authInfo.expirDate) - Date.now();
-    if (newExpirDate > 0) {
-      this.saveTimeout = setTimeout(() => {
-        this.logout();
-      }, newExpirDate);
-      this.authStatusListner.next(true);
-      // this.accessToken = authInfo.accessToken;
-      // this.userId = authInfo.userId;
-      // this.email = authInfo.email;
-    }
-  }
 
-  private saveAuthData(
-    accessToken: string,
-    expirDate: number,
-    email: string,
-    userId: string
-  ) {
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('email', email);
-    localStorage.setItem('userId', userId);
-    localStorage.setItem('expirDate', expirDate.toString());
-  }
-  private getAuthData() {
-    const accessToken = localStorage.getItem('accessToken');
-    const email = localStorage.getItem('email');
-    const userId = localStorage.getItem('userId');
-    const expirDate = localStorage.getItem('expirDate');
-    if (!accessToken || !expirDate) {
-      return;
-    }
-    return {
-      accessToken,
-      expirDate,
-      email,
-      userId,
-    };
-  }
   private clearAuthData() {
-    sessionStorage.removeItem('name');
     sessionStorage.removeItem('accessToken');
   }
 }
