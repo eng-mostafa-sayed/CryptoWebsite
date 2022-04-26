@@ -125,6 +125,7 @@ export class WithdrawComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
+          this.sharedSerivce.sentMessage.next('something went wrong');
         },
       });
   }

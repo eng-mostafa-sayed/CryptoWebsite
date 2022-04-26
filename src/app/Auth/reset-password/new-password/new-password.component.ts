@@ -1,5 +1,9 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SharedService } from 'src/app/shared/shared.service';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-new-password',
@@ -8,11 +12,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class NewPasswordComponent implements OnInit {
   newPasswordForm!: FormGroup;
+  code: string | null;
   newPass = false;
   confirmPass = false;
-  constructor() {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private http: HttpClient,
+    private sharedSerivce: SharedService
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.newPasswordForm = new FormGroup({
       password: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(5)],
@@ -22,7 +32,36 @@ export class NewPasswordComponent implements OnInit {
       }),
     });
   }
-  newPassowrd() {}
+  async newPassowrd() {
+    this.code = sessionStorage.getItem('code')
+      ? sessionStorage.getItem('code')
+      : null;
+    if (
+      this.newPasswordForm.value.password ===
+        this.newPasswordForm.value.confirm &&
+      this.code !== null
+    ) {
+      (
+        await this.authService.resetNewPassword(
+          this.newPasswordForm.value.password
+        )
+      ).subscribe({
+        next: (res) => {
+          console.log('new password reseting here');
+          this.router.navigate(['/']);
+          sessionStorage.removeItem('code');
+          sessionStorage.removeItem('email');
+          sessionStorage.removeItem('resetToken');
+        },
+        error: (err) => {
+          this.sharedSerivce.sentMessage.next(
+            'something went wrong please try again'
+          );
+          console.log(err);
+        },
+      });
+    } //end of if statement
+  }
   changeInput1(input: any): any {
     this.newPass = !this.newPass;
     input.type = input.type === 'password' ? 'text' : 'password';

@@ -35,6 +35,7 @@ export class OtpComponent implements OnInit {
   resendOtp() {
     this.sharedSerivce.isLoading.next(true);
     this.authService.resendOtp();
+    this.sharedSerivce.sentMessage.next('New OTP has been sent');
     this.sharedSerivce.isLoading.next(false);
   }
 }

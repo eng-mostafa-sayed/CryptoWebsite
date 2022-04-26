@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/shared.service';
 import { AuthService } from '../auth.service';
 
@@ -13,7 +14,8 @@ export class ResetPasswordComponent implements OnInit {
   restForm: FormGroup;
   constructor(
     public authService: AuthService,
-    private sharedSerivce: SharedService
+    private sharedSerivce: SharedService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -21,7 +23,7 @@ export class ResetPasswordComponent implements OnInit {
       email: new FormControl(null, Validators.required),
     });
   }
-  resetPassword() {
-    this.authService.resetPassword(this.restForm.value);
-  }
+  resetPassword = () => {
+    this.authService.resetPassword(this.restForm.value.email);
+  };
 }

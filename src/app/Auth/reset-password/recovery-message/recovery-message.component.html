@@ -5,6 +5,13 @@
   <h2 class="login-box__title">Recovery link sent!</h2>
   <span class="login-box__sub"
     >We’ve sent the password recovery link to your email
-    <span> test@example.com</span></span
+    <span> {{ _email }}</span></span
   >
+  <br />
+  <button
+    class="login-box__btn btn btn--light btn--animated"
+    (click)="newpassword()"
+  >
+    Next
+  </button>
 </div>

@@ -51,6 +51,7 @@ import { RecoveryMessageComponent } from './Auth/reset-password/recovery-message
 import { NewPasswordComponent } from './Auth/reset-password/new-password/new-password.component';
 import { OtpComponent } from './Auth/otp/otp.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ResetCodeComponent } from './Auth/reset-password/reset-code/reset-code.component';
 
 ///////////////////////////////
 
@@ -69,6 +70,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     RecoveryMessageComponent,
     NewPasswordComponent,
     OtpComponent,
+    ResetCodeComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { SharedService } from '../shared/shared.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,45 +12,27 @@ export class AuthService {
   APIKey: string =
     'c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4';
 
-  private userId: string | null;
   private email: string | null;
   private accessToken: string | null;
   private refreshToken: string | null;
   private name: string | null;
-  private phone: string | null;
-  private balance: string | null;
-  private balance_eth: string | null;
-  private balance_btc: string | null;
-  private balance_rvn: string | null;
-  private balance_ltct: string | null;
-  private activePlans: string | null;
-  private activeDemoPlans: string | null;
-  private devices: string | null;
+  private resetToken: string = '';
+
   authStatusListner = new BehaviorSubject<boolean>(false);
   saveTimeout: any;
-  constructor(private http: HttpClient, private router: Router) {}
-
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private sharedSerivce: SharedService
+  ) {}
+  //////////////////////////////////////////////the auth autherization
   header: any = {
     headers: new HttpHeaders().set(
       'Authorization',
       `Bearer ${sessionStorage.getItem('accessToken')}`
     ),
   };
-  // UserData() {
-  //   // return this.http.post<any>(
-  //   //   `${this.APIBaseUrl}/user/getUserData?key=${this.APIKey}`,
-  //   //   this.header
-  //   // );
-  //   return {
-  //     name: this.name,
-  //     balance_eth: this.balance_eth,
-  //     balance_btc: this.balance_btc,
-  //     balance_rvn: this.balance_rvn,
-  //     balance_ltct: this.balance_ltct,
-  //     activePlans: this.activePlans,
-  //   };
-  // }
-
+  //////////////////////////////////////////////////////////////////////////////////the auth functions////////////////////////////////
   signup(name: String, email: String, phone: number, password: String) {
     return this.http.post<any>(
       `${this.APIBaseUrl}/user/register?key=${this.APIKey}`,
@@ -72,9 +55,10 @@ export class AuthService {
       })
       .subscribe({
         next: (res) => {
-          console.log(res);
-
           if (res.message == 'Wrong credentials') {
+            this.sharedSerivce.sentMessage.next(
+              'something went wrong please try again'
+            );
             this.authStatusListner.next(false);
           } else if (res.message != 'Wrong credentials') {
             this.authStatusListner.next(true);
@@ -83,7 +67,10 @@ export class AuthService {
           }
         },
         error: (err) => {
-          //console.log(err);
+          this.sharedSerivce.sentMessage.next(
+            'something went wrong please try again'
+          );
+          console.log(err);
         },
       });
   }
@@ -104,6 +91,7 @@ export class AuthService {
           console.log(res);
         },
         error: (err) => {
+          this.sharedSerivce.sentMessage.next('something went wrong');
           console.log(err);
         },
       });
@@ -117,7 +105,7 @@ export class AuthService {
       })
       .subscribe({
         next: (res) => {
-          console.log(res);
+          //console.log(res);
           this.accessToken = res.jwt.accessToken;
           this.refreshToken = res.jwt.refreshToken;
 
@@ -128,6 +116,9 @@ export class AuthService {
           this.router.navigate(['/user/dashboard/overview']);
         },
         error: (err) => {
+          this.sharedSerivce.sentMessage.next(
+            'something went wrong please try again'
+          );
           console.log(err);
         },
       });
@@ -147,14 +138,53 @@ export class AuthService {
       })
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.authStatusListner.next(true);
-          // this.router.navigate(['/user/dashboard/overview']);
+          sessionStorage.setItem('email', forgetEmail);
+          this.router.navigate(['/user/recovery-message']);
         },
         error: (err) => {
+          this.sharedSerivce.sentMessage.next('wrong password');
           console.log(err);
         },
       });
+  }
+  /////////////////////////////////////////////////////////////
+
+  async resetPasswordVerificationCode(verifyCode: string) {
+    await this.http
+      .post<any>(`${this.APIBaseUrl}/user/verifyCode?key=${this.APIKey}`, {
+        email: this.email ? this.email : sessionStorage.getItem('email'),
+        code: verifyCode,
+      })
+      .subscribe({
+        next: (res) => {
+          sessionStorage.setItem('resetToken', res.token);
+          this.resetToken = res.token;
+          this.authStatusListner.next(true);
+        },
+        error: (err) => {
+          this.sharedSerivce.sentMessage.next(
+            'wrong verification code please try again'
+          );
+          console.log(err);
+        },
+      });
+  }
+  /////////////////////////////////////////////////////////////
+  resetNewPassword(newPassword: any) {
+    return this.http.post<any>(
+      `${this.APIBaseUrl}/user/resetPassword?key=${this.APIKey}`,
+      {
+        newPassword: newPassword,
+        code: sessionStorage.getItem('code')?.toString().trim(),
+      },
+      {
+        headers: new HttpHeaders().set(
+          'Authorization',
+          `Bearer ${sessionStorage.getItem('resetToken')}`
+        ),
+      }
+    );
   }
   /////////////////////////////////////////////////////////////
   autoAuth() {
