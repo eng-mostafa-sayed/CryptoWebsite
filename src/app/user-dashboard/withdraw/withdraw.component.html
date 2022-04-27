@@ -239,40 +239,43 @@
                   wallet</span
                 >
               </div>
-              <form (ngSubmit)="onWithdraw('BTC')" [formGroup]="withdrawForm">
+              <form
+                (ngSubmit)="onWithdrawBTC('BTC')"
+                [formGroup]="withdrawFormBTC"
+              >
                 <div class="input-field-group">
-                  <label class="input-field-group__label" for="address"
-                    >Bitcoin address</label
+                  <label class="input-field-group__label" for="addressBTC"
+                    >Bitcoin addressBTC</label
                   >
                   <input
                     class="input-field-group__input"
                     placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
-                    id="address"
-                    name="address"
+                    id="addressBTC"
+                    name="addressBTC"
                     type="text"
-                    formControlName="address"
+                    formControlName="addressBTC"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('address')?.invalid &&
-                        withdrawForm.get('address')?.dirty
+                        withdrawFormBTC.get('addressBTC')?.invalid &&
+                        withdrawFormBTC.get('addressBTC')?.dirty
                     }"
                   />
                 </div>
                 <div class="input-field-group">
-                  <label class="input-field-group__label" for="amount"
+                  <label class="input-field-group__label" for="amountBTC"
                     >Amount</label
                   >
                   <input
                     class="input-field-group__input"
-                    placeholder="Enter your amount"
-                    id="amount"
-                    name="amount"
+                    placeholder="Enter your amount in BTC"
+                    id="amountBTC"
+                    name="amountBTC"
                     type="number"
-                    formControlName="amount"
+                    formControlName="amountBTC"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('amount')?.invalid &&
-                        withdrawForm.get('amount')?.dirty
+                        withdrawFormBTC.get('amountBTC')?.invalid &&
+                        withdrawFormBTC.get('amountBTC')?.dirty
                     }"
                   />
                 </div>
@@ -297,40 +300,43 @@
                   wallet</span
                 >
               </div>
-              <form (ngSubmit)="onWithdraw('ETH')">
+              <form
+                (ngSubmit)="onWithdrawETH('ETH')"
+                [formGroup]="withdrawFormETH"
+              >
                 <div class="input-field-group">
-                  <label class="input-field-group__label" for="address"
+                  <label class="input-field-group__label" for="addressETH"
                     >Etherum address</label
                   >
                   <input
                     class="input-field-group__input"
                     placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
-                    id="address"
-                    name="address"
+                    id="addressETH"
+                    name="addressETH"
                     type="text"
-                    formControlName="address"
+                    formControlName="addressETH"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('address')?.invalid &&
-                        withdrawForm.get('address')?.dirty
+                        withdrawFormETH.get('addressETH')?.invalid &&
+                        withdrawFormETH.get('addressETH')?.dirty
                     }"
                   />
                 </div>
                 <div class="input-field-group">
-                  <label class="input-field-group__label" for="amount"
+                  <label class="input-field-group__label" for="amountETH"
                     >Amount</label
                   >
                   <input
                     class="input-field-group__input"
-                    placeholder="Enter your amount"
-                    id="amount"
-                    name="amount"
+                    placeholder="Enter your amount in ETH"
+                    id="amountETH"
+                    name="amountETH"
                     type="text"
-                    formControlName="amount"
+                    formControlName="amountETH"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('amount')?.invalid &&
-                        withdrawForm.get('amount')?.dirty
+                        withdrawFormETH.get('amountETH')?.invalid &&
+                        withdrawFormETH.get('amountETH')?.dirty
                     }"
                   />
                 </div>
@@ -354,40 +360,43 @@
                   You can only withdraw from RVN balance to RVN wallet</span
                 >
               </div>
-              <form (ngSubmit)="onWithdraw('RVN')">
+              <form
+                (ngSubmit)="onWithdrawRVN('RVN')"
+                [formGroup]="withdrawFormRVN"
+              >
                 <div class="input-field-group">
-                  <label class="input-field-group__label" for="address"
+                  <label class="input-field-group__label" for="addressRVN"
                     >RVN address</label
                   >
                   <input
                     class="input-field-group__input"
                     placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
-                    id="address"
-                    name="address"
+                    id="addressRVN"
+                    name="addressRVN"
                     type="text"
-                    formControlName="address"
+                    formControlName="addressRVN"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('address')?.invalid &&
-                        withdrawForm.get('address')?.dirty
+                        withdrawFormRVN.get('addressRVN')?.invalid &&
+                        withdrawFormRVN.get('addressRVN')?.dirty
                     }"
                   />
                 </div>
                 <div class="input-field-group">
-                  <label class="input-field-group__label" for="amount"
+                  <label class="input-field-group__label" for="amountRVN"
                     >Amount</label
                   >
                   <input
                     class="input-field-group__input"
-                    placeholder="Enter your amount"
-                    id="amount"
-                    name="amount"
+                    placeholder="Enter your amount in RVN"
+                    id="amountRVN"
+                    name="amountRVN"
                     type="text"
-                    formControlName="amount"
+                    formControlName="amountRVN"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('amount')?.invalid &&
-                        withdrawForm.get('amount')?.dirty
+                        withdrawFormRVN.get('amountRVN')?.invalid &&
+                        withdrawFormRVN.get('amountRVN')?.dirty
                     }"
                   />
                 </div>
@@ -411,40 +420,43 @@
                   You can only withdraw from LTCT balance to LTCT wallet</span
                 >
               </div>
-              <form (ngSubmit)="onWithdraw('LTCT')">
+              <form
+                (ngSubmit)="onWithdrawLTCT('LTCT')"
+                [formGroup]="withdrawFormLTCT"
+              >
                 <div class="input-field-group">
-                  <label class="input-field-group__label" for="address"
+                  <label class="input-field-group__label" for="addressLTCT"
                     >LTCT address</label
                   >
                   <input
                     class="input-field-group__input"
                     placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
-                    id="address"
-                    name="address"
+                    id="addressLTCT"
+                    name="addressLTCT"
                     type="text"
-                    formControlName="address"
+                    formControlName="addressLTCT"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('address')?.invalid &&
-                        withdrawForm.get('address')?.dirty
+                        withdrawFormLTCT.get('addressLTCT')?.invalid &&
+                        withdrawFormLTCT.get('addressLTCT')?.dirty
                     }"
                   />
                 </div>
                 <div class="input-field-group">
-                  <label class="input-field-group__label" for="amount"
+                  <label class="input-field-group__label" for="amountLTCT"
                     >Amount</label
                   >
                   <input
                     class="input-field-group__input"
-                    placeholder="Enter your amount"
-                    id="amount"
-                    name="amount"
+                    placeholder="Enter your amount in LTCT"
+                    id="amountLTCT"
+                    name="amountLTCT"
                     type="text"
-                    formControlName="amount"
+                    formControlName="amountLTCT"
                     [ngClass]="{
                       'input-field-group__input--invalid':
-                        withdrawForm.get('amount')?.invalid &&
-                        withdrawForm.get('amount')?.dirty
+                        withdrawFormLTCT.get('amountLTCT')?.invalid &&
+                        withdrawFormLTCT.get('amountLTCT')?.dirty
                     }"
                   />
                 </div>

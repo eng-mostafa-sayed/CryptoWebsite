@@ -11,7 +11,12 @@ import { DashboardService } from '../user-dashboard.service';
 export class WithdrawComponent implements OnInit {
   crypto = true;
   cryptoTapOpend = 'tap1';
-  withdrawForm: FormGroup;
+
+  withdrawFormBTC: FormGroup;
+  withdrawFormETH: FormGroup;
+  withdrawFormRVN: FormGroup;
+  withdrawFormLTCT: FormGroup;
+
   _balance_btc: any;
   _balance_eth: any;
   _balance_rvn: any;
@@ -45,15 +50,54 @@ export class WithdrawComponent implements OnInit {
   async ngOnInit() {
     this.sharedSerivce.isLoading.next(true);
     //////////////////////////////////
-    this.withdrawForm = new FormGroup({
-      address: new FormControl(null, {
+    this.withdrawFormBTC = new FormGroup({
+      addressBTC: new FormControl(null, {
         validators: [
           Validators.required,
-          Validators.minLength(34),
-          Validators.maxLength(34),
+          // Validators.minLength(34),
+          // Validators.maxLength(34),
         ],
       }),
-      amount: new FormControl(0.1, Validators.required),
+      amountBTC: new FormControl(null, Validators.required),
+      //   validators: [Validators.required, Validators.pattern(/^[0-9]+$/)],
+      // }),
+    });
+    //////////////////////////////////
+    this.withdrawFormETH = new FormGroup({
+      addressETH: new FormControl(null, {
+        validators: [
+          Validators.required,
+          // Validators.minLength(34),
+          // Validators.maxLength(34),
+        ],
+      }),
+      amountETH: new FormControl(null, Validators.required),
+      //   validators: [Validators.required, Validators.pattern(/^[0-9]+$/)],
+      // }),
+    });
+    //////////////////////////////////
+    this.withdrawFormRVN = new FormGroup({
+      addressRVN: new FormControl(null, {
+        validators: [
+          Validators.required,
+          // Validators.minLength(34),
+          // Validators.maxLength(34),
+        ],
+      }),
+      amountRVN: new FormControl(null, Validators.required),
+      //   validators: [Validators.required, Validators.pattern(/^[0-9]+$/)],
+      // }),
+    });
+    //////////////////////////////////
+    this.withdrawFormLTCT = new FormGroup({
+      addressLTCT: new FormControl(null, {
+        validators: [
+          Validators.required,
+          // Validators.minLength(34),
+          // Validators.maxLength(34),
+        ],
+      }),
+      amountLTCT: new FormControl(null, Validators.required),
       //   validators: [Validators.required, Validators.pattern(/^[0-9]+$/)],
       // }),
     });
@@ -109,21 +153,13 @@ export class WithdrawComponent implements OnInit {
     }, this.waitingTime + 200);
   }
 
-  onWithdraw(currency: string) {
-    console.log('currency11');
-    console.log(currency);
-    console.log('amount1212');
-    console.log(Number(this.withdrawForm.value.amount));
-    if (this.withdrawForm.value.amount > 0.0) {
-      console.log('wallet');
-      console.log(this.withdrawForm.value.address);
-    } else if (this.withdrawForm.value.amount > 1000) {
+  ///////////////////////////////////////////////////// to withdraw in BTC
+  onWithdrawBTC(currency: string) {
+    let _amount = this.withdrawFormLTCT.value.amountLTCT;
+    let _address = this.withdrawFormLTCT.value.addressLTCT;
+    if (_amount > 0.0) {
       this.dashboardd
-        .UserWithdrawRequest(
-          currency,
-          parseFloat(this.withdrawForm.value.amount),
-          this.withdrawForm.value.address
-        )
+        .UserWithdrawRequest(currency, parseFloat(_amount), _address)
         .subscribe({
           next: (res) => {
             ///this is to display the notification
@@ -138,6 +174,73 @@ export class WithdrawComponent implements OnInit {
         });
     }
   }
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////// to withdraw in ETH
+  onWithdrawETH(currency: string) {
+    let _amount = this.withdrawFormLTCT.value.amountLTCT;
+    let _address = this.withdrawFormLTCT.value.addressLTCT;
+    if (_amount > 0.0) {
+      this.dashboardd
+        .UserWithdrawRequest(currency, parseFloat(_amount), _address)
+        .subscribe({
+          next: (res) => {
+            ///this is to display the notification
+            this.sharedSerivce.sentMessage.next(
+              'the property has been added successfully wait for the confirmation'
+            );
+          },
+          error: (err) => {
+            console.log(err);
+            this.sharedSerivce.sentMessage.next('something went wrong');
+          },
+        });
+    }
+  }
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////// to withdraw in RVN
+  onWithdrawRVN(currency: string) {
+    let _amount = this.withdrawFormLTCT.value.amountLTCT;
+    let _address = this.withdrawFormLTCT.value.addressLTCT;
+    if (_amount > 0.0) {
+      this.dashboardd
+        .UserWithdrawRequest(currency, parseFloat(_amount), _address)
+        .subscribe({
+          next: (res) => {
+            ///this is to display the notification
+            this.sharedSerivce.sentMessage.next(
+              'the property has been added successfully wait for the confirmation'
+            );
+          },
+          error: (err) => {
+            console.log(err);
+            this.sharedSerivce.sentMessage.next('something went wrong');
+          },
+        });
+    }
+  }
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////// to withdraw in LTCT
+  onWithdrawLTCT(currency: string) {
+    let _amount = this.withdrawFormLTCT.value.amountLTCT;
+    let _address = this.withdrawFormLTCT.value.addressLTCT;
+    if (_amount > 0.0) {
+      this.dashboardd
+        .UserWithdrawRequest(currency, parseFloat(_amount), _address)
+        .subscribe({
+          next: (res) => {
+            ///this is to display the notification
+            this.sharedSerivce.sentMessage.next(
+              'the property has been added successfully wait for the confirmation'
+            );
+          },
+          error: (err) => {
+            console.log(err);
+            this.sharedSerivce.sentMessage.next('something went wrong');
+          },
+        });
+    }
+  }
+  ///////////////////////////////////////////////////////////////////////
   cryptoPlansTap1() {
     this.cryptoTapOpend = 'tap1';
   }
