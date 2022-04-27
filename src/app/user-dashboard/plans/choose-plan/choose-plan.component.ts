@@ -77,7 +77,7 @@ export class ChoosePlanComponent implements OnInit {
       },
       error: (err) => {
         this.sharedSerivce.sentMessage.next({
-          message: 'something went wrong',
+          message: 'something went wrong, or no sufficient balance',
           error: true,
         });
       },
