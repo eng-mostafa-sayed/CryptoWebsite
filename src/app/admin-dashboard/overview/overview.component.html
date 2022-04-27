@@ -8,21 +8,30 @@
           <div class="total-box">
             <div class="total-box__title">Total Users</div>
             <div class="total-box__value">{{ totalUsers }}</div>
-            <i class="fas fa-spinner total-box__value" *ngIf="!totalUsers"></i>
+            <i
+              class="fas fa-spinner total-box__value"
+              *ngIf="!totalUsers && !(totalUsers == 0)"
+            ></i>
           </div>
         </div>
         <div class="col-12 col-md-6">
           <div class="total-box">
             <div class="total-box__title">total Asics</div>
             <div class="total-box__value">{{ totalAsics }}</div>
-            <i class="fas fa-spinner total-box__value" *ngIf="!totalAsics"></i>
+            <i
+              class="fas fa-spinner total-box__value"
+              *ngIf="!totalAsics && !(totalAsics == 0)"
+            ></i>
           </div>
         </div>
         <div class="col-12 col-md-6">
           <div class="total-box">
             <div class="total-box__title">total Plans</div>
             <div class="total-box__value">{{ totalPlans }}</div>
-            <i class="fas fa-spinner total-box__value" *ngIf="!totalPlans"></i>
+            <i
+              class="fas fa-spinner total-box__value"
+              *ngIf="!totalPlans && !(totalPlans == 0)"
+            ></i>
           </div>
         </div>
         <div class="col-12 col-md-6">
@@ -33,7 +42,7 @@
             </div>
             <i
               class="fas fa-spinner total-box__value"
-              *ngIf="!totalPlanContarcts"
+              *ngIf="!totalPlanContarcts && !(totalPlanContarcts == 0)"
             ></i>
           </div>
         </div>
@@ -45,7 +54,9 @@
             </div>
             <i
               class="fas fa-spinner total-box__value"
-              *ngIf="!totalActiveAsicContarcts"
+              *ngIf="
+                !totalActiveAsicContarcts && !(totalActiveAsicContarcts == 0)
+              "
             ></i>
           </div>
         </div>
@@ -57,7 +68,10 @@
             </div>
             <i
               class="fas fa-spinner total-box__value"
-              *ngIf="!totalAsicContarctsOnDemand"
+              *ngIf="
+                !totalAsicContarctsOnDemand &&
+                !(totalAsicContarctsOnDemand == 0)
+              "
             ></i>
           </div>
         </div>
@@ -69,7 +83,7 @@
             </div>
             <i
               class="fas fa-spinner total-box__value"
-              *ngIf="!totalWithdrawals"
+              *ngIf="!totalWithdrawals && !(totalWithdrawals == 0)"
             ></i>
           </div>
         </div>
@@ -81,7 +95,7 @@
             </div>
             <i
               class="fas fa-spinner total-box__value"
-              *ngIf="!totalDeposits"
+              *ngIf="!totalDeposits && !(totalDeposits == 0)"
             ></i>
           </div>
         </div>
@@ -93,7 +107,7 @@
         <div class="balance-box__title">Company balance</div>
         <div class="balance-box__item">
           <div class="balance-box__item__icon">
-            <i class="fab fa-btc sm"></i>
+            <i class="fab fa-btc md"></i>
             BTC
           </div>
           <div class="balance-box__item__value">
@@ -104,35 +118,41 @@
         </div>
         <div class="balance-box__item">
           <div class="balance-box__item__icon">
-            <i class="fab fa-ethereum sm"></i>
+            <i class="fab fa-ethereum md"></i>
             ETH
           </div>
           <div class="balance-box__item__value">
-            <!-- <i class="fas fa-spinner" *ngIf="!btc"></i> -->
             <span *ngIf="!eth">0.00000000</span>
-            <span *ngIf="btc"> {{ eth }} </span>ETH
+            <span *ngIf="eth"> {{ eth }} </span>ETH
           </div>
         </div>
         <div class="balance-box__item">
           <div class="balance-box__item__icon">
-            <i class="fab fa-btc sm"></i>
+            <img
+              src="../../../assets/LTCT-Crypto.png"
+              alt="LTCT"
+              class="icon icon--sm"
+            />
             LTCT
           </div>
           <div class="balance-box__item__value">
-            <!-- <i class="fas fa-spinner" *ngIf="!btc"></i> -->
             <span *ngIf="!ltct">0.00000000</span>
-            <span *ngIf="btc"> {{ ltct }} </span>LTCT
+            <span *ngIf="ltct"> {{ ltct }} </span>LTCT
           </div>
         </div>
         <div class="balance-box__item">
           <div class="balance-box__item__icon">
-            <i class="fab fa-ethereum sm"></i>
+            <img
+              src="../../../assets/RVN-Crypto.svg"
+              alt="RVN"
+              class="icon icon--sm"
+            />
             RVN
           </div>
           <div class="balance-box__item__value">
             <!-- <i class="fas fa-spinner" *ngIf="!btc"></i> -->
             <span *ngIf="!rvn">0.00000000</span>
-            <span *ngIf="btc"> {{ rvn }} </span>RVN
+            <span *ngIf="rvn"> {{ rvn }} </span>RVN
           </div>
         </div>
       </div>
@@ -172,7 +192,7 @@
   <!-- Mining devices -->
   <div class="d-flex justify-content-between my-5">
     <h2 class="dash-heading__title">Mining devices</h2>
-    <button class="btn btn--darker btn--animated">
+    <button class="btn btn--darker btn--animated" routerLink="../miners">
       <span style="margin-right: 12px">See more</span
       ><i class="fas fa-chevron-right"></i>
     </button>

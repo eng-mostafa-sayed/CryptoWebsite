@@ -11,6 +11,7 @@
   max-width: 36rem;
   padding: 2.4rem;
   margin: 0 auto;
+
   &--online {
     border: 2px solid green !important;
   }
@@ -73,9 +74,11 @@
       width: 4rem;
       border-radius: 50%;
       cursor: pointer;
-
       i {
         color: $color-white-2;
+      }
+      &--nobk {
+        background: none;
       }
     }
     &__body {
@@ -158,5 +161,94 @@
   &__btn {
     width: 100%;
     height: 4.8rem;
+  }
+}
+.miners-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 64px 0px 24px 0px;
+  &__title {
+    font-weight: 900;
+    font-size: 3.2rem;
+    line-height: 4rem;
+  }
+  button {
+    padding: 1.8rem 2.4rem;
+    max-width: 21.8rem;
+    i {
+      margin-right: 0.8rem;
+    }
+  }
+}
+
+.miner {
+  min-width: 338px;
+  max-width: 450px;
+  background: rgba(29, 26, 39, 0.6);
+  border: 1px solid rgba(13, 23, 66, 0.2);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2.4rem;
+  margin: 0 auto;
+  &__title {
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3rem;
+    color: $color-white-2;
+  }
+  &__sub {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    display: flex;
+    align-items: center;
+    margin-top: 0.4rem;
+  }
+  &__img {
+    display: block;
+    width: 142px;
+    height: 132.08px;
+    margin: 29px 0px;
+  }
+  &__details {
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 2rem;
+
+    &__title {
+      color: $color-white-2;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    &__sub {
+      color: $color-white;
+    }
+  }
+  &--add {
+    min-width: 338px;
+    max-width: 450px;
+    height: 404px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid transparent;
+    background: linear-gradient(rgba(29, 26, 39, 1), rgba(29, 26, 39, 1))
+        padding-box,
+      linear-gradient(to right, rgba(79, 86, 255, 1), rgba(255, 73, 128, 1))
+        border-box !important;
+    // box-shadow: -2px -1px 56px -6px rgba(79, 86, 255, 0.8);
+    // filter: drop-shadow(0px 0px 16px rgba(79, 86, 255, 1));
+    border-radius: 12px;
+    margin: 0 auto;
+
+    cursor: pointer;
+    &__img {
+    }
+    &__title {
+    }
   }
 }

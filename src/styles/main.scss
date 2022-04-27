@@ -20,7 +20,8 @@
 @import "components/notification";
 @import "components/confirmation";
 @import "components/accept-popup-form";
-@import "components/admin-overview";
+@import "components/merchant-header";
+@import "components/accordion";
 
 @import "layout/grid";
 @import "layout/main-nav";
@@ -35,42 +36,10 @@
 @import "pages/choose-plan";
 @import "pages/mining-devices";
 @import "pages/choose-miner";
-@import "pages/subscribed-users";
+@import "pages/subscribed-user";
 @import "pages/wallet";
+@import "pages/admin-overview";
+@import "pages/merchant-miner";
+@import "pages/merchant-steps";
 
 @import "shame";
-
-// .mat-menu-content .ng-tns-c97-0 {
-//   padding: 0px;
-//   justify-content: center;
-//   li {
-//     width: 165px;
-//     display: flex;
-//     justify-content: space-between;
-//   }
-// }
-// mat-form-field span.mat-form-field-label-wrapper label {
-//   color: orange !important;
-// }
-
-// mat-form-field.mat-focused span.mat-form-field-label-wrapper label {
-//   color: green !important;
-// }
-
-// .mat-select-panel {
-//   height: 500px !important;
-// }
-// .mat-dialog-container {
-//   padding: 0px !important;
-//   border-radius: 8px !important;
-//   border: none !important;
-//   background: none;
-// }
-
-// @media only screen and (max-width: 1700px) and (min-width: 1440px) {
-//   .dashboard-container {
-//     margin-left: auto;
-//     margin-right: auto;
-//     padding-left: 248px;
-//   }
-// }

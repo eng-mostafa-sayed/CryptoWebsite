@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Plan } from './models/plan.model';
 import { Miner } from './models/miner.model';
@@ -8,6 +8,9 @@ import { User } from './models/user.model';
 import { UserPlan } from './models/user-plan.model';
 import { UserAsic } from './models/userAsic.model';
 import { Log } from './models/log.model';
+import { Worker } from './models/worker.model';
+import { AdminAuthService } from '../Auth/admin-auth.service';
+import { catchError, tap, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +18,10 @@ export class AdminDashboardService {
   private rootURL = 'https://cominer.herokuapp.com';
   private key =
     'c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4';
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AdminAuthService
+  ) {}
 
   ////////////////////             Plans               ////////////////////////
   getPlans() {
@@ -33,7 +39,7 @@ export class AdminDashboardService {
         cryptoName: plan.cryptoName,
         algorithm: plan.algorithm,
         planDuration: plan.planDuration,
-        profitability: plan.planDuration,
+        profitability: plan.profitability,
         price: plan.price,
         availability: plan.availability,
       },
@@ -119,12 +125,18 @@ export class AdminDashboardService {
     }>(`${this.rootURL}/api/transaction/admin/getdepositaddressForAsicContarct?asicID=${asicID}
     `);
   }
-  acceptRequest(asicID: string, address: string, workerID: string) {
+  acceptRequest(
+    asicID: string,
+    address: string,
+    workerID: string,
+    pool: string
+  ) {
     return this.http.put(
       `${this.rootURL}/api/asic/x/contract/activate/${asicID}?key=${this.key} `,
       {
         address,
         workerID,
+        pool,
       },
       { responseType: 'text' }
     );
@@ -158,7 +170,7 @@ export class AdminDashboardService {
     );
   }
   getUserAsics(userID: string) {
-    return this.http.get<UserAsic[]>(
+    return this.http.get<[]>(
       `${this.rootURL}/api/asic/admin/getUserContracts/${userID}?key=${this.key}`
     );
   }
@@ -177,5 +189,53 @@ export class AdminDashboardService {
   //////////////////// Overview page /////////////////////////
   getOverviewData() {
     return this.http.get<any>(`${this.rootURL}/admin/OVERVIEW?key=${this.key}`);
+  }
+  //////////////////// Farm ///////////////////////
+  getActiveWorkers() {
+    return this.http.get<Worker[]>(
+      `${this.rootURL}/api/farm/getactiveworkers?key=${this.key}`
+    );
+  }
+  getInactiveWorkers() {
+    return this.http.get<Worker[]>(
+      `${this.rootURL}/api/farm/getnotactiveworkers?key=${this.key}`
+    );
+  }
+  addNewWorker(worker: Worker) {
+    return this.http.post(
+      `${this.rootURL}/api/farm/addworker?key=${this.key}`,
+      worker,
+      { responseType: 'text' }
+    );
+  }
+  endWorker(workerID: string) {
+    return this.http.put(
+      `${this.rootURL}/api/farm/endworker/${workerID}?key=${this.key}`,
+      {},
+      { responseType: 'text' }
+    );
+  }
+  deleteWorker(workerID: string) {
+    return this.http.delete(
+      `${this.rootURL}/api/farm/deleteworker/${workerID}?key=${this.key}`,
+      { responseType: 'text' }
+    );
+  }
+  errorHandler(err: HttpErrorResponse) {
+    if (err.status == 401) {
+      this.authService.removeAuthData();
+      return throwError(() => new Error(this.setErrors(err)));
+    }
+  }
+  setErrors(err: HttpErrorResponse): string {
+    let errorMessage = '';
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = err.error.message;
+    } else {
+      if (err.status != 0) {
+        errorMessage = err.error.message;
+      }
+    }
+    return errorMessage;
   }
 }

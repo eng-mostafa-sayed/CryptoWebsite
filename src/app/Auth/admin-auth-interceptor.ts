@@ -2,18 +2,16 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
+  HttpErrorResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, throwError } from 'rxjs';
 import { AdminAuthService } from './admin-auth.service';
-
-import { AuthService } from './auth.service';
-
 @Injectable()
 export class AdminAuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AdminAuthService) {}
-
+  constructor(private adminAuthService: AdminAuthService) {}
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const authToken = this.authService.getToken();
+    const authToken = this.adminAuthService.getToken();
     const authRequest = req.clone({
       headers: req.headers.set('Authorization', 'Bearer ' + authToken),
     });

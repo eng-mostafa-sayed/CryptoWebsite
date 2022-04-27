@@ -22,8 +22,8 @@ export class AppComponent {
     this.sharedService.isLoading.subscribe((loading) => {
       this.isLoading = loading;
     });
-    this.sharedService.sentMessage.subscribe((message: string) => {
-      if (message != '') {
+    this.sharedService.sentMessage.subscribe((res) => {
+      if (res.message != '') {
         this.showNotification = true;
       } else this.showNotification = false;
     });

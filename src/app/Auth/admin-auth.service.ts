@@ -38,7 +38,7 @@ export class AdminAuthService {
     });
   }
   public getOTP(otp: String) {
-    return this.http
+    this.http
       .post(`${this.rootURL}/admin/2FAuth?key=${this.key}`, {
         otp: otp,
       })
@@ -48,8 +48,8 @@ export class AdminAuthService {
           this.refersh = res.jwt.refreshToken;
           this.isAuthenticated = true;
           this.authStatusListener$.next(true);
-          localStorage.setItem('token', this.token);
-          localStorage.setItem('refersh', this.refersh);
+          sessionStorage.setItem('token', this.token);
+          sessionStorage.setItem('refersh', this.refersh);
           this.sharedService.isLoading.next(false);
           this.router.navigate(['admin/dashboard/overview']);
         },
@@ -59,9 +59,8 @@ export class AdminAuthService {
       });
   }
   public autoAuth() {
-    const token = localStorage.getItem('token');
-    const refersh = localStorage.getItem('refersh');
-    console.log(token, refersh);
+    const token = sessionStorage.getItem('token');
+    const refersh = sessionStorage.getItem('refersh');
     if (!token || !refersh) {
       return;
     }
@@ -81,16 +80,35 @@ export class AdminAuthService {
       )
       .subscribe({
         next: () => {
-          console.log('Logged out successfully');
-          localStorage.removeItem('token');
-          localStorage.removeItem('refersh');
+          sessionStorage.removeItem('token');
+          sessionStorage.removeItem('refersh');
           this.token = '';
           this.refersh = '';
           this.isAuthenticated = false;
           this.authStatusListener$.next(false);
-          this.router.navigate(['/']);
+          this.sharedService.isLoading.next(false);
+          this.router.navigate(['/admin/signin']);
         },
-        error: (err) => {},
+        error: (err) => {
+          sessionStorage.removeItem('token');
+          sessionStorage.removeItem('refersh');
+          this.token = '';
+          this.refersh = '';
+          this.isAuthenticated = false;
+          this.authStatusListener$.next(false);
+          this.sharedService.isLoading.next(false);
+          this.router.navigate(['/admin/signin']);
+        },
       });
+  }
+  removeAuthData() {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('refersh');
+    this.token = '';
+    this.refersh = '';
+    this.isAuthenticated = false;
+    this.authStatusListener$.next(false);
+    this.sharedService.isLoading.next(false);
+    this.router.navigate(['/admin/signin']);
   }
 }

@@ -24,6 +24,9 @@ export class SubUsersComponent implements OnInit {
         this.usersLength = res.length;
         this.sharedSerivce.isLoading.next(false);
       },
+      error: (err) => {
+        this.dashboardService.errorHandler(err);
+      },
     });
   }
 }

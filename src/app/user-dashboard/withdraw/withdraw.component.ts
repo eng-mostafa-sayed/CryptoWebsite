@@ -177,13 +177,18 @@ export class WithdrawComponent implements OnInit {
         .subscribe({
           next: (res) => {
             ///this is to display the notification
-            this.sharedSerivce.sentMessage.next(
-              'the property has been added successfully wait for the confirmation'
-            );
+            this.sharedSerivce.sentMessage.next({
+              message:
+                'the property has been added successfully wait for the confirmation',
+              error: false,
+            });
           },
           error: (err) => {
             console.log(err);
-            this.sharedSerivce.sentMessage.next('something went wrong');
+            this.sharedSerivce.sentMessage.next({
+              message: 'something went wrong ',
+              error: true,
+            });
           },
         });
     }

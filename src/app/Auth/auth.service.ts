@@ -54,9 +54,10 @@ export class AuthService {
       .subscribe({
         next: (res) => {
           if (res.message == 'Wrong credentials') {
-            this.sharedSerivce.sentMessage.next(
-              'something went wrong please try again'
-            );
+            this.sharedSerivce.sentMessage.next({
+              message: 'something went wrong please try again',
+              error: true,
+            });
             this.authStatusListner.next(false);
           } else if (res.message != 'Wrong credentials') {
             sessionStorage.setItem('name', `${userName}`);
@@ -66,9 +67,10 @@ export class AuthService {
           }
         },
         error: (err) => {
-          this.sharedSerivce.sentMessage.next(
-            'something went wrong please try again'
-          );
+          this.sharedSerivce.sentMessage.next({
+            message: 'something went wrong please try again',
+            error: true,
+          });
           console.log(err);
         },
       });
@@ -90,7 +92,10 @@ export class AuthService {
           console.log(res);
         },
         error: (err) => {
-          this.sharedSerivce.sentMessage.next('something went wrong');
+          this.sharedSerivce.sentMessage.next({
+            message: 'something went wrong',
+            error: true,
+          });
           console.log(err);
         },
       });
@@ -112,9 +117,10 @@ export class AuthService {
           this.router.navigate(['/user/dashboard/overview']);
         },
         error: (err) => {
-          this.sharedSerivce.sentMessage.next(
-            'something went wrong please try again'
-          );
+          this.sharedSerivce.sentMessage.next({
+            message: 'something went wrong please try again',
+            error: true,
+          });
           console.log(err);
         },
       });
@@ -137,12 +143,16 @@ export class AuthService {
           this.authStatusListner.next(true);
           sessionStorage.setItem('email', forgetEmail);
           this.router.navigate(['/user/recovery-message']);
-          this.sharedSerivce.sentMessage.next(
-            'Your password had been reseted successfully'
-          );
+          this.sharedSerivce.sentMessage.next({
+            message: 'Your password had been reseted successfully',
+            error: false,
+          });
         },
         error: (err) => {
-          this.sharedSerivce.sentMessage.next('wrong password');
+          this.sharedSerivce.sentMessage.next({
+            message: 'wrong password',
+            error: true,
+          });
           console.log(err);
         },
       });
@@ -162,9 +172,10 @@ export class AuthService {
           this.authStatusListner.next(true);
         },
         error: (err) => {
-          this.sharedSerivce.sentMessage.next(
-            'wrong verification code please try again'
-          );
+          this.sharedSerivce.sentMessage.next({
+            message: 'wrong verification code please try again',
+            error: true,
+          });
           console.log(err);
         },
       });

@@ -1,3 +1,4 @@
+import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -62,11 +63,17 @@ export class SignupComponent implements OnInit {
           /////////////////////////////////////////////mesh byd5ol hena
           next: (res: any) => {
             this.router.navigate(['user//signin']);
-            this.sharedSerivce.sentMessage.next('Created Successfully');
+            this.sharedSerivce.sentMessage.next({
+              message: 'Created Successfully',
+              error: false,
+            });
           },
           error: (err: any) => {
             console.log(err);
-            this.sharedSerivce.sentMessage.next('Failed');
+            this.sharedSerivce.sentMessage.next({
+              message: 'Failed',
+              error: true,
+            });
           },
         });
       this.sharedSerivce.isLoading.next(false);

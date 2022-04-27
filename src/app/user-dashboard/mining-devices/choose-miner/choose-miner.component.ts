@@ -25,9 +25,11 @@ export class ChooseMinerComponent implements OnInit {
       console.log('buying Asic' + n[0]);
     });
     ///this is to display the notification
-    this.sharedSerivce.sentMessage.next(
-      'the ASIC  has been added successfully wait for the confirmation'
-    );
+    this.sharedSerivce.sentMessage.next({
+      message:
+        'the ASIC  has been added successfully wait for the confirmation',
+      error: false,
+    });
   }
 
   ngOnInit() {

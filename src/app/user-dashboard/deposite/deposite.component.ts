@@ -17,7 +17,7 @@ export class DepositeComponent implements OnInit {
   BTC_address: any;
   ETH_address: any;
   RVN_address: any;
-  LTCT_address: any = 'mostafa';
+  LTCT_address: any;
 
   BTC_img_src: string;
   ETH_img_src: string;
@@ -28,17 +28,17 @@ export class DepositeComponent implements OnInit {
 
   depositLogsLength = 0;
   depositLogs: any = [
-    {
-      _id: 'hi',
-      address: 'hi',
-      amount: 'hi',
-      currency: 'hi',
-      transactionStatus: 'hi',
-      userID: 'hi',
-      createdAt: 'hi',
-      updatedAt: 'hi',
-      txn_id: 'hi',
-    },
+    // {
+    //   _id: 'hi',
+    //   address: 'hi',
+    //   amount: 'hi',
+    //   currency: 'hi',
+    //   transactionStatus: 'hi',
+    //   userID: 'hi',
+    //   createdAt: 'hi',
+    //   updatedAt: 'hi',
+    //   txn_id: 'hi',
+    // },
   ];
 
   _balance_btc: any;

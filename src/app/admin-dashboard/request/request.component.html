@@ -32,10 +32,12 @@
           [paginator]="true"
           [rows]="10"
           [rowsPerPageOptions]="[10, 15, 20]"
+          sortField="createdAt"
+          [sortOrder]="-1"
         >
           <ng-template pTemplate="header" let-columns>
             <tr>
-              <th pSortableColumn="date">
+              <th pSortableColumn="createdAt">
                 Request date
                 <p-columnFilter
                   type="date"
@@ -121,10 +123,12 @@
           [paginator]="true"
           [rows]="10"
           [rowsPerPageOptions]="[10, 15, 20]"
+          sortField="createdAt"
+          [sortOrder]="-1"
         >
           <ng-template pTemplate="header" let-columns>
             <tr>
-              <th pSortableColumn="date">
+              <th pSortableColumn="createdAt">
                 Request date
                 <p-columnFilter
                   type="date"
@@ -141,6 +145,7 @@
                   display="menu"
                 ></p-columnFilter>
               </th>
+
               <th pSortableColumn="asicName">
                 Requested device
                 <p-columnFilter
@@ -158,6 +163,15 @@
                   display="menu"
                 ></p-columnFilter>
                 <p-sortIcon field="workerID"></p-sortIcon>
+              </th>
+              <th pSortableColumn="pool">
+                Pool
+                <p-columnFilter
+                  type="text"
+                  field="pool"
+                  display="menu"
+                ></p-columnFilter>
+                <p-sortIcon field="pool"></p-sortIcon>
               </th>
               <th pSortableColumn="startDate">
                 Aprroved date
@@ -179,7 +193,13 @@
               </td>
               <td>
                 <span class="p-column-title"> User ID</span>
-                <span class="table__header">{{ request.userID }}</span>
+                <span class="table__header"
+                  >{{ request.userID }}
+                  <i
+                    class="fas fa-external-link-alt"
+                    routerLink="../profile/{{ request.userID }}"
+                  ></i>
+                </span>
               </td>
               <td>
                 <span class="p-column-title"> Requested device</span>
@@ -197,10 +217,14 @@
                 <span class="table__header"> {{ request.workerID }}</span>
               </td>
               <td>
+                <span class="p-column-title">Pool</span>
+                <span class="table__header"> {{ request.pool }}</span>
+              </td>
+              <td>
                 <span class="p-column-title">Approved Date</span>
                 <div class="row align-items-center">
                   <div class="col-2">
-                    <div class="notification__check">
+                    <div class="notification__success">
                       <i class="fas fa-check"></i>
                     </div>
                   </div>
@@ -261,7 +285,13 @@
               acceptForm.get('address')?.invalid
           }"
         />
-        <div class="input-field-group__icon"><i class="far fa-copy"></i></div>
+        <div
+          class="input-field-group__icon"
+          style="cursor: pointer"
+          (click)="copyText()"
+        >
+          <i class="far fa-copy"></i>
+        </div>
       </div>
       <div class="input-field-group">
         <label class="input-field-group__label" for="workerID">Worker ID</label>
@@ -278,6 +308,20 @@
           }"
         />
       </div>
+      <div class="input-field-group">
+        <label class="input-field-group__label" for="pool">Pool</label>
+        <input
+          class="input-field-group__input"
+          id="pool"
+          name="pool"
+          type="text"
+          formControlName="pool"
+          [ngClass]="{
+            'input-field-group__input--invalid':
+              acceptForm.get('pool')?.invalid && acceptForm.get('pool')?.dirty
+          }"
+        />
+      </div>
       <div class="accept-form__body__footer">
         <div
           class="btn btn--darker btn--animated"
@@ -286,7 +330,7 @@
           Cancel
         </div>
         <button type="submit" class="btn btn--light btn--animated">
-          Accept
+          Activate
         </button>
       </div>
     </form>

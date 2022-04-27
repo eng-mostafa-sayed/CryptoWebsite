@@ -36,7 +36,20 @@ export class NewPasswordComponent implements OnInit {
     this.code = sessionStorage.getItem('code')
       ? sessionStorage.getItem('code')
       : null;
+
+    ///if it is isnt valid
     if (
+      this.newPasswordForm.value.password ===
+        this.newPasswordForm.value.confirm &&
+      this.code !== null
+    ) {
+      this.sharedSerivce.sentMessage.next({
+        message: 'something went wrong, make sure the password is the same',
+        error: false,
+      });
+    }
+    //// if it is valid
+    else if (
       this.newPasswordForm.value.password ===
         this.newPasswordForm.value.confirm &&
       this.code !== null
@@ -51,11 +64,17 @@ export class NewPasswordComponent implements OnInit {
           sessionStorage.removeItem('code');
           sessionStorage.removeItem('email');
           sessionStorage.removeItem('resetToken');
+          /////show the notification
+          this.sharedSerivce.sentMessage.next({
+            message: 'reset password successfully',
+            error: false,
+          });
         },
         error: (err) => {
-          this.sharedSerivce.sentMessage.next(
-            'something went wrong please try again'
-          );
+          this.sharedSerivce.sentMessage.next({
+            message: 'something went wrong please try again',
+            error: true,
+          });
           console.log(err);
         },
       });

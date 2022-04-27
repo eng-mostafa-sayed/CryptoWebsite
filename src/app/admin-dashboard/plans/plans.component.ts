@@ -4,6 +4,13 @@ import { SharedService } from 'src/app/shared/shared.service';
 import { AdminDashboardService } from '../admin-dashboard.service';
 import { Plan } from '../models/plan.model';
 
+export interface planError {
+  value: string;
+  msg: string;
+  param: string;
+  location: string;
+}
+
 @Component({
   selector: 'app-plans',
   templateUrl: './plans.component.html',
@@ -33,6 +40,23 @@ export class PlansComponent implements OnInit {
   // error messages
   newFormError = '';
   updateFormError = '';
+  errors: planError[] = [
+    {
+      value: 'asd',
+      msg: 'Invalid value',
+      param: 'planType',
+      location: 'body',
+    },
+  ];
+  displayedErrors: any = {
+    planType: false,
+    planName: false,
+    cryptoName: false,
+    algorithm: false,
+    planDuration: false,
+    profitability: false,
+    price: false,
+  };
   constructor(
     private dashboardService: AdminDashboardService,
     private sharedSerivce: SharedService
@@ -41,8 +65,17 @@ export class PlansComponent implements OnInit {
     this.sharedSerivce.isLoading.next(true);
     this.dashboardService.getPlans().subscribe({
       next: (res) => {
-        this.plans = res;
-        this.plansLength = this.plans.length;
+        if (res.length > 0) {
+          this.plans = res;
+          this.plansLength = this.plans.length;
+        } else {
+          this.plans = [];
+          this.plansLength = 0;
+        }
+        this.sharedSerivce.isLoading.next(false);
+      },
+      error: (err) => {
+        this.dashboardService.errorHandler(err);
         this.sharedSerivce.isLoading.next(false);
       },
     });
@@ -94,7 +127,7 @@ export class PlansComponent implements OnInit {
       return true;
     } else if (plan.cryptoName.includes('RVN') && this.selected == 'tap3') {
       return true;
-    } else if (plan.cryptoName.includes('STX') && this.selected == 'tap4') {
+    } else if (plan.cryptoName.includes('LTCT') && this.selected == 'tap4') {
       return true;
     } else if (this.selected == 'all') {
       return true;
@@ -128,6 +161,7 @@ export class PlansComponent implements OnInit {
   onNew() {
     if (this.newPlanForm.valid) {
       const plan = this.newPlanForm.value;
+      console.log(plan);
       this.dashboardService.addNewPlan(plan).subscribe({
         next: () => {
           //the problem with the commented code is that the _id of the new plan is empty..
@@ -148,7 +182,51 @@ export class PlansComponent implements OnInit {
           window.location.reload();
         },
         error: (err) => {
-          this.newFormError = 'Some error occured, try again!';
+          // console.log(err.error);
+          // console.log(err.error.errors);
+          // this.errors = err.error['errors'];
+          // for (let i = 0; i <= err.error.length; i++) {
+          //   console.log(this.errors[i]?.msg, this.errors[i]?.param);
+          //   if (
+          //     this.errors[i]?.msg == 'Invalid value' &&
+          //     this.errors[i]?.param == 'planType'
+          //   ) {
+          //     this.displayedErrors.planType = true;
+          //   } else if (
+          //     this.errors[i]?.msg == 'Invalid value' &&
+          //     this.errors[i]?.param == 'planName'
+          //   ) {
+          //     this.displayedErrors.planName = true;
+          //   } else if (
+          //     this.errors[i]?.msg == 'Invalid value' &&
+          //     this.errors[i]?.param == 'cryptoName'
+          //   ) {
+          //     this.displayedErrors.cryptoName = true;
+          //   } else if (
+          //     this.errors[i]?.msg == 'Invalid value' &&
+          //     this.errors[i]?.param == 'algorithm'
+          //   ) {
+          //     this.displayedErrors.algorithm = true;
+          //   } else if (
+          //     this.errors[i]?.msg == 'Invalid value' &&
+          //     this.errors[i]?.param == 'planDuration'
+          //   ) {
+          //     this.displayedErrors.planDuration = true;
+          //   } else if (
+          //     this.errors[i]?.msg == 'Invalid value' &&
+          //     this.errors[i]?.param == 'profitability'
+          //   ) {
+          //     this.displayedErrors.profitability = true;
+          //   } else if (
+          //     this.errors[i]?.msg == 'Invalid value' &&
+          //     this.errors[i]?.param == 'price'
+          //   ) {
+          //     this.displayedErrors.price = true;
+          //   }
+          // }
+          // console.log(this.displayedErrors);
+          this.dashboardService.errorHandler(err);
+          this.newFormError = 'Some errors occured, try again!';
         },
       });
     } else return;
@@ -168,10 +246,15 @@ export class PlansComponent implements OnInit {
           this.editPlanForm.reset();
           this.editFormOpend = false;
           //tp send message to the notification component
-          this.sharedSerivce.sentMessage.next(message);
+          this.sharedSerivce.sentMessage.next({
+            message: message,
+            error: false,
+          });
         },
         error: (err) => {
+          this.dashboardService.errorHandler(err);
           this.updateFormError = 'Some error occured, try again!';
+          console.log(err);
         },
       });
     } else return;
@@ -191,10 +274,13 @@ export class PlansComponent implements OnInit {
 
         this.deleteConfirmOpend = false;
         //to send message to the notification component
-        this.sharedSerivce.sentMessage.next(message);
+        this.sharedSerivce.sentMessage.next({
+          message: message,
+          error: false,
+        });
       },
       error: (err) => {
-        console.log(err);
+        this.dashboardService.errorHandler(err);
       },
     });
   }
@@ -219,12 +305,16 @@ export class PlansComponent implements OnInit {
           return e._id == plan._id;
         });
         this.plans[updatedInedx] = plan;
-        // console.log(this.plans[updatedInedx]);
+        this.plans = [...this.plans];
         this.editPlanForm.reset();
         //tp send message to the notification component
-        this.sharedSerivce.sentMessage.next(message);
+        this.sharedSerivce.sentMessage.next({
+          message: message,
+          error: false,
+        });
       },
       error: (err) => {
+        this.dashboardService.errorHandler(err);
         console.log(err);
       },
     });

@@ -8,6 +8,8 @@
       [paginator]="true"
       [rows]="10"
       [rowsPerPageOptions]="[10, 15, 20]"
+      sortField="createdAt"
+      [sortOrder]="-1"
     >
       <ng-template pTemplate="caption">
         Subscribed users ({{ usersLength }})

@@ -48,13 +48,23 @@
           class="dropdown-taps__trigger__btn__text"
           *ngIf="selected == 'tap3'"
         >
-          <i class="fab fa-btc sm"></i> <a>RVN</a>
+          <img
+            src="../../../assets/RVN-Crypto.svg"
+            alt="RVN"
+            class="icon icon--xs"
+          />
+          <a>RVN</a>
         </div>
         <div
           class="dropdown-taps__trigger__btn__text"
           *ngIf="selected == 'tap4'"
         >
-          <i class="fab fa-ethereum sm"></i> <a>STX</a>
+          <img
+            src="../../../assets/LTCT-Crypto.png"
+            alt="LTCT"
+            class="icon icon--xs"
+          />
+          <a>LTCT</a>
         </div>
         <i class="fas fa-angle-down arrow" *ngIf="!dropCollapsed"></i>
         <i class="fas fa-angle-up arrow" *ngIf="dropCollapsed"></i>
@@ -84,13 +94,22 @@
         class="dropdown-taps__body__item"
         (click)="selected = 'tap3'; dropCollapsed = !dropCollapsed"
       >
-        <i class="fab fa-btc sm"></i> <a>RVN</a>
+        <img
+          src="../../../assets/RVN-Crypto.svg"
+          alt="RVN"
+          class="icon icon--xs"
+        />
+        <a>RVN</a>
       </li>
       <li
         class="dropdown-taps__body__item"
         (click)="selected = 'tap4'; dropCollapsed = !dropCollapsed"
       >
-        <i class="fab fa-ethereum sm"></i> <a>STX</a>
+        <img
+          src="../../../assets/LTCT-Crypto.png"
+          alt="LTCT"
+          class="icon icon--xs"
+        /><a>LTCT</a>
       </li>
     </ul>
   </div>
@@ -152,7 +171,7 @@
 
           <div class="miner__box">
             <h6 class="miner__box__title">Unit Price</h6>
-            <p class="miner__box__sub">{{ miner.price }}</p>
+            <p class="miner__box__sub">{{ miner.price }}$</p>
           </div>
           <div class="miner__box">
             <h6 class="miner__box__title">Host Fees</h6>
@@ -263,7 +282,7 @@
                 <input
                   class="input-field-group__input"
                   placeholder=""
-                  type="text"
+                  type="number"
                   id="hashPower"
                   formControlName="hashPower"
                   [ngClass]="{
@@ -281,7 +300,7 @@
             <input
               class="input-field-group__input"
               placeholder=""
-              type="text"
+              type="number"
               id="price"
               formControlName="price"
               [ngClass]="{
@@ -299,7 +318,7 @@
             <input
               class="input-field-group__input"
               placeholder=""
-              type="text"
+              type="number"
               id="hostFees"
               formControlName="hostFees"
               [ngClass]="{
@@ -308,7 +327,7 @@
                   newMinerForm.get('hostFees')?.dirty
               }"
             />
-            <div class="input-field-group__icon">$</div>
+            <div class="input-field-group__icon">%</div>
           </div>
         </div>
         <div>
@@ -409,7 +428,7 @@
                 <input
                   class="input-field-group__input"
                   placeholder=""
-                  type="text"
+                  type="number"
                   id="hashPower"
                   formControlName="hashPower"
                   [ngClass]="{
@@ -427,7 +446,7 @@
             <input
               class="input-field-group__input"
               placeholder=""
-              type="text"
+              type="number"
               id="price"
               formControlName="price"
               [ngClass]="{
@@ -445,7 +464,7 @@
             <input
               class="input-field-group__input"
               placeholder=""
-              type="text"
+              type="number"
               id="hostFees"
               formControlName="hostFees"
               [ngClass]="{
@@ -454,7 +473,7 @@
                   newMinerForm.get('hostFees')?.dirty
               }"
             />
-            <div class="input-field-group__icon">$</div>
+            <div class="input-field-group__icon">%</div>
           </div>
         </div>
         <div>

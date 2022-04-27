@@ -51,6 +51,7 @@
           <button
             (click)="buyAsic([miner._id])"
             class="btn btn--animated btn--light miner__btn"
+            [disabled]="!miner.availability"
           >
             {{ miner.availability ? "Buy Device" : "Not Available Now" }}
           </button>

@@ -27,7 +27,7 @@
       }
       &__value {
         font-weight: 700;
-        font-size: 2rem;
+        font-size: 1.6rem;
         line-height: 2.5rem;
         overflow-wrap: anywhere;
       }
@@ -98,7 +98,7 @@
           margin-bottom: 2.4rem;
           color: $color-white;
           display: flex;
-          justify-content: start;
+          justify-content: flex-start;
           align-items: baseline;
           gap: 1.4rem;
           cursor: default;

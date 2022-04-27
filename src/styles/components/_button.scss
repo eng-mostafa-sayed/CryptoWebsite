@@ -208,7 +208,7 @@ button.mat-button-disabled {
 }
 .toggle-btn {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   .checkbox {
     label {

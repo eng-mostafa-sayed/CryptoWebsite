@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminAuthGuard } from '../Auth/admin-auth.guard';
 import { AdminDashboardComponent } from './admin-dashboard.component';
+import { FarmComponent } from './farm/farm.component';
 import { MinersComponent } from './miners/miners.component';
 import { OverviewComponent } from './overview/overview.component';
 import { PlansComponent } from './plans/plans.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'profile/:userID', component: SubUserComponent },
       { path: 'miners', component: MinersComponent },
       { path: 'request', component: RequestComponent },
+      { path: 'farm', component: FarmComponent },
     ],
   },
 ];

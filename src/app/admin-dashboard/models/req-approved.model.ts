@@ -12,4 +12,5 @@ export class RequestApproved {
   'updatedAt': Date;
   'address': string;
   'workerID': string;
+  'pool': string;
 }

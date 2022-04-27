@@ -1,4 +1,22 @@
-//Icons
+// icons new
+.icon {
+  margin-right: 8px;
+  &--xs {
+    height: 24px;
+    width: 24px;
+  }
+  &--sm {
+    height: 3.2rem;
+    width: 3.2rem;
+  }
+  &--md {
+    height: 4rem;
+    width: 4rem;
+  }
+  &--lg {
+  }
+}
+////////////////
 .fab.lg {
   border-radius: 50%;
   height: 40px;

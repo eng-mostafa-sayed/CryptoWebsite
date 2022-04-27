@@ -50,7 +50,7 @@ export class SubUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //    this.sharedSerivce.isLoading.next(true);
+    this.sharedSerivce.isLoading.next(true);
     this.sub = this.activatedRoute.paramMap.subscribe((params) => {
       this.userID = params.get('userID')!;
       this.dashboardService.getUserData(this.userID).subscribe({
@@ -76,6 +76,9 @@ export class SubUserComponent implements OnInit {
           ];
           this.sharedSerivce.isLoading.next(false);
         },
+        error: (err) => {
+          this.dashboardService.errorHandler(err);
+        },
       });
       this.dashboardService.getUserPlans(this.userID).subscribe({
         next: (res) => {
@@ -89,11 +92,17 @@ export class SubUserComponent implements OnInit {
           this.activePlansLength = this.activeUserPlans.length;
           this.expiredPlansLength = this.expiredUserPlans.length;
         },
+        error: (err) => {
+          this.dashboardService.errorHandler(err);
+        },
       });
       this.dashboardService.getUserAsics(this.userID).subscribe({
         next: (res) => {
           this.userAsics = res;
           this.userAsicsLength = res.length;
+        },
+        error: (err) => {
+          this.dashboardService.errorHandler(err);
         },
       });
       this.dashboardService.getUserDepositLogs(this.userID).subscribe({
@@ -101,12 +110,18 @@ export class SubUserComponent implements OnInit {
           this.depositLogs = res;
           this.depositLogsLength = res.length;
         },
+        error: (err) => {
+          this.dashboardService.errorHandler(err);
+        },
       });
     });
     this.dashboardService.getUserWithdrawLogs(this.userID).subscribe({
       next: (res) => {
         this.withdrawLogs = res;
         this.withdrawLogsLength = res.length;
+      },
+      error: (err) => {
+        this.dashboardService.errorHandler(err);
       },
     });
   }

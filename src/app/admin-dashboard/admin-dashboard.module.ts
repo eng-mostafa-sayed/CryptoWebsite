@@ -22,6 +22,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { InputTextModule } from 'primeng/inputtext';
 import { SubUserComponent } from './sub-user/sub-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FarmComponent } from './farm/farm.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MinersComponent,
     RequestComponent,
     SubUserComponent,
+    FarmComponent,
   ],
   imports: [
     CommonModule,

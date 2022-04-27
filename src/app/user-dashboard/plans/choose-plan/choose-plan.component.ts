@@ -66,11 +66,22 @@ export class ChoosePlanComponent implements OnInit {
   //////////////////////////// each tab has its buttons even short or long and BTC or ETH or RVN or LTCT
   buying(n: any) {
     console.log('buy Bitcion short plan');
-    this.dashboard.buyPlan(n[0]).subscribe((res: any) => {
-      console.log(n[0]);
+    this.dashboard.buyPlan(n[0]).subscribe({
+      next: (res) => {
+        console.log(n[0]);
+        ///this is to display the notification
+        this.sharedSerivce.sentMessage.next({
+          message: 'the plan has been added successfully',
+          error: false,
+        });
+      },
+      error: (err) => {
+        this.sharedSerivce.sentMessage.next({
+          message: 'something went wrong',
+          error: true,
+        });
+      },
     });
-    ///this is to display the notification
-    this.sharedSerivce.sentMessage.next('the plan has been added successfully');
   }
 
   /////here is general buy plan method
@@ -96,9 +107,7 @@ export class ChoosePlanComponent implements OnInit {
               ? res.plans[i].profitability
               : '0',
             price: res.plans[i].price ? res.plans[i].price : '0',
-            availability: res.plans[i].availability
-              ? res.plans[i].availability
-              : true,
+            availability: res.plans[i].availability,
             hashrate: res.PlansHashPower[i].hashrate
               ? res.PlansHashPower[i].hashrate
               : '0',
@@ -125,9 +134,7 @@ export class ChoosePlanComponent implements OnInit {
               ? res.plans[i].profitability
               : '0',
             price: res.plans[i].price ? res.plans[i].price : '0',
-            availability: res.plans[i].availability
-              ? res.plans[i].availability
-              : true,
+            availability: res.plans[i].availability,
             hashrate: res.PlansHashPower[i].hashrate
               ? res.PlansHashPower[i].hashrate
               : '0',
@@ -156,9 +163,7 @@ export class ChoosePlanComponent implements OnInit {
               ? res.plans[i].profitability
               : '0',
             price: res.plans[i].price ? res.plans[i].price : '0',
-            availability: res.plans[i].availability
-              ? res.plans[i].availability
-              : true,
+            availability: res.plans[i].availability,
             hashrate: res.PlansHashPower[i].hashrate
               ? res.PlansHashPower[i].hashrate
               : '0',
@@ -184,9 +189,7 @@ export class ChoosePlanComponent implements OnInit {
               ? res.plans[i].profitability
               : '0',
             price: res.plans[i].price ? res.plans[i].price : '0',
-            availability: res.plans[i].availability
-              ? res.plans[i].availability
-              : true,
+            availability: res.plans[i].availability,
             hashrate: res.PlansHashPower[i].hashrate
               ? res.PlansHashPower[i].hashrate
               : '0',
@@ -214,9 +217,7 @@ export class ChoosePlanComponent implements OnInit {
               ? res.plans[i].profitability
               : '0',
             price: res.plans[i].price ? res.plans[i].price : '0',
-            availability: res.plans[i].availability
-              ? res.plans[i].availability
-              : true,
+            availability: res.plans[i].availability,
             hashrate: res.PlansHashPower[i].hashrate
               ? res.PlansHashPower[i].hashrate
               : '0',
@@ -242,9 +243,7 @@ export class ChoosePlanComponent implements OnInit {
               ? res.plans[i].profitability
               : '0',
             price: res.plans[i].price ? res.plans[i].price : '0',
-            availability: res.plans[i].availability
-              ? res.plans[i].availability
-              : true,
+            availability: res.plans[i].availability,
             hashrate: res.PlansHashPower[i].hashrate
               ? res.PlansHashPower[i].hashrate
               : '0',
@@ -272,9 +271,7 @@ export class ChoosePlanComponent implements OnInit {
               ? res.plans[i].profitability
               : '0',
             price: res.plans[i].price ? res.plans[i].price : '0',
-            availability: res.plans[i].availability
-              ? res.plans[i].availability
-              : true,
+            availability: res.plans[i].availability,
             hashrate: res.PlansHashPower[i].hashrate
               ? res.PlansHashPower[i].hashrate
               : '0',
@@ -300,9 +297,7 @@ export class ChoosePlanComponent implements OnInit {
               ? res.plans[i].profitability
               : '0',
             price: res.plans[i].price ? res.plans[i].price : '0',
-            availability: res.plans[i].availability
-              ? res.plans[i].availability
-              : true,
+            availability: res.plans[i].availability,
             hashrate: res.PlansHashPower[i].hashrate
               ? res.PlansHashPower[i].hashrate
               : '0',

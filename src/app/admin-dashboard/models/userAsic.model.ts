@@ -12,4 +12,5 @@ export class UserAsic {
   'updatedAt': Date;
   'address': string;
   'workerID': string;
+  'pool': string;
 }

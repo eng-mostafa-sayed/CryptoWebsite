@@ -42,9 +42,20 @@ export class MinersComponent implements OnInit {
     this.sharedSerivce.isLoading.next(true);
     this.dashboardService.getMiners().subscribe({
       next: (res) => {
-        this.miners = res;
-        this.minersLength = this.miners.length;
+        if (res.length > 0) {
+          this.miners = res;
+          this.minersLength = this.miners.length;
+        } else {
+          this.miners = [];
+          this.minersLength = 0;
+        }
         this.sharedSerivce.isLoading.next(false);
+      },
+      error: (err) => {
+        this.miners = [];
+        this.minersLength = 0;
+        this.sharedSerivce.isLoading.next(false);
+        this.dashboardService.errorHandler(err);
       },
     });
     this.newMinerForm = new FormGroup({
@@ -108,7 +119,7 @@ export class MinersComponent implements OnInit {
       return true;
     } else if (miner.cryptoName.includes('RVN') && this.selected == 'tap3') {
       return true;
-    } else if (miner.cryptoName.includes('STX') && this.selected == 'tap4') {
+    } else if (miner.cryptoName.includes('LTCT') && this.selected == 'tap4') {
       return true;
     } else if (this.selected == 'all') {
       return true;
@@ -135,6 +146,7 @@ export class MinersComponent implements OnInit {
           window.location.reload();
         },
         error: (err) => {
+          this.dashboardService.errorHandler(err);
           this.newFormError = 'Some error occured, try again!';
         },
       });
@@ -155,10 +167,14 @@ export class MinersComponent implements OnInit {
           this.editMinerForm.reset();
           this.editFormOpend = false;
           //tp send message to the notification component
-          this.sharedSerivce.sentMessage.next(message);
+          this.sharedSerivce.sentMessage.next({
+            message: message,
+            error: false,
+          });
         },
         error: (err) => {
           console.log(err);
+          this.dashboardService.errorHandler(err);
         },
       });
     } else return;
@@ -177,10 +193,16 @@ export class MinersComponent implements OnInit {
         }
         this.deleteConfirmOpend = false;
         //to send message to the notification component
-        this.sharedSerivce.sentMessage.next(message);
+        this.sharedSerivce.sentMessage.next({
+          message: message,
+          error: false,
+        });
       },
       error: (err) => {
-        this.updateFormError = 'Some error occured, try again!';
+        this.dashboardService.errorHandler(err);
+        const message = `'${this.minerToEdit.asicName}' can't be deleted! `;
+        this.sharedSerivce.sentMessage.next({ message: message, error: true });
+        this.deleteConfirmOpend = false;
       },
     });
   }
@@ -207,10 +229,14 @@ export class MinersComponent implements OnInit {
         // console.log(this.miners[updatedInedx]);
         this.editMinerForm.reset();
         //tp send message to the notification component
-        this.sharedSerivce.sentMessage.next(message);
+        this.sharedSerivce.sentMessage.next({
+          message: message,
+          error: false,
+        });
       },
       error: (err) => {
         console.log(err);
+        this.dashboardService.errorHandler(err);
       },
     });
   }

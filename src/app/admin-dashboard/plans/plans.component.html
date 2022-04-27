@@ -48,13 +48,23 @@
           class="dropdown-taps__trigger__btn__text"
           *ngIf="selected == 'tap3'"
         >
-          <i class="fab fa-btc sm"></i> <a>RVN</a>
+          <img
+            src="../../../assets/RVN-Crypto.svg"
+            alt="RVN"
+            class="icon icon--xs"
+          />
+          <a>RVN</a>
         </div>
         <div
           class="dropdown-taps__trigger__btn__text"
           *ngIf="selected == 'tap4'"
         >
-          <i class="fab fa-ethereum sm"></i> <a>STX</a>
+          <img
+            src="../../../assets/LTCT-Crypto.png"
+            alt="LTCT"
+            class="icon icon--xs"
+          />
+          <a>LTCT</a>
         </div>
         <i class="fas fa-angle-down arrow" *ngIf="!dropCollapsed"></i>
         <i class="fas fa-angle-up arrow" *ngIf="dropCollapsed"></i>
@@ -84,13 +94,22 @@
         class="dropdown-taps__body__item"
         (click)="selected = 'tap3'; dropCollapsed = !dropCollapsed"
       >
-        <i class="fab fa-btc sm"></i> <a>RVN</a>
+        <img
+          src="../../../assets/RVN-Crypto.svg"
+          alt="RVN"
+          class="icon icon--xs"
+        />
+        <a>RVN</a>
       </li>
       <li
         class="dropdown-taps__body__item"
         (click)="selected = 'tap4'; dropCollapsed = !dropCollapsed"
       >
-        <i class="fab fa-ethereum sm"></i> <a>STX</a>
+        <img
+          src="../../../assets/LTCT-Crypto.png"
+          alt="LTCT"
+          class="icon icon--xs"
+        /><a>LTCT</a>
       </li>
     </ul>
   </div>
@@ -141,10 +160,7 @@
             <h6 class="miner__box__title">Mining Currency</h6>
             <p class="miner__box__sub">{{ plan.cryptoName }}</p>
           </div>
-          <div class="miner__box">
-            <h6 class="miner__box__title">Plan Type</h6>
-            <p class="miner__box__sub">{{ plan.planType }}</p>
-          </div>
+
           <div class="miner__box">
             <h6 class="miner__box__title">Algorithm</h6>
             <p class="miner__box__sub">{{ plan.algorithm }}</p>
@@ -155,7 +171,38 @@
           </div>
           <div class="miner__box">
             <h6 class="miner__box__title">Plan Duration</h6>
-            <p class="miner__box__sub">{{ plan.planDuration }}</p>
+            <p class="miner__box__sub">
+              <span
+                *ngIf="
+                  plan.planDuration == 1 &&
+                  (plan.planType == 'long' || plan.planType == 'Long')
+                "
+              >
+                1 Year</span
+              >
+              <span
+                *ngIf="
+                  plan.planDuration == 1 &&
+                  (plan.planType == 'short' || plan.planType == 'Short')
+                "
+              >
+                1 Month</span
+              >
+              <span
+                *ngIf="
+                  !(plan.planDuration == 1) &&
+                  (plan.planType == 'short' || plan.planType == 'Short')
+                "
+                >{{ plan.planDuration }} months</span
+              >
+              <span
+                *ngIf="
+                  !(plan.planDuration == 1) &&
+                  (plan.planType == 'long' || plan.planType == 'Long')
+                "
+                >{{ plan.planDuration }} years</span
+              >
+            </p>
           </div>
           <div class="miner__box">
             <h6 class="miner__box__title">Price</h6>
@@ -163,7 +210,16 @@
             <div class="miner__box__active row justify-content-between">
               <div class="col-2 d-flex flex-column">
                 <span class="miner__box__active__name">Status</span>
-                <span class="miner__box__active__value">Active</span>
+                <span
+                  class="miner__box__active__value"
+                  *ngIf="plan.availability"
+                  >Active</span
+                >
+                <span
+                  class="miner__box__active__value"
+                  *ngIf="!plan.availability"
+                  >Inactive</span
+                >
               </div>
               <section class="toggle-btn col-3">
                 <div class="checkbox">
@@ -257,6 +313,7 @@
                       newPlanForm.get('planType')?.dirty
                   }"
                 />
+                <span *ngIf="displayedErrors.planType">Error</span>
               </div>
             </div>
             <div class="col-12 col-md-6">
@@ -267,7 +324,7 @@
                 <input
                   class="input-field-group__input"
                   placeholder=""
-                  type="text"
+                  type="number"
                   id="planDuration"
                   formControlName="planDuration"
                   [ngClass]="{
@@ -307,7 +364,7 @@
                 <input
                   class="input-field-group__input"
                   placeholder=""
-                  type="text"
+                  type="number"
                   id="profitability"
                   formControlName="profitability"
                   [ngClass]="{
@@ -325,7 +382,7 @@
             <input
               class="input-field-group__input"
               placeholder=""
-              type="text"
+              type="number"
               id="price"
               formControlName="price"
               [ngClass]="{
@@ -337,10 +394,10 @@
             <div class="input-field-group__icon">$</div>
           </div>
         </div>
+        <span class="input-field-group__error" *ngIf="newFormError != ''">{{
+          newFormError
+        }}</span>
         <div>
-          <span class="input-field-group__error" *ngIf="newFormError != ''">{{
-            newFormError
-          }}</span>
           <button
             type="submit"
             class="login-box__btn btn btn--light btn--animated"
@@ -435,7 +492,7 @@
                 <input
                   class="input-field-group__input"
                   placeholder=""
-                  type="text"
+                  type="number"
                   id="planDuration"
                   formControlName="planDuration"
                   [ngClass]="{
@@ -475,7 +532,7 @@
                 <input
                   class="input-field-group__input"
                   placeholder=""
-                  type="text"
+                  type="number"
                   id="profitability"
                   formControlName="profitability"
                   [ngClass]="{
@@ -493,7 +550,7 @@
             <input
               class="input-field-group__input"
               placeholder=""
-              type="text"
+              type="number"
               id="price"
               formControlName="price"
               [ngClass]="{

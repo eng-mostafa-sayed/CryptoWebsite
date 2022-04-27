@@ -8,18 +8,20 @@ import { SharedService } from '../shared.service';
 })
 export class NotificationComponent implements OnInit {
   message: string;
+  error: boolean;
 
   constructor(private shared: SharedService) {}
 
   ngOnInit(): void {
-    this.shared.sentMessage.subscribe((message: string) => {
-      this.message = message;
+    this.shared.sentMessage.subscribe((res) => {
+      this.message = res.message;
+      this.error = res.error;
       setTimeout(() => {
-        this.shared.sentMessage.next('');
-      }, 2500);
+        this.shared.sentMessage.next({ message: '', error: false });
+      }, 5000);
     });
   }
   closeNotif() {
-    this.shared.sentMessage.next('');
+    this.shared.sentMessage.next({ message: '', error: false });
   }
 }

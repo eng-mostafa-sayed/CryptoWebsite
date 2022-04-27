@@ -12,6 +12,7 @@ import { UserComponent } from './Auth/user/user.component';
 import { ChoosePlanComponent } from './user-dashboard/plans/choose-plan/choose-plan.component';
 import { WithdrawComponent } from './user-dashboard/withdraw/withdraw.component';
 import { AdminComponent } from './Auth/admin/admin.component';
+// import { MerchantComponent } from './merchant/merchant.component';
 
 const routes: Routes = [
   {
@@ -54,8 +55,10 @@ const routes: Routes = [
     component: UserComponent,
     children: [{ path: 'signin', component: AdminComponent }],
   },
-  // { path: '', redirectTo: 'user/signin', pathMatch: 'full' },
-  // { path: '**', redirectTo: 'user/signin' },
+  // {
+  //   path: 'test',
+  //    component: MerchantComponent,
+  // },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
