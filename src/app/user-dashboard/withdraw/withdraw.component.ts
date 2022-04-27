@@ -153,9 +153,9 @@ export class WithdrawComponent implements OnInit {
     }, this.waitingTime + 200);
   }
 
-  ///////////////////////////////////////////////////// to withdraw in BTC
-
+  ///////////////////////////////////////////////////// to withdraw
   onWithdraw(currency: string) {
+    this.sharedSerivce.isLoading.next(true);
     console.log('inside withdraw');
     let _amount, _address;
     if (currency === 'BTC') {
@@ -187,6 +187,7 @@ export class WithdrawComponent implements OnInit {
           },
         });
     }
+    this.sharedSerivce.isLoading.next(false);
   }
   ////////////////////////////////////////////////////////////////////
   cryptoPlansTap1() {

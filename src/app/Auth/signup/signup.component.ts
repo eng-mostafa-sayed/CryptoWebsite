@@ -39,6 +39,11 @@ export class SignupComponent implements OnInit {
     });
   }
   onSignup() {
+    console.log(`name : ${this.signupForm.value.name}`);
+    console.log(`email : ${this.signupForm.value.email}`);
+    console.log(`phone : ${this.signupForm.value.phone}`);
+    console.log(`password : ${this.signupForm.value.password}`);
+
     this.sharedSerivce.isLoading.next(true);
     if (
       this.signupForm.value.name &&
@@ -48,18 +53,20 @@ export class SignupComponent implements OnInit {
     ) {
       this.authService
         .signup(
-          this.signupForm.value.name,
-          this.signupForm.value.email,
+          String(this.signupForm.value.name),
+          String(this.signupForm.value.email).trim(),
           this.signupForm.value.phone,
-          this.signupForm.value.password
+          String(this.signupForm.value.password)
         )
         .subscribe({
           /////////////////////////////////////////////mesh byd5ol hena
           next: (res: any) => {
-            this.router.navigate(['../signin']);
+            this.router.navigate(['user//signin']);
+            this.sharedSerivce.sentMessage.next('Created Successfully');
           },
           error: (err: any) => {
             console.log(err);
+            this.sharedSerivce.sentMessage.next('Failed');
           },
         });
       this.sharedSerivce.isLoading.next(false);

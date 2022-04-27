@@ -27,7 +27,6 @@ export class AuthService {
   ) {}
 
   getAccessToken() {
-    sessionStorage.setItem('accessToken', `${this.accessToken}`);
     return this.accessToken;
   }
 
@@ -36,10 +35,10 @@ export class AuthService {
     return this.http.post<any>(
       `${this.APIBaseUrl}/user/register?key=${this.APIKey}`,
       {
-        name,
-        email,
-        phone,
-        password,
+        userName: name,
+        email: email,
+        phone: phone,
+        password: password,
       }
     );
   }
@@ -60,9 +59,10 @@ export class AuthService {
             );
             this.authStatusListner.next(false);
           } else if (res.message != 'Wrong credentials') {
+            sessionStorage.setItem('name', `${userName}`);
             this.authStatusListner.next(true);
             this.router.navigate(['/user/otp']);
-            sessionStorage.removeItem('password');
+            sessionStorage.setItem('password', `${password}`);
           }
         },
         error: (err) => {
@@ -99,11 +99,12 @@ export class AuthService {
   async otpValidator(otp: string) {
     await this.http
       .post<any>(`${this.APIBaseUrl}/user/TwoFactorAuth?key=${this.APIKey}`, {
-        userName: this.name,
+        userName: sessionStorage.getItem('name'),
         otp: otp,
       })
       .subscribe({
         next: (res) => {
+          sessionStorage.clear();
           this.accessToken = res.jwt.accessToken;
           this.refreshToken = res.jwt.refreshToken;
           localStorage.setItem('accessToken', `${this.accessToken}`);
@@ -120,7 +121,7 @@ export class AuthService {
   }
   //////////////////////////////////////////////////////////////
   resendOtp() {
-    let n = this.name;
+    let n = sessionStorage.getItem('name');
     let p = sessionStorage.getItem('password');
     this.signin(n ? n : 'dummy data', p ? p : 'dummy data');
   }
@@ -136,6 +137,9 @@ export class AuthService {
           this.authStatusListner.next(true);
           sessionStorage.setItem('email', forgetEmail);
           this.router.navigate(['/user/recovery-message']);
+          this.sharedSerivce.sentMessage.next(
+            'Your password had been reseted successfully'
+          );
         },
         error: (err) => {
           this.sharedSerivce.sentMessage.next('wrong password');
