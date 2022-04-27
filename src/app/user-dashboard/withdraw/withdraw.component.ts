@@ -154,10 +154,24 @@ export class WithdrawComponent implements OnInit {
   }
 
   ///////////////////////////////////////////////////// to withdraw in BTC
-  onWithdrawBTC(currency: string) {
-    let _amount = this.withdrawFormLTCT.value.amountBTC;
-    let _address = this.withdrawFormLTCT.value.addressBTC;
-    if (_amount > 0.0) {
+
+  onWithdraw(currency: string) {
+    console.log('inside withdraw');
+    let _amount, _address;
+    if (currency === 'BTC') {
+      _amount = this.withdrawFormBTC.value.amountBTC;
+      _address = this.withdrawFormBTC.value.addressBTC;
+    } else if (currency === 'ETH') {
+      _amount = this.withdrawFormETH.value.amountETH;
+      _address = this.withdrawFormETH.value.addressETH;
+    } else if (currency === 'RVN') {
+      _amount = this.withdrawFormRVN.value.amountRVN;
+      _address = this.withdrawFormRVN.value.addressRVN;
+    } else if (currency === 'LTCT') {
+      _amount = this.withdrawFormLTCT.value.amountLTCT;
+      _address = this.withdrawFormLTCT.value.addressLTCT;
+    }
+    if (Number(_amount) > 0.0 && _address != null) {
       this.dashboardd
         .UserWithdrawRequest(currency, parseFloat(_amount), _address)
         .subscribe({
@@ -174,73 +188,6 @@ export class WithdrawComponent implements OnInit {
         });
     }
   }
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////// to withdraw in ETH
-  onWithdrawETH(currency: string) {
-    let _amount = this.withdrawFormLTCT.value.amountETH;
-    let _address = this.withdrawFormLTCT.value.addressETH;
-    if (_amount > 0.0) {
-      this.dashboardd
-        .UserWithdrawRequest(currency, parseFloat(_amount), _address)
-        .subscribe({
-          next: (res) => {
-            ///this is to display the notification
-            this.sharedSerivce.sentMessage.next(
-              'the property has been added successfully wait for the confirmation'
-            );
-          },
-          error: (err) => {
-            console.log(err);
-            this.sharedSerivce.sentMessage.next('something went wrong');
-          },
-        });
-    }
-  }
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////// to withdraw in RVN
-  onWithdrawRVN(currency: string) {
-    let _amount = this.withdrawFormLTCT.value.amountRVN;
-    let _address = this.withdrawFormLTCT.value.addressRVN;
-    if (_amount > 0.0) {
-      this.dashboardd
-        .UserWithdrawRequest(currency, parseFloat(_amount), _address)
-        .subscribe({
-          next: (res) => {
-            ///this is to display the notification
-            this.sharedSerivce.sentMessage.next(
-              'the property has been added successfully wait for the confirmation'
-            );
-          },
-          error: (err) => {
-            console.log(err);
-            this.sharedSerivce.sentMessage.next('something went wrong');
-          },
-        });
-    }
-  }
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////// to withdraw in LTCT
-  onWithdrawLTCT(currency: string) {
-    let _amount = this.withdrawFormLTCT.value.amountLTCT;
-    let _address = this.withdrawFormLTCT.value.addressLTCT;
-    if (_amount > 0.0) {
-      this.dashboardd
-        .UserWithdrawRequest(currency, parseFloat(_amount), _address)
-        .subscribe({
-          next: (res) => {
-            ///this is to display the notification
-            this.sharedSerivce.sentMessage.next(
-              'the property has been added successfully wait for the confirmation'
-            );
-          },
-          error: (err) => {
-            console.log(err);
-            this.sharedSerivce.sentMessage.next('something went wrong');
-          },
-        });
-    }
-  }
-  ///////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   cryptoPlansTap1() {
     this.cryptoTapOpend = 'tap1';
