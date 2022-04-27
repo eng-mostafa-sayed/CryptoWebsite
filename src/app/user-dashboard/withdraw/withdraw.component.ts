@@ -155,8 +155,8 @@ export class WithdrawComponent implements OnInit {
 
   ///////////////////////////////////////////////////// to withdraw in BTC
   onWithdrawBTC(currency: string) {
-    let _amount = this.withdrawFormLTCT.value.amountLTCT;
-    let _address = this.withdrawFormLTCT.value.addressLTCT;
+    let _amount = this.withdrawFormLTCT.value.amountBTC;
+    let _address = this.withdrawFormLTCT.value.addressBTC;
     if (_amount > 0.0) {
       this.dashboardd
         .UserWithdrawRequest(currency, parseFloat(_amount), _address)
@@ -177,8 +177,8 @@ export class WithdrawComponent implements OnInit {
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////// to withdraw in ETH
   onWithdrawETH(currency: string) {
-    let _amount = this.withdrawFormLTCT.value.amountLTCT;
-    let _address = this.withdrawFormLTCT.value.addressLTCT;
+    let _amount = this.withdrawFormLTCT.value.amountETH;
+    let _address = this.withdrawFormLTCT.value.addressETH;
     if (_amount > 0.0) {
       this.dashboardd
         .UserWithdrawRequest(currency, parseFloat(_amount), _address)
@@ -199,8 +199,8 @@ export class WithdrawComponent implements OnInit {
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////// to withdraw in RVN
   onWithdrawRVN(currency: string) {
-    let _amount = this.withdrawFormLTCT.value.amountLTCT;
-    let _address = this.withdrawFormLTCT.value.addressLTCT;
+    let _amount = this.withdrawFormLTCT.value.amountRVN;
+    let _address = this.withdrawFormLTCT.value.addressRVN;
     if (_amount > 0.0) {
       this.dashboardd
         .UserWithdrawRequest(currency, parseFloat(_amount), _address)
@@ -241,6 +241,7 @@ export class WithdrawComponent implements OnInit {
     }
   }
   ///////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
   cryptoPlansTap1() {
     this.cryptoTapOpend = 'tap1';
   }
