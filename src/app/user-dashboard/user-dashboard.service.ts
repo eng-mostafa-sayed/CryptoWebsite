@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Balance } from './balance.model';
 import { AuthService } from '../Auth/auth.service';
+import { SharedService } from '../shared/shared.service';
 
 @Injectable({
   providedIn: 'root',
@@ -62,7 +63,11 @@ export class DashboardService {
   }
 
   balances$ = new Subject<Balance[]>();
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private sharedSerivce: SharedService
+  ) {
     this.accessToken = this.authService.getAccessToken();
   }
 

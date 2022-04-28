@@ -3,6 +3,7 @@ import { newArray } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/shared/shared.service';
 import { DashboardService } from '../../user-dashboard.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-choose-miner',
@@ -20,18 +21,6 @@ export class ChooseMinerComponent implements OnInit {
   miners2 = new Array();
   miners3 = new Array();
 
-  buyAsic(n: any) {
-    this.dashboard.buyAsic(n[0]).subscribe((res: any) => {
-      console.log('buying Asic' + n[0]);
-    });
-    ///this is to display the notification
-    this.sharedSerivce.sentMessage.next({
-      message:
-        'the ASIC  has been added successfully wait for the confirmation',
-      error: false,
-    });
-  }
-
   ngOnInit() {
     this.sharedSerivce.isLoading.next(true);
     this.dashboard.getAsicBTCDevicesContractPlans().subscribe((res: any) => {
@@ -43,6 +32,26 @@ export class ChooseMinerComponent implements OnInit {
       //   this.miners.push(...this.miners3);
       //   console.log(this.miners);
       // });
+    });
+  }
+  buyAsic(n: any) {
+    this.dashboard.buyAsic(n[0]).subscribe({
+      next: (res) => {
+        ///this is to display the notification
+        this.sharedSerivce.sentMessage.next({
+          message:
+            'the ASIC  has been added successfully wait for the confirmation',
+          error: false,
+        });
+      },
+      error: (err) => {
+        console.log(err);
+        ///this is to display the notification
+        this.sharedSerivce.sentMessage.next({
+          message: 'something went wrong ,or no sufficient balance',
+          error: true,
+        });
+      },
     });
   }
 }
