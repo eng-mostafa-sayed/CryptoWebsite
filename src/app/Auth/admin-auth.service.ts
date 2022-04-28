@@ -50,8 +50,10 @@ export class AdminAuthService {
           this.authStatusListener$.next(true);
           sessionStorage.setItem('token', this.token);
           sessionStorage.setItem('refersh', this.refersh);
+          localStorage.setItem('token', this.token);
+          localStorage.setItem('refersh', this.refersh);
           this.sharedService.isLoading.next(false);
-          this.router.navigate(['admin/dashboard/overview']);
+          this.router.navigate(['admin/dashboard/overview']); //////////////edited
         },
         error: (err) => {
           this.otpError$.next(true);

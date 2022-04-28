@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Plan } from './models/plan.model';
 import { Miner } from './models/miner.model';
@@ -11,6 +15,8 @@ import { Log } from './models/log.model';
 import { Worker } from './models/worker.model';
 import { AdminAuthService } from '../Auth/admin-auth.service';
 import { catchError, tap, throwError } from 'rxjs';
+
+let accessToken = localStorage.getItem('token');
 @Injectable({
   providedIn: 'root',
 })
@@ -23,10 +29,17 @@ export class AdminDashboardService {
     private authService: AdminAuthService
   ) {}
 
+  header = {
+    headers: new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}`
+    ),
+  };
   ////////////////////             Plans               ////////////////////////
   getPlans() {
     return this.http.get<Plan[]>(
-      `${this.rootURL}/api/plan/admin?key=${this.key}`
+      `${this.rootURL}/api/plan/admin?key=${this.key}`,
+      this.header
     );
   }
 
@@ -43,7 +56,7 @@ export class AdminDashboardService {
         price: plan.price,
         availability: plan.availability,
       },
-      { responseType: 'text' }
+      this.header
     );
   }
 
@@ -60,19 +73,20 @@ export class AdminDashboardService {
         price: plan.price,
         availability: plan.availability,
       },
-      { responseType: 'text' }
+      this.header
     );
   }
   deletePlan(plan: Plan) {
     return this.http.delete(
       `${this.rootURL}/api/plan/delete/${plan._id}?key=${this.key}`,
-      { responseType: 'text' }
+      this.header
     );
   }
   ////////////////////             Miners               ////////////////////////
   getMiners() {
     return this.http.get<Miner[]>(
-      `${this.rootURL}/api/asic/admin?key=${this.key}`
+      `${this.rootURL}/api/asic/admin?key=${this.key}`,
+      this.header
     );
   }
 
@@ -87,7 +101,7 @@ export class AdminDashboardService {
         price: miner.price,
         hostFees: miner.hostFees,
       },
-      { responseType: 'text' }
+      this.header
     );
   }
 
@@ -103,27 +117,30 @@ export class AdminDashboardService {
         hostFees: miner.hostFees,
         availability: miner.availability,
       },
-      { responseType: 'text' }
+      this.header
     );
   }
   deleteMiner(miner: Miner) {
     return this.http.delete(
       `${this.rootURL}/api/asic/delete/${miner._id}?key=${this.key}`,
-      { responseType: 'text' }
+      this.header
     );
   }
   ////////////////////             Buy requests               ////////////////////////
 
   getRequests() {
     return this.http.get<RequestNew[]>(
-      `${this.rootURL}/api/asic/x/contract/ondemand?key=${this.key}`
+      `${this.rootURL}/api/asic/x/contract/ondemand?key=${this.key}`,
+      this.header
     );
   }
   getAddress(asicID: string) {
     return this.http.get<{
       address: string;
-    }>(`${this.rootURL}/api/transaction/admin/getdepositaddressForAsicContarct?asicID=${asicID}
-    `);
+    }>(
+      `${this.rootURL}/api/transaction/admin/getdepositaddressForAsicContarct?asicID=${asicID}`,
+      this.header
+    );
   }
   acceptRequest(
     asicID: string,
@@ -138,87 +155,100 @@ export class AdminDashboardService {
         workerID,
         pool,
       },
-      { responseType: 'text' }
+      this.header
     );
   }
   getApprovedRequests() {
     return this.http.get<RequestApproved[]>(
-      `${this.rootURL}/api/asic/x/contract/activeContracts?key=${this.key} `
+      `${this.rootURL}/api/asic/x/contract/activeContracts?key=${this.key} `,
+      this.header
     );
   }
   endContract(contractID: string) {
     return this.http.put(
       `${this.rootURL}/api/asic/x/contract/expire/${contractID}?key=${this.key}`,
       {},
-      { responseType: 'text' }
+      this.header
     );
   }
   ////////////////////////////// subscribed users ////////////////////////
   getSubscribedUsers() {
     return this.http.get<User[]>(
-      `${this.rootURL}/api/admin/getUsers?key=${this.key}`
+      `${this.rootURL}/api/admin/getUsers?key=${this.key}`,
+      this.header
     );
   }
   getUserData(userID: string) {
     return this.http.get<User>(
-      `${this.rootURL}/api/admin/getUserData/${userID}?key=${this.key}`
+      `${this.rootURL}/api/admin/getUserData/${userID}?key=${this.key}`,
+      this.header
     );
   }
   getUserPlans(userID: string) {
     return this.http.get<UserPlan[]>(
-      `${this.rootURL}/api/plan/admin/getUserContracts/${userID}?key=${this.key}`
+      `${this.rootURL}/api/plan/admin/getUserContracts/${userID}?key=${this.key}`,
+      this.header
     );
   }
   getUserAsics(userID: string) {
     return this.http.get<[]>(
-      `${this.rootURL}/api/asic/admin/getUserContracts/${userID}?key=${this.key}`
+      `${this.rootURL}/api/asic/admin/getUserContracts/${userID}?key=${this.key}`,
+      this.header
     );
   }
   getUserDepositLogs(userID: string) {
-    return this.http.get<
-      Log[]
-    >(`${this.rootURL}/api/transaction/admin/${userID}/getUserdeposits
-    `);
+    return this.http.get<Log[]>(
+      `${this.rootURL}/api/transaction/admin/${userID}/getUserdeposits`,
+      this.header
+    );
   }
   getUserWithdrawLogs(userID: string) {
-    return this.http.get<
-      Log[]
-    >(`${this.rootURL}/api/transaction/admin/${userID}/getUserwithdraws
-    `);
+    return this.http.get<Log[]>(
+      `${this.rootURL}/api/transaction/admin/${userID}/getUserwithdraws`,
+      this.header
+    );
   }
+
   //////////////////// Overview page /////////////////////////
   getOverviewData() {
-    return this.http.get<any>(`${this.rootURL}/admin/OVERVIEW?key=${this.key}`);
+    return this.http.get<any>(
+      `${this.rootURL}/admin/OVERVIEW?key=${this.key}`,
+      this.header
+    );
   }
+
   //////////////////// Farm ///////////////////////
   getActiveWorkers() {
     return this.http.get<Worker[]>(
-      `${this.rootURL}/api/farm/getactiveworkers?key=${this.key}`
+      `${this.rootURL}/api/farm/getactiveworkers?key=${this.key}`,
+      this.header
     );
   }
   getInactiveWorkers() {
     return this.http.get<Worker[]>(
-      `${this.rootURL}/api/farm/getnotactiveworkers?key=${this.key}`
+      `${this.rootURL}/api/farm/getnotactiveworkers?key=${this.key}`,
+      this.header
     );
   }
   addNewWorker(worker: Worker) {
     return this.http.post(
       `${this.rootURL}/api/farm/addworker?key=${this.key}`,
       worker,
-      { responseType: 'text' }
+
+      this.header
     );
   }
   endWorker(workerID: string) {
     return this.http.put(
       `${this.rootURL}/api/farm/endworker/${workerID}?key=${this.key}`,
       {},
-      { responseType: 'text' }
+      this.header
     );
   }
   deleteWorker(workerID: string) {
     return this.http.delete(
       `${this.rootURL}/api/farm/deleteworker/${workerID}?key=${this.key}`,
-      { responseType: 'text' }
+      this.header
     );
   }
   errorHandler(err: HttpErrorResponse) {

@@ -52,7 +52,7 @@ import { NewPasswordComponent } from './Auth/reset-password/new-password/new-pas
 import { OtpComponent } from './Auth/otp/otp.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ResetCodeComponent } from './Auth/reset-password/reset-code/reset-code.component';
-import { AdminAuthInterceptor } from './Auth/admin-auth-interceptor';
+//import { AdminAuthInterceptor } from './Auth/admin-auth-interceptor';
 import { ErrorHandlerInterceptor } from './Auth/admin-error-interceptor';
 // import { MerchantComponent } from './merchant/merchant.component';
 import { AccordionModule } from 'primeng/accordion';
