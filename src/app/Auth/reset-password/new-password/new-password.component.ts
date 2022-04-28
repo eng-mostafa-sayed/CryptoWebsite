@@ -39,9 +39,9 @@ export class NewPasswordComponent implements OnInit {
 
     ///if it is isnt valid
     if (
-      this.newPasswordForm.value.password ===
-        this.newPasswordForm.value.confirm &&
-      this.code !== null
+      this.newPasswordForm.value.password !==
+        this.newPasswordForm.value.confirm ||
+      this.code == null
     ) {
       this.sharedSerivce.sentMessage.next({
         message: 'something went wrong, make sure the password is the same',

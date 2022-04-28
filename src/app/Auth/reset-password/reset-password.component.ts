@@ -24,7 +24,7 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
   resetPassword = () => {
-    if (this.restForm.value.email != null) {
+    if (this.restForm.value.email == null) {
       this.sharedSerivce.sentMessage.next({
         message: 'enter valid email',
         error: true,
