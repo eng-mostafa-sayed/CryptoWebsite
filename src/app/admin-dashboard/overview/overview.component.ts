@@ -32,42 +32,31 @@ export class OverviewComponent implements OnInit {
   ) {}
 
   accessToken = localStorage.getItem('token');
-  ngOnInit(): void {
-    //this.dashboardService.getOverviewData().subscribe({
-    this.http
-      .get<any>(
-        'https://cominer.herokuapp.com/admin/OVERVIEW?key=c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4',
-        {
-          headers: new HttpHeaders().set(
-            'Authorization',
-            `Bearer ${this.accessToken}`
-          ),
-        }
-      )
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.totalUsers = res.totalUsers;
-          this.totalAsics = res.totalAsics;
-          this.totalPlans = res.totalPlans;
-          this.totalPlanContarcts = res.totalPlanContarcts;
-          this.totalActiveAsicContarcts = res.totalActiveAsicContarcts;
-          this.totalAsicContarctsOnDemand = res.totalAsicContarctsOnDemand;
-          this.totalWithdrawals = res.totalWithdrawals;
-          this.totalDeposits = res.totalDeposits;
-          // if (res.balances.BTC?.balancef ) {
-          //   this.btc = res.balances.BTC.balancef;
-          // }
-          this.btc = res.balances.BTC?.balancef ?? '0.00000000';
-          this.eth = res.balances.ETH?.balancef ?? '0.00000000';
-          this.ltct = res.balances.LTCT?.balancef ?? '0.00000000';
-          this.rvn = res.balances.RVN?.balancef ?? '0.00000000';
-          this.plansSubs = res.planSubscribtion;
-          this.minersSubs = res.asicSubscribtion;
-        },
-        error: (err) => {
-          this.dashboardService.errorHandler(err);
-        },
-      });
+  ngOnInit() {
+    this.dashboardService.getOverviewData().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.totalUsers = res.totalUsers;
+        this.totalAsics = res.totalAsics;
+        this.totalPlans = res.totalPlans;
+        this.totalPlanContarcts = res.totalPlanContarcts;
+        this.totalActiveAsicContarcts = res.totalActiveAsicContarcts;
+        this.totalAsicContarctsOnDemand = res.totalAsicContarctsOnDemand;
+        this.totalWithdrawals = res.totalWithdrawals;
+        this.totalDeposits = res.totalDeposits;
+        // if (res.balances.BTC?.balancef ) {
+        //   this.btc = res.balances.BTC.balancef;
+        // }
+        this.btc = res.balances.BTC?.balancef ?? '0.00000000';
+        this.eth = res.balances.ETH?.balancef ?? '0.00000000';
+        this.ltct = res.balances.LTCT?.balancef ?? '0.00000000';
+        this.rvn = res.balances.RVN?.balancef ?? '0.00000000';
+        this.plansSubs = res.planSubscribtion;
+        this.minersSubs = res.asicSubscribtion;
+      },
+      error: (err) => {
+        this.dashboardService.errorHandler(err);
+      },
+    });
   }
 }
